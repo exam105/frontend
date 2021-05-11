@@ -1,2 +1,2 @@
 Exam 105 App
-Checking auto build trigger
+- Checking auto build trigger
