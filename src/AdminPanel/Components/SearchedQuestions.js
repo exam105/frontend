@@ -173,7 +173,7 @@ const SearchedQuestions = ({ handleClose, id, open }) => {
                         <TableCell
                           component="th"
                           scope="row"
-                          style={{ width: "10rem" }}
+                          style={{ width: "6rem" }}
                           align="left"
                         >
                           <div className="textContainer">{row.question}</div>
@@ -195,7 +195,10 @@ const SearchedQuestions = ({ handleClose, id, open }) => {
           </div>
           <div className="rightSide">
             {question === "" ? (
-              <div className="d-flex justify-content-center">
+              <div
+                className="d-flex justify-content-center"
+                style={{ marginTop: "1rem" }}
+              >
                 <div
                   className={`${questionLoadStatus} spinner-border`}
                   role="status"
@@ -212,12 +215,10 @@ const SearchedQuestions = ({ handleClose, id, open }) => {
               >
                 <div
                   className="questionField"
-                  style={{ flex: images.length > 0 ? "60%" : "100%" }}
+                  style={{ flex: images.length > 0 ? "80%" : "100%" }}
                 >
                   <div style={{ display: "flex", marginTop: "0.3rem" }}>
-                    <h5 className="py-1 simple-header-font font-italic text-left">
-                      Topics:
-                    </h5>
+                    <h5 className="py-1 text-left">Topics:</h5>
                     <div style={{ margin: "0.5rem 0rem 0rem 1.5rem" }}>
                       {topics.length === 0 ? (
                         <span>This question does not have any topic</span>
@@ -241,19 +242,16 @@ const SearchedQuestions = ({ handleClose, id, open }) => {
                       )}
                     </div>
                   </div>
-                  <h5 className="py-1 simple-header-font font-italic text-left">
-                    Marks: {marks}
-                  </h5>
+                  <h6 className="py-1 text-left">Marks: {marks}</h6>
                   <div
                     style={{
                       textAlign: "justify",
                       fontSize: "15px",
-                      marginTop: "1.5rem",
+                      marginTop: "0.5rem",
+                      borderRadius: "0.3rem",
+                      background: "#f6f6f6",
                     }}
                   >
-                    <h5 className="py-1 simple-header-font font-italic text-left">
-                      Question:
-                    </h5>
                     <MathpixLoader>
                       <MathpixMarkdown text={question} />
                     </MathpixLoader>
@@ -265,12 +263,12 @@ const SearchedQuestions = ({ handleClose, id, open }) => {
                         style={{
                           textAlign: "justify",
                           fontSize: "15px",
-                          marginTop: "1.5rem",
+                          marginTop: "0.5rem",
+                          borderRadius: "0.3rem",
+                          background: "#f6f6f6",
                         }}
                       >
-                        <h5 className="py-1 simple-header-font font-italic text-left">
-                          Answer:
-                        </h5>
+                        <h5 className="py-1 text-left">Answer:</h5>
                         <MathpixLoader>
                           <MathpixMarkdown text={answer} />
                         </MathpixLoader>
@@ -282,15 +280,18 @@ const SearchedQuestions = ({ handleClose, id, open }) => {
                     <>
                       <div className="row">
                         <div className="col-md-12">
-                          <h5 className="py-1 simple-header-font font-italic text-left">
-                            Options:
-                          </h5>
+                          <h5 className="py-1 text-left">Options:</h5>
                           <div>
                             {options?.map((item, i) => (
                               <div
                                 className="pt-3 d-flex"
                                 style={{
-                                  borderBottom: "1px solid rgba(0,0,0,0.3)",
+                                  borderRadius: "0.3rem",
+                                  marginBottom: "0.2rem",
+                                  background:
+                                    item.correct === true
+                                      ? "#bcf5bc"
+                                      : "#f6f6f6",
                                 }}
                               >
                                 {item.correct === true ? (
@@ -316,7 +317,7 @@ const SearchedQuestions = ({ handleClose, id, open }) => {
                       animate="show"
                       exit={{ x: 1000, duration: "0.5", ease: "easeOut" }}
                       className="imageField"
-                      style={{ flex: "40%", position: "relative" }}
+                      style={{ flex: "20%", position: "relative" }}
                     >
                       <h5>Figures ({images.length})</h5>
                       {images.map((item, i) => {
@@ -337,7 +338,7 @@ const SearchedQuestions = ({ handleClose, id, open }) => {
                               <img
                                 alt="Image Error"
                                 style={{ height: "120px", width: "100%" }}
-                                className="img-fluid px-1"
+                                className="image "
                                 src={item.imageurl}
                               />
                             </div>
