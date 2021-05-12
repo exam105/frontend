@@ -79,7 +79,6 @@ const EnhancedTableToolbar = (props) => {
   };
 
   const onHideQuestionList = () => {
-    console.log(id);
     if (id.length >= 0) {
       data.map((item, i) => {
         if (item.id === id[0]) {

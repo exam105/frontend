@@ -7,7 +7,6 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import ModelNotification from "../../Modals/ModelNotification";
 import ConfirmDialog from "../../Modals/ConfirmDialog";
-import { MenuItem, Select } from "@material-ui/core";
 import { useSelector } from "react-redux";
 
 function AdminAddBoardComponent(props) {
@@ -52,8 +51,7 @@ function AdminAddBoardComponent(props) {
     system: "",
     board: "",
     subject: "",
-    year: "",
-    month: "",
+    date: "",
     series: "",
     paper: "",
   });
@@ -66,7 +64,7 @@ function AdminAddBoardComponent(props) {
 
   const submit_data = (e) => {
     e.preventDefault();
-    if (paper.month === "" || paper.year === "") {
+    if (!paper.date) {
       setNotificationStatus(true);
     } else {
       props.add_board(paper);
@@ -123,51 +121,18 @@ function AdminAddBoardComponent(props) {
   };
 
   const change_month_and_year = (date) => {
-    setStartDate(date);
-    const monthNumber = date.getMonth();
+    let monthNumber = date.getMonth();
+    monthNumber = monthNumber + 1;
     const year = date.getFullYear();
-    var month = "";
-    switch (monthNumber.toString()) {
-      case "0":
-        month = "January";
-        break;
-      case "1":
-        month = "February";
-        break;
-      case "2":
-        month = "March";
-        break;
-      case "3":
-        month = "April";
-        break;
-      case "4":
-        month = "May";
-        break;
-      case "5":
-        month = "June";
-        break;
-      case "6":
-        month = "July";
-        break;
-      case "7":
-        month = "August";
-        break;
-      case "8":
-        month = "September";
-        break;
-      case "9":
-        month = "October";
-        break;
-      case "10":
-        month = "November";
-        break;
-      case "11":
-        month = "December";
-        break;
-      default:
-        alert("please try again");
+    let m;
+    if (monthNumber < 10) {
+      m = `0${monthNumber}`;
+    } else {
+      m = `${monthNumber}`;
     }
-    setPaper({ ...paper, year: year.toString(), month: month });
+    let newDate = new Date(`${year}-${m}-01T00:00:00Z`);
+    setStartDate(newDate);
+    setPaper({ ...paper, date: date });
   };
 
   return (

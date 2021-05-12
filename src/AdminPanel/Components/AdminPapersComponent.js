@@ -171,6 +171,7 @@ export default function AdminPapersComponent() {
         } else {
           setProgressBarStatus("d-none");
           setRows(res.data);
+          console.log("this is data: ", res.data);
         }
       })
       .catch((err) => console.log(err));
@@ -323,8 +324,14 @@ export default function AdminPapersComponent() {
                       </TableCell>
                       <TableCell align="left">{row.board}</TableCell>
                       <TableCell align="left">{row.subject}</TableCell>
-                      <TableCell align="left">{row.year}</TableCell>
-                      <TableCell align="left">{row.month}</TableCell>
+                      <TableCell align="left">
+                        {new Date(row.date).getFullYear()}
+                      </TableCell>
+                      <TableCell align="left">
+                        {new Date(row.date).toLocaleString("default", {
+                          month: "long",
+                        })}
+                      </TableCell>
                       <TableCell align="left">{row.series}</TableCell>
                       <TableCell align="left">{row.paper}</TableCell>
                     </TableRow>

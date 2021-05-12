@@ -57,15 +57,13 @@ function DialogModalMetaData(props) {
     system: "",
     board: "",
     subject: "",
-    year: "",
-    month: "",
+    date: "",
     series: "",
     paper: "",
   });
 
   const submit_data = (e) => {
     e.preventDefault();
-    console.log("paper is this: ", paper);
     axios({
       method: "POST",
       url: `/dashboard/de/metadata/${props.id}`,
@@ -134,108 +132,32 @@ function DialogModalMetaData(props) {
     };
     change_input(e);
     setPaper({
-      system: props.data.system,
-      board: props.data.board,
-      subject: props.data.subject,
-      year: props.data.year,
-      month: props.data.month,
-      series: props.data.series,
-      paper: props.data.paper,
+      system: props?.data?.system,
+      board: props?.data?.board,
+      subject: props?.data?.subject,
+      date: props?.data?.date,
+      series: props?.data?.series,
+      paper: props?.data?.paper,
     });
     setOpen(props.DialogStatus);
-    let year = props.data.year;
-    let month = props.data.month;
-    let monthNumber = "";
-    switch (month) {
-      case "January":
-        monthNumber = 0;
-        break;
-      case "February":
-        monthNumber = 1;
-        break;
-      case "March":
-        monthNumber = 2;
-        break;
-      case "April":
-        monthNumber = 3;
-        break;
-      case "May":
-        monthNumber = 4;
-        break;
-      case "June":
-        monthNumber = 5;
-        break;
-      case "July":
-        monthNumber = 6;
-        break;
-      case "August":
-        monthNumber = 7;
-        break;
-      case "September":
-        monthNumber = 8;
-        break;
-      case "October":
-        monthNumber = 9;
-        break;
-      case "November":
-        monthNumber = 10;
-        break;
-      case "December":
-        monthNumber = 11;
-        break;
-      default:
-        monthNumber = 1;
-        year = 2020;
+    if (props.data.date !== undefined) {
+      const newDate = new Date(props.data.date);
+      setStartDate(newDate);
     }
-    const newDate = new Date(year, monthNumber);
-    setStartDate(newDate);
   }, [props.DialogStatus]);
   const change_month_and_year = (date) => {
-    setStartDate(date);
-    const monthNumber = date.getMonth();
+    let monthNumber = date.getMonth();
+    monthNumber = monthNumber + 1;
     const year = date.getFullYear();
-    var month = "";
-    switch (monthNumber.toString()) {
-      case "0":
-        month = "January";
-        break;
-      case "1":
-        month = "February";
-        break;
-      case "2":
-        month = "March";
-        break;
-      case "3":
-        month = "April";
-        break;
-      case "4":
-        month = "May";
-        break;
-      case "5":
-        month = "June";
-        break;
-      case "6":
-        month = "July";
-        break;
-      case "7":
-        month = "August";
-        break;
-      case "8":
-        month = "September";
-        break;
-      case "9":
-        month = "October";
-        break;
-      case "10":
-        month = "November";
-        break;
-      case "11":
-        month = "December";
-        break;
-      default:
-        alert("please try again");
+    let m;
+    if (monthNumber < 10) {
+      m = `0${monthNumber}`;
+    } else {
+      m = `${monthNumber}`;
     }
-    setPaper({ ...paper, year: year.toString(), month: month });
+    let newDate = new Date(`${year}-${m}-01T00:00:00Z`);
+    setStartDate(newDate);
+    setPaper({ ...paper, date: date });
   };
   return (
     <div>

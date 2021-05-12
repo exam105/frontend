@@ -1,11 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import Dialog from "@material-ui/core/Dialog";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import IconButton from "@material-ui/core/IconButton";
 import Typography from "@material-ui/core/Typography";
 import CloseIcon from "@material-ui/icons/Close";
-import Button from "@material-ui/core/Button";
 import axios from "axios";
 import Tooltip from "@material-ui/core/Tooltip";
 // Dialog Box
@@ -13,9 +12,7 @@ import Slide from "@material-ui/core/Slide";
 import { makeStyles } from "@material-ui/core/styles";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
-import TableCell from "@material-ui/core/TableCell";
 import TableContainer from "@material-ui/core/TableContainer";
-import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 import { useSelector } from "react-redux";
 import DeleteIcon from "@material-ui/icons/Delete";
@@ -47,7 +44,6 @@ function QuestionList(props) {
   const classes = useStyles();
   const { open, metadata, onClose, id, is_theory } = props;
   const [rows, setRows] = React.useState([]);
-  const loginReducer = useSelector((state) => state.loginReducer);
   const [openSeeDialog, setOpenSeeDialog] = React.useState(false);
   const [confirmDialogStatus, setConfirmDialogStatus] = React.useState(false);
   const [getQuestions, setGetQuestions] = React.useState(false);
@@ -71,6 +67,7 @@ function QuestionList(props) {
     setRows([]);
     setProgressBarStatus("");
     if (id.length === 1) {
+      console.log("i came in question list");
       axios({
         method: "GET",
         url: is_theory
@@ -81,6 +78,7 @@ function QuestionList(props) {
           if (!metadata.subject) {
             onClose(false);
           }
+          console.log("data: ", res.data);
           setRows(res.data);
           setProgressBarStatus("d-none");
         })
