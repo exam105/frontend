@@ -1,0 +1,69 @@
+.questionsContainer {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  overflow-x: hidden;
+  overflow-y: hidden;
+}
+.leftSide {
+  padding: 0 0.2rem;
+  flex: 40%;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+.rightSide {
+  padding: 0 0.2rem;
+  flex: 60%;
+  border-left: 3px solid #3f51b5;
+}
+@media screen and (max-width: 600px) {
+  .rightSide {
+    flex-direction: column;
+  }
+}
+.questionField {
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+.questionField::-webkit-scrollbar {
+  width: 0.5rem;
+}
+.questionField::-webkit-scrollbar-thumb {
+  background-color: darkgray;
+}
+.imageField::-webkit-scrollbar {
+  width: 0.5rem;
+}
+.imageField::-webkit-scrollbar-thumb {
+  background-color: darkgray;
+}
+.leftSide::-webkit-scrollbar {
+  width: 0.5rem;
+}
+.leftSide::-webkit-scrollbar-thumb {
+  background-color: darkgray;
+}
+.imageField {
+  height: 100%;
+  width: 100%;
+  position: sticky;
+  top: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+.images > img {
+  width: 100%;
+  height: 50vh;
+  object-fit: cover;
+}
+.images {
+  margin-bottom: 0.5rem;
+  background: none;
+}
+.images:hover {
+  background: #504f4f;
+}
+.question {
+  text-align: justify;
+  text-justify: inter-word;
+}

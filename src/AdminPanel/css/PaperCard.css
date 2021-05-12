@@ -1,0 +1,16 @@
+.paperContainer {
+  border-radius: 0.5rem;
+  border: 1px #d3d3d3 solid;
+  margin-bottom: 0.2rem;
+  transition: 0.3s;
+}
+.paperContainer:hover {
+  background: #d3d3d3 !important;
+  cursor: pointer;
+  font-weight: bold;
+}
+.lineOne {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}

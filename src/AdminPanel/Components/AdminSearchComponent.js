@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import PaperCard from "./PaperCard";
 import { useHistory } from "react-router-dom";
 import axios from "axios";
 import AppBar from "@material-ui/core/AppBar";
@@ -41,6 +42,9 @@ const useStyles = makeStyles((theme) => ({
     zIndex: theme.zIndex.drawer + 1,
     color: "#fff",
   },
+  appBar: {
+    // position: "relative",
+  },
   root: {
     position: "fixed",
     bottom: theme.spacing(2),
@@ -69,24 +73,12 @@ const useStyles = makeStyles((theme) => ({
     cursor: "pointer",
     outline: "none",
   },
-  container: {
+  papersContainer: {
     display: "flex",
+    flexDirection: "column",
     width: "100%",
     height: "100%",
-  },
-  leftSide: {
-    padding: "0 0.2rem",
-    flex: "40%",
-  },
-  rightSide: {
-    padding: "0 0.2rem",
-    flex: "60%",
-    borderLeft: "3px solid #3F51B5",
-  },
-  questionsContainer: {
-    width: "100%",
-    overflowX: "hidden",
-    height: "100%",
+    marginLeft: "2rem",
   },
 }));
 
@@ -121,6 +113,7 @@ function ScrollTop(props) {
 const AdminSearchComponent = (props) => {
   const classes = useStyles();
   const history = useHistory();
+  const [zindex, setZindex] = useState(true);
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date());
   const [date, setDate] = useState(new Date());
@@ -223,6 +216,7 @@ const AdminSearchComponent = (props) => {
       })
         .then((res) => {
           setProgressBarStatus(false);
+          setRows(res.data);
           console.log("This is result: ", res.data);
         })
         .catch((err) => {
@@ -251,9 +245,12 @@ const AdminSearchComponent = (props) => {
   };
 
   return (
-    <React.Fragment>
+    <div>
       <CssBaseline />
-      <AppBar>
+      <AppBar
+        className={classes.appBar}
+        style={{ zIndex: zindex ? "1" : "-1" }}
+      >
         <Toolbar>
           <form onSubmit={submit_data} style={{ width: "100%" }} id="myForm">
             <div className={classes.firstLine}>
@@ -492,77 +489,31 @@ const AdminSearchComponent = (props) => {
           padding: "0",
         }}
       >
-        <Box my={2} className={classes.container}>
-          <div className={classes.leftSide}>
-            <div className={classes.questionsContainer}>
-              {/* <div className="d-flex justify-content-center">
-                  <div
-                    className={`${progressBarStatus} spinner-border`}
-                    role="status"
-                  ></div>
-                </div> */}
-              <TableContainer component={Paper}>
-                <Table className={`${classes.table}`} aria-label="simple table">
-                  <TableHead>
-                    <TableRow>
-                      <TableCell className="bold">Question</TableCell>
-                      <TableCell className="bold" align="right">
-                        System
-                      </TableCell>
-                      <TableCell className="bold" align="right">
-                        Board
-                      </TableCell>
-                      <TableCell className="bold" align="right">
-                        Subject
-                      </TableCell>
-                    </TableRow>
-                  </TableHead>
-                  {rows?.map((row, index) => {
-                    var bg;
-                    if (index % 2 === 0) {
-                      bg = "#F6F6F6";
-                    } else {
-                      bg = "white";
-                    }
-                    return (
-                      <TableBody
-                        key={index}
-                        className="p-0 border"
-                        style={{ background: bg }}
-                      >
-                        <TableRow
-                          key={index}
-                          className="onHoverHighlightTextAndCursor"
-                        >
-                          <TableCell
-                            component="th"
-                            scope="row"
-                            style={{ width: "10rem" }}
-                            align="left"
-                          >
-                            <div className="textContainer">{row.question}</div>
-                          </TableCell>
-                          <TableCell align="right">{row.system}</TableCell>
-                          <TableCell align="right">{row.board}</TableCell>
-                          <TableCell align="right">{row.subject}</TableCell>
-                        </TableRow>
-                      </TableBody>
-                    );
-                  })}
-                </Table>
-                <br />
-                <br />
-                <br />
-                <br />
-                <br />
-                <br />
-                <br />
-                <br />
-              </TableContainer>
+        <Box my={2} className={classes.papersContainer}>
+          {rows.length > 0 ? (
+            rows.map((row) => (
+              <PaperCard
+                year={new Date(row.date).getFullYear()}
+                month={new Date(row.date).toLocaleString("default", {
+                  month: "long",
+                })}
+                system={row.system}
+                board={row.board}
+                subject={row.subject}
+                id={row.id}
+                key={row.id}
+                setZindex={setZindex}
+              />
+            ))
+          ) : (
+            <div style={{ margin: "auto" }}>
+              Select from parameters and a date to search the past papers data
             </div>
-          </div>
-
-          <div className={classes.rightSide}> This is the right side</div>
+          )}
+          {/* Progress Bar */}
+          <Backdrop className={classes.backdrop} open={progressBarStatus}>
+            <LinearProgressWithLabel value={progress} />;
+          </Backdrop>
           <ModelNotification
             DialogStatus={notificationStatus}
             DialogTitle="Notification"
@@ -578,10 +529,6 @@ const AdminSearchComponent = (props) => {
             handleClose={() => setDialogStatus(false)}
             DialogOk="Ok"
           />
-          {/* Progress Bar */}
-          <Backdrop className={classes.backdrop} open={progressBarStatus}>
-            <LinearProgressWithLabel value={progress} />;
-          </Backdrop>
         </Box>
       </Container>
       <ScrollTop {...props}>
@@ -589,7 +536,7 @@ const AdminSearchComponent = (props) => {
           <KeyboardArrowUpIcon />
         </Fab>
       </ScrollTop>
-    </React.Fragment>
+    </div>
   );
 };
 

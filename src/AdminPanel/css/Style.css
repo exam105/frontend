@@ -18,6 +18,13 @@
 .AdminUserField {
   background-color: transparent !important;
 }
+.onHoverHighlightTextAndCursor:hover {
+  background: #d3d3d3 !important;
+  cursor: pointer;
+}
+.onHoverHighlightTextAndCursor {
+  transition: 0.3s;
+}
 
 #filled-adornment-password,
 #standard-basic {
@@ -27,13 +34,7 @@
 .onHoverBoldText:hover {
   font-weight: bold !important;
 }
-.onHoverHighlightTextAndCursor:hover {
-  background: #d3d3d3 !important;
-  cursor: pointer;
-}
-.onHoverHighlightTextAndCursor {
-  transition: 0.3s;
-}
+
 .bold {
   font-weight: bold !important;
 }
@@ -63,7 +64,7 @@
   cursor: pointer;
 }
 .textContainer {
-  width: 10rem;
+  width: 28rem;
   display: block;
   margin: 0;
   overflow: hidden;
