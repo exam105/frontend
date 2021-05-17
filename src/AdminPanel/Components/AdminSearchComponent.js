@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import PaperCard from "./PaperCard";
-import { useHistory } from "react-router-dom";
 import axios from "axios";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
@@ -21,11 +20,6 @@ import InputLabel from "@material-ui/core/InputLabel";
 import MenuItem from "@material-ui/core/MenuItem";
 import Select from "@material-ui/core/Select";
 import magnifier from "../images/magnifier.svg";
-import DateRangePicker from "react-bootstrap-daterangepicker";
-import Table from "@material-ui/core/Table";
-import TableBody from "@material-ui/core/TableBody";
-import TableContainer from "@material-ui/core/TableContainer";
-import Paper from "@material-ui/core/Paper";
 import ModelNotification from "../../Modals/ModelNotification";
 import LinearProgressWithLabel from "./LinearProgressBarWithLabel";
 import Backdrop from "@material-ui/core/Backdrop";
@@ -35,7 +29,6 @@ import CssBaseline from "@material-ui/core/CssBaseline";
 import "bootstrap/dist/css/bootstrap.css";
 import "bootstrap-daterangepicker/daterangepicker.css";
 import "../css/AdminSearchComponent.css";
-import { TableCell, TableHead, TableRow } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
   backdrop: {
@@ -112,8 +105,8 @@ function ScrollTop(props) {
 
 const AdminSearchComponent = (props) => {
   const classes = useStyles();
-  const history = useHistory();
   const [zindex, setZindex] = useState(true);
+  const [result, setResult] = useState(false);
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date());
   const [date, setDate] = useState(new Date());
@@ -128,7 +121,7 @@ const AdminSearchComponent = (props) => {
   const [progressBarStatus, setProgressBarStatus] = React.useState(false);
   const [progress, setProgress] = useState(10);
   const [notificationStatus, setNotificationStatus] = useState(false);
-  const [systems, setSystems] = useState([
+  const [systems] = useState([
     { system: "GCSE" },
     { system: "IGCSE" },
     { system: "AS" },
@@ -143,14 +136,7 @@ const AdminSearchComponent = (props) => {
     board: "",
     date: "",
   });
-  // const [paper, setPaper] = useState({
-  //   system: "",
-  //   board: "",
-  //   subject: "",
-  //   date: "",
-  // });
-
-  const [subjects, setSubjects] = useState([
+  const [subjects] = useState([
     { subject: "Math" },
     { subject: "Physics" },
     { subject: "Biology" },
@@ -161,41 +147,33 @@ const AdminSearchComponent = (props) => {
     if (e.target.name === "system") {
       if (e.target.value === "GCSE") {
         setBoards([
-          { board: "Edexcel CGSE" },
-          { board: "AQA GCSE" },
-          { board: "OCR GCSE" },
-          { board: "CCEA GCSE" },
+          { board: "Edexcel" },
+          { board: "AQA" },
+          { board: "OCR" },
+          { board: "CCEA" },
         ]);
       } else if (e.target.value === "IGCSE") {
-        setBoards([{ board: "Edexcel IGCSE" }, { board: "CIE IGCSE" }]);
+        setBoards([{ board: "Edexcel" }, { board: "CIE" }]);
       } else if (e.target.value === "AS") {
         setBoards([
-          { board: "Edexcel AS" },
-          { board: "AQA AS" },
-          { board: "OCR AS" },
-          { board: "CIE AS" },
+          { board: "Edexcel" },
+          { board: "AQA" },
+          { board: "OCR" },
+          { board: "CIE" },
           { board: "Edexcel IAL" },
         ]);
       } else if (e.target.value === "A Level") {
         setBoards([
-          { board: "Edexcel A Level" },
-          { board: "AQA A Level" },
-          { board: "OCR A Level" },
-          { board: "CIE A Level" },
-          { board: "Edexcel IAL" },
+          { board: "Edexcel" },
+          { board: "AQA" },
+          { board: "OCR" },
+          { board: "CIE" },
+          { board: "Edexcel" },
         ]);
       } else if (e.target.value === "O Level") {
-        setBoards([
-          { board: "Edexcel A Level" },
-          { board: "AQA A Level" },
-          { board: "OCR A Level" },
-          { board: "CIE A Level" },
-          { board: "Edexcel IAL" },
-        ]);
-      } else if (e.target.value === "O Level") {
-        setBoards([{ board: "CIE O Level" }]);
+        setBoards([{ board: "CIE" }]);
       } else if (e.target.value === "Pre U") {
-        setBoards([{ board: "CIE Pre U" }]);
+        setBoards([{ board: "CIE" }]);
       } else if (e.target.value === "IB") {
         setBoards([{ board: "No Board", status: "disable" }]);
       }
@@ -207,7 +185,7 @@ const AdminSearchComponent = (props) => {
     if (!paper.date) {
       setNotificationStatus(true);
     } else {
-      console.log("this be paper", paper);
+      setRows([]);
       setProgressBarStatus(true);
       axios({
         method: "POST",
@@ -216,8 +194,13 @@ const AdminSearchComponent = (props) => {
       })
         .then((res) => {
           setProgressBarStatus(false);
-          setRows(res.data);
-          console.log("This is result: ", res.data);
+          if (res.data === null) {
+            setResult(true);
+          } else {
+            setRows(res.data);
+            setResult(false);
+            console.log("This is result: ", res.data);
+          }
         })
         .catch((err) => {
           console.log(err);
@@ -490,7 +473,7 @@ const AdminSearchComponent = (props) => {
         }}
       >
         <Box my={2} className={classes.papersContainer}>
-          {rows.length > 0 ? (
+          {rows && rows.length > 0 ? (
             rows.map((row) => (
               <PaperCard
                 year={new Date(row.date).getFullYear()}
@@ -505,6 +488,14 @@ const AdminSearchComponent = (props) => {
                 setZindex={setZindex}
               />
             ))
+          ) : result ? (
+            <div style={{ margin: "auto" }}>
+              <h1>Oops!</h1>
+              <h4>
+                We didn't find any results. Try again by changing the
+                parameters.
+              </h4>
+            </div>
           ) : (
             <div style={{ margin: "auto" }}>
               Select from parameters and a date to search the past papers data

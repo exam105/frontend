@@ -264,7 +264,7 @@ function AdminAddmcqsComponent(props) {
   const getOldMcq = (e) => {
     if (question !== "" && window.value === undefined) {
       setDialogDesc(
-        "If you navigate old question then this question will be loss. Please first save this question or reset this question."
+        "If you navigate old question then this question will be lost. Please first save this question or reset this question."
       );
       setDialogStatus(true);
     } else {
@@ -273,7 +273,7 @@ function AdminAddmcqsComponent(props) {
       mcqButtonChangeBorder(e);
       setTopics([]);
       setOptions(mcqReducer[e].options);
-      setQuestion(mcqReducer[e].questions);
+      setQuestion(mcqReducer[e].question);
       $(".marks").val(mcqReducer[e].marks);
       setTopics(mcqReducer[e].topics);
       const imageurls = mcqReducer[e].images;

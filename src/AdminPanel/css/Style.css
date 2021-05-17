@@ -25,7 +25,6 @@
 .onHoverHighlightTextAndCursor {
   transition: 0.3s;
 }
-
 #filled-adornment-password,
 #standard-basic {
   background-color: transparent !important;
@@ -58,6 +57,7 @@
 .seeSomeText {
   width: 30%;
   margin: 0;
+  display: block;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;

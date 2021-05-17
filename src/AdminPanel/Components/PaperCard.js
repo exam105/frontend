@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import SearchedQuestions from "./SearchedQuestions";
 //Styles
 import "../css/PaperCard.css";
 
 const PaperCard = ({ id, month, year, subject, system, board, setZindex }) => {
-  const [questionsList, setQuestionsList] = useState(false);
+  const [questionsList, setQuestionsList] = React.useState(false);
   useEffect(() => {
     if (questionsList) {
       setZindex(false);

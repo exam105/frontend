@@ -38,8 +38,9 @@ const Transition2 = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="left" ref={ref} {...props} />;
 });
 
-const SearchedQuestions = ({ handleClose, id, open }) => {
+const SearchedQuestions = (props) => {
   const classes = useStyles();
+  const { handleClose, id, open } = props;
   const [rows, setRows] = useState([]);
   const [listLoadStatus, setListLoadStatus] = React.useState("");
   const [questionLoadStatus, setQuestionLoadStatus] = React.useState("");
@@ -127,7 +128,6 @@ const SearchedQuestions = ({ handleClose, id, open }) => {
       <Dialog
         fullScreen
         open={open}
-        onClose={handleClose}
         TransitionComponent={Transition2}
         style={{ zIndex: "1" }}
       >
@@ -136,7 +136,12 @@ const SearchedQuestions = ({ handleClose, id, open }) => {
             <Typography variant="h6" className={classes.title}>
               Questions
             </Typography>
-            <Button color="inherit" onClick={handleCloseDialogBox}>
+            <Button
+              color="inherit"
+              onClick={() => {
+                handleClose();
+              }}
+            >
               Go Back
             </Button>
           </Toolbar>
