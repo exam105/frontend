@@ -64,6 +64,7 @@ function AdminAddBoardComponent(props) {
 
   const submit_data = (e) => {
     e.preventDefault();
+    console.log("initial board: ", paper.date.toJSON());
     if (!paper.date) {
       setNotificationStatus(true);
     } else {
@@ -124,7 +125,7 @@ function AdminAddBoardComponent(props) {
     }
     let newDate = new Date(`${year}-${m}-01T00:00:00Z`);
     setStartDate(newDate);
-    setPaper({ ...paper, date: date });
+    setPaper({ ...paper, date: newDate });
   };
 
   return (

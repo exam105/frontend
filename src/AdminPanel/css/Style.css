@@ -55,9 +55,8 @@
 }
 
 .seeSomeText {
-  width: 30%;
+  width: 90vw;
   margin: 0;
-  display: block;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;

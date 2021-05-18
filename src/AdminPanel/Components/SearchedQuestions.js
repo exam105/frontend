@@ -17,6 +17,8 @@ import TableCell from "@material-ui/core/TableCell";
 import TableBody from "@material-ui/core/TableBody";
 import TableContainer from "@material-ui/core/TableContainer";
 import Paper from "@material-ui/core/Paper";
+import IconButton from "@material-ui/core/IconButton";
+import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 import CancelIcon from "@material-ui/icons/Cancel";
 import CheckCircleIcon from "@material-ui/icons/CheckCircle";
 //Styles
@@ -29,8 +31,8 @@ const useStyles = makeStyles((theme) => ({
     top: "0",
   },
   title: {
-    marginLeft: theme.spacing(2),
     flex: 1,
+    textAlign: "center",
   },
 }));
 
@@ -78,10 +80,6 @@ const SearchedQuestions = (props) => {
   }, [rows]);
   const ImageViewClose = () => {
     setImageViewStatus(false);
-  };
-  const handleCloseDialogBox = () => {
-    console.log("i came for closing the box");
-    handleClose();
   };
   const loadQuestion = (rowId) => {
     setQuestionLoadStatus("");
@@ -133,17 +131,19 @@ const SearchedQuestions = (props) => {
       >
         <AppBar className={classes.appBar}>
           <Toolbar>
-            <Typography variant="h6" className={classes.title}>
-              Questions
-            </Typography>
-            <Button
+            <IconButton
+              edge="start"
               color="inherit"
+              aria-label="close"
               onClick={() => {
                 handleClose();
               }}
             >
-              Go Back
-            </Button>
+              <ArrowBackIcon />
+            </IconButton>
+            <Typography variant="h6" className={classes.title}>
+              Questions
+            </Typography>
           </Toolbar>
         </AppBar>
         <div className="questionsContainer">

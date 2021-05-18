@@ -168,7 +168,7 @@ const AdminSearchComponent = (props) => {
           { board: "AQA" },
           { board: "OCR" },
           { board: "CIE" },
-          { board: "Edexcel" },
+          { board: "Edexcel IAL" },
         ]);
       } else if (e.target.value === "O Level") {
         setBoards([{ board: "CIE" }]);
@@ -185,6 +185,7 @@ const AdminSearchComponent = (props) => {
     if (!paper.date) {
       setNotificationStatus(true);
     } else {
+      console.log("This is paper: ", paper);
       setRows([]);
       setProgressBarStatus(true);
       axios({
@@ -456,7 +457,7 @@ const AdminSearchComponent = (props) => {
                   type="submit"
                   /*className="btn  px-5 py-2 bg-info mybutton"*/
                 >
-                  <img src={magnifier} alt="iiimage" />
+                  <img src={magnifier} alt="search" />
                 </button>
               </div>
             </div>
@@ -486,14 +487,15 @@ const AdminSearchComponent = (props) => {
                 id={row.id}
                 key={row.id}
                 setZindex={setZindex}
+                zindex={zindex}
               />
             ))
           ) : result ? (
             <div style={{ margin: "auto" }}>
               <h1>Oops!</h1>
               <h4>
-                We didn't find any results. Try again by changing the
-                parameters.
+                We didn't find any papers matching your criteria. Please try
+                again by changing the parameters.
               </h4>
             </div>
           ) : (
