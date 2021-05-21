@@ -1,7 +1,9 @@
 import React from "react";
 import SearchedQuestions from "./SearchedQuestions";
-//Styles
+// Styles
 import "../css/PaperCard.css";
+// Images
+import paper from "../images/paper.svg";
 
 const PaperCard = ({
   id,
@@ -26,12 +28,15 @@ const PaperCard = ({
       }}
     >
       <div className="lineOne">
-        <div className="system">{system}</div>
-        <div className="board">{board}</div>
-        <div className="subject">{subject}</div>
-        <div className="monthYear">
-          {month}/{year}
+        <div>
+          <img src={paper} alt="Paper" />
         </div>
+        <h5>{system}</h5>
+        <h5>{board}</h5>
+        <h5>{subject}</h5>
+        <h5>
+          {month}/{year}
+        </h5>
       </div>
       <SearchedQuestions
         handleClose={() => {

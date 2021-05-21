@@ -44,6 +44,7 @@ const SearchedQuestions = (props) => {
   const classes = useStyles();
   const { handleClose, id, open } = props;
   const [rows, setRows] = useState([]);
+  const [selectedRow, setSelectedRow] = useState(0);
   const [listLoadStatus, setListLoadStatus] = React.useState("");
   const [questionLoadStatus, setQuestionLoadStatus] = React.useState("");
   const [question, setQuestion] = React.useState("");
@@ -168,12 +169,17 @@ const SearchedQuestions = (props) => {
                     <TableBody
                       key={index}
                       className="p-0 border"
-                      style={{ background: bg }}
+                      style={{
+                        background: index === selectedRow ? "#d3d3d3" : bg,
+                      }}
                     >
                       <TableRow
                         key={index}
                         className="onHoverHighlightTextAndCursor"
-                        onClick={() => loadQuestion(row.id)}
+                        onClick={() => {
+                          setSelectedRow(index);
+                          loadQuestion(row.id);
+                        }}
                       >
                         <TableCell
                           component="th"
@@ -246,8 +252,10 @@ const SearchedQuestions = (props) => {
                         ))
                       )}
                     </div>
+                    <h6 className="py-1" style={{ marginLeft: "auto" }}>
+                      Marks: {marks}
+                    </h6>
                   </div>
-                  <h6 className="py-1 text-left">Marks: {marks}</h6>
                   <div
                     style={{
                       textAlign: "justify",
@@ -261,7 +269,7 @@ const SearchedQuestions = (props) => {
                       <MathpixMarkdown text={question} />
                     </MathpixLoader>
                   </div>
-                  <hr />
+                  <hr className="style14" />
                   {isTheory && (
                     <div>
                       <div
@@ -278,7 +286,7 @@ const SearchedQuestions = (props) => {
                           <MathpixMarkdown text={answer} />
                         </MathpixLoader>
                       </div>
-                      <hr />
+                      <hr className="style14" />
                     </div>
                   )}
                   {!isTheory && (

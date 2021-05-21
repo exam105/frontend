@@ -46,8 +46,7 @@ const headCells = [
   { id: "system", numeric: false, disablePadding: true, label: "System" },
   { id: "board", numeric: false, disablePadding: false, label: "Board" },
   { id: "subject", numeric: false, disablePadding: false, label: "Subject" },
-  { id: "year", numeric: false, disablePadding: false, label: "Year" },
-  { id: "month", numeric: false, disablePadding: false, label: "Month" },
+  { id: "date", numeric: false, disablePadding: false, label: "Date" },
   { id: "series", numeric: false, disablePadding: false, label: "Series" },
   { id: "paper", numeric: false, disablePadding: false, label: "Paper" },
 ];
@@ -325,12 +324,10 @@ export default function AdminPapersComponent() {
                       <TableCell align="left">{row.board}</TableCell>
                       <TableCell align="left">{row.subject}</TableCell>
                       <TableCell align="left">
-                        {new Date(row.date).getFullYear()}
-                      </TableCell>
-                      <TableCell align="left">
                         {new Date(row.date).toLocaleString("default", {
                           month: "long",
                         })}
+                        / {new Date(row.date).getFullYear()}
                       </TableCell>
                       <TableCell align="left">{row.series}</TableCell>
                       <TableCell align="left">{row.paper}</TableCell>
