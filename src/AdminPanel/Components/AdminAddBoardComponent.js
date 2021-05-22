@@ -15,7 +15,7 @@ function AdminAddBoardComponent(props) {
   const [startDate, setStartDate] = useState(new Date());
   const [notificationStatus, setNotificationStatus] = useState(false);
   const [confirmDialogStatus, setConfirmDialogStatus] = useState(false);
-  const [systems, setSystems] = useState([
+  const [systems] = useState([
     { system: "GCSE" },
     { system: "IGCSE" },
     { system: "AS" },
@@ -26,13 +26,13 @@ function AdminAddBoardComponent(props) {
   ]);
   const [boards, setBoards] = useState([]);
 
-  const [subjects, setSubjects] = useState([
+  const [subjects] = useState([
     { subject: "Math" },
     { subject: "Physics" },
     { subject: "Biology" },
   ]);
 
-  const [series, setSeries] = useState([
+  const [series] = useState([
     { series: "1" },
     { series: "2" },
     { series: "3" },
@@ -41,7 +41,7 @@ function AdminAddBoardComponent(props) {
     { series: "6" },
   ]);
 
-  const [papers, setPapers] = useState([
+  const [papers] = useState([
     { paper: "Paper 1" },
     { paper: "Paper 2" },
     { paper: "Paper 3" },
@@ -64,6 +64,7 @@ function AdminAddBoardComponent(props) {
 
   const submit_data = (e) => {
     e.preventDefault();
+    console.log("initial board: ", paper.date.toJSON());
     if (!paper.date) {
       setNotificationStatus(true);
     } else {
@@ -78,41 +79,33 @@ function AdminAddBoardComponent(props) {
     if (e.target.name === "system") {
       if (e.target.value === "GCSE") {
         setBoards([
-          { board: "Edexcel CGSE" },
-          { board: "AQA GCSE" },
-          { board: "OCR GCSE" },
-          { board: "CCEA GCSE" },
+          { board: "Edexcel" },
+          { board: "AQA" },
+          { board: "OCR" },
+          { board: "CCEA" },
         ]);
       } else if (e.target.value === "IGCSE") {
-        setBoards([{ board: "Edexcel IGCSE" }, { board: "CIE IGCSE" }]);
+        setBoards([{ board: "Edexcel" }, { board: "CIE" }]);
       } else if (e.target.value === "AS") {
         setBoards([
-          { board: "Edexcel AS" },
-          { board: "AQA AS" },
-          { board: "OCR AS" },
-          { board: "CIE AS" },
+          { board: "Edexcel" },
+          { board: "AQA" },
+          { board: "OCR" },
+          { board: "CIE" },
           { board: "Edexcel IAL" },
         ]);
       } else if (e.target.value === "A Level") {
         setBoards([
-          { board: "Edexcel A Level" },
-          { board: "AQA A Level" },
-          { board: "OCR A Level" },
-          { board: "CIE A Level" },
+          { board: "Edexcel" },
+          { board: "AQA" },
+          { board: "OCR" },
+          { board: "CIE" },
           { board: "Edexcel IAL" },
         ]);
       } else if (e.target.value === "O Level") {
-        setBoards([
-          { board: "Edexcel A Level" },
-          { board: "AQA A Level" },
-          { board: "OCR A Level" },
-          { board: "CIE A Level" },
-          { board: "Edexcel IAL" },
-        ]);
-      } else if (e.target.value === "O Level") {
-        setBoards([{ board: "CIE O Level" }]);
+        setBoards([{ board: "CIE" }]);
       } else if (e.target.value === "Pre U") {
-        setBoards([{ board: "CIE Pre U" }]);
+        setBoards([{ board: "CIE" }]);
       } else if (e.target.value === "IB") {
         setBoards([{ board: "No Board", status: "disable" }]);
       }
@@ -132,7 +125,7 @@ function AdminAddBoardComponent(props) {
     }
     let newDate = new Date(`${year}-${m}-01T00:00:00Z`);
     setStartDate(newDate);
-    setPaper({ ...paper, date: date });
+    setPaper({ ...paper, date: newDate });
   };
 
   return (

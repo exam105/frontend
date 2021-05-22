@@ -17,6 +17,8 @@ import TableCell from "@material-ui/core/TableCell";
 import TableBody from "@material-ui/core/TableBody";
 import TableContainer from "@material-ui/core/TableContainer";
 import Paper from "@material-ui/core/Paper";
+import IconButton from "@material-ui/core/IconButton";
+import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 import CancelIcon from "@material-ui/icons/Cancel";
 import CheckCircleIcon from "@material-ui/icons/CheckCircle";
 //Styles
@@ -29,8 +31,8 @@ const useStyles = makeStyles((theme) => ({
     top: "0",
   },
   title: {
-    marginLeft: theme.spacing(2),
     flex: 1,
+    textAlign: "center",
   },
 }));
 
@@ -38,9 +40,11 @@ const Transition2 = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="left" ref={ref} {...props} />;
 });
 
-const SearchedQuestions = ({ handleClose, id, open }) => {
+const SearchedQuestions = (props) => {
   const classes = useStyles();
+  const { handleClose, id, open } = props;
   const [rows, setRows] = useState([]);
+  const [selectedRow, setSelectedRow] = useState(0);
   const [listLoadStatus, setListLoadStatus] = React.useState("");
   const [questionLoadStatus, setQuestionLoadStatus] = React.useState("");
   const [question, setQuestion] = React.useState("");
@@ -77,10 +81,6 @@ const SearchedQuestions = ({ handleClose, id, open }) => {
   }, [rows]);
   const ImageViewClose = () => {
     setImageViewStatus(false);
-  };
-  const handleCloseDialogBox = () => {
-    console.log("i came for closing the box");
-    handleClose();
   };
   const loadQuestion = (rowId) => {
     setQuestionLoadStatus("");
@@ -127,18 +127,30 @@ const SearchedQuestions = ({ handleClose, id, open }) => {
       <Dialog
         fullScreen
         open={open}
-        onClose={handleClose}
         TransitionComponent={Transition2}
         style={{ zIndex: "1" }}
       >
         <AppBar className={classes.appBar}>
           <Toolbar>
+            <IconButton
+              edge="start"
+              color="inherit"
+              aria-label="close"
+              onClick={() => {
+                handleClose();
+                setImages([]);
+                setOptions([]);
+                setMarks("");
+                setTopics([]);
+                setQuestion("");
+                setAnswer("");
+              }}
+            >
+              <ArrowBackIcon />
+            </IconButton>
             <Typography variant="h6" className={classes.title}>
               Questions
             </Typography>
-            <Button color="inherit" onClick={handleCloseDialogBox}>
-              Go Back
-            </Button>
           </Toolbar>
         </AppBar>
         <div className="questionsContainer">
@@ -163,12 +175,21 @@ const SearchedQuestions = ({ handleClose, id, open }) => {
                     <TableBody
                       key={index}
                       className="p-0 border"
-                      style={{ background: bg }}
+                      style={{
+                        background: index === selectedRow ? "#c1c7e0" : bg,
+                      }}
                     >
                       <TableRow
                         key={index}
                         className="onHoverHighlightTextAndCursor"
-                        onClick={() => loadQuestion(row.id)}
+                        style={{
+                          borderLeft:
+                            index === selectedRow ? "7px solid #41528b" : "",
+                        }}
+                        onClick={() => {
+                          setSelectedRow(index);
+                          loadQuestion(row.id);
+                        }}
                       >
                         <TableCell
                           component="th"
@@ -241,22 +262,24 @@ const SearchedQuestions = ({ handleClose, id, open }) => {
                         ))
                       )}
                     </div>
+                    <h6 className="py-1" style={{ marginLeft: "auto" }}>
+                      Marks: {marks}
+                    </h6>
                   </div>
-                  <h6 className="py-1 text-left">Marks: {marks}</h6>
                   <div
                     style={{
                       textAlign: "justify",
                       fontSize: "15px",
                       marginTop: "0.5rem",
                       borderRadius: "0.3rem",
-                      background: "#f6f6f6",
+                      border: "1px solid #afb9f07d",
                     }}
                   >
                     <MathpixLoader>
                       <MathpixMarkdown text={question} />
                     </MathpixLoader>
                   </div>
-                  <hr />
+                  <hr className="style14" />
                   {isTheory && (
                     <div>
                       <div
@@ -265,7 +288,7 @@ const SearchedQuestions = ({ handleClose, id, open }) => {
                           fontSize: "15px",
                           marginTop: "0.5rem",
                           borderRadius: "0.3rem",
-                          background: "#f6f6f6",
+                          border: "1px solid #afb9f07d",
                         }}
                       >
                         <h5 className="py-1 text-left">Answer:</h5>
@@ -273,7 +296,7 @@ const SearchedQuestions = ({ handleClose, id, open }) => {
                           <MathpixMarkdown text={answer} />
                         </MathpixLoader>
                       </div>
-                      <hr />
+                      <hr className="style14" />
                     </div>
                   )}
                   {!isTheory && (

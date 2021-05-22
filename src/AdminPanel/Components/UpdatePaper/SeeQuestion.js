@@ -32,13 +32,14 @@ const useStyles = makeStyles((theme) => ({
   },
   title: {
     marginLeft: theme.spacing(2),
-    flex: 1,
+    flex: "1",
   },
 }));
 
 export default function SeeQuestion(props) {
   const classes = useStyles();
-  const { handleClose, open, is_theory } = props;
+  const { editThisQuestion, deleteThisQuestion, handleClose, open, is_theory } =
+    props;
   const [data, setData] = React.useState([]);
   const loginReducer = useSelector((state) => state.loginReducer);
   const [question, setQuestion] = React.useState("");
@@ -90,6 +91,7 @@ export default function SeeQuestion(props) {
       .then((res) => {
         setQuestion(res?.data.question);
         if (is_theory) {
+          console.log("this is isTheory: ", is_theory);
           setAnswer(res?.data.answer);
         } else {
           setOptions(res?.data.options);
@@ -107,6 +109,32 @@ export default function SeeQuestion(props) {
         }
       })
       .catch((err) => console.log(err));
+  };
+  const editCurrentQuestion = () => {
+    setOptions([]);
+    setTopics([]);
+    setQuestion("");
+    setAnswer("");
+    setImages([]);
+    setMarks("");
+    handleClose();
+    if (window.SeeQuestionId !== undefined) {
+      window.EditQuestionId = window.SeeQuestionId;
+      editThisQuestion();
+    }
+  };
+  const deleteCurrentQuestion = () => {
+    setOptions([]);
+    setTopics([]);
+    setQuestion("");
+    setAnswer("");
+    setImages([]);
+    setMarks("");
+    handleClose();
+    if (window.SeeQuestionId !== undefined) {
+      window.DeleteQuestionsId = window.SeeQuestionId;
+      deleteThisQuestion();
+    }
   };
 
   return (
@@ -126,6 +154,16 @@ export default function SeeQuestion(props) {
             <Typography variant="h6" className={classes.title}>
               See Question
             </Typography>
+            <Button color="inherit" onClick={editCurrentQuestion}>
+              Edit
+            </Button>
+            <Button
+              onClick={deleteCurrentQuestion}
+              style={{ marginRight: "2rem" }}
+              color="inherit"
+            >
+              Delete
+            </Button>
             <IconButton
               edge="start"
               color="inherit"

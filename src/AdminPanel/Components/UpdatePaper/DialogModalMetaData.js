@@ -63,6 +63,7 @@ function DialogModalMetaData(props) {
   });
 
   const submit_data = (e) => {
+    console.log("initial board: ", paper.date.toJSON());
     e.preventDefault();
     axios({
       method: "POST",
@@ -82,41 +83,33 @@ function DialogModalMetaData(props) {
     if (name === "system") {
       if (value === "GCSE") {
         setBoards([
-          { board: "Edexcel CGSE" },
-          { board: "AQA GCSE" },
-          { board: "OCR GCSE" },
-          { board: "CCEA GCSE" },
+          { board: "Edexcel" },
+          { board: "AQA" },
+          { board: "OCR" },
+          { board: "CCEA" },
         ]);
       } else if (value === "IGCSE") {
-        setBoards([{ board: "Edexcel IGCSE" }, { board: "CIE IGCSE" }]);
+        setBoards([{ board: "Edexcel" }, { board: "CIE" }]);
       } else if (value === "AS") {
         setBoards([
-          { board: "Edexcel AS" },
-          { board: "AQA AS" },
-          { board: "OCR AS" },
-          { board: "CIE AS" },
+          { board: "Edexcel" },
+          { board: "AQA" },
+          { board: "OCR" },
+          { board: "CIE" },
           { board: "Edexcel IAL" },
         ]);
       } else if (value === "A Level") {
         setBoards([
-          { board: "Edexcel A Level" },
-          { board: "AQA A Level" },
-          { board: "OCR A Level" },
-          { board: "CIE A Level" },
+          { board: "Edexcel" },
+          { board: "AQA" },
+          { board: "OCR" },
+          { board: "CIE" },
           { board: "Edexcel IAL" },
         ]);
       } else if (value === "O Level") {
-        setBoards([
-          { board: "Edexcel A Level" },
-          { board: "AQA A Level" },
-          { board: "OCR A Level" },
-          { board: "CIE A Level" },
-          { board: "Edexcel IAL" },
-        ]);
-      } else if (value === "O Level") {
-        setBoards([{ board: "CIE O Level" }]);
+        setBoards([{ board: "CIE" }]);
       } else if (value === "Pre U") {
-        setBoards([{ board: "CIE Pre U" }]);
+        setBoards([{ board: "CIE" }]);
       } else if (value === "IB") {
         setBoards([{ board: "No Board", status: "disable" }]);
       } else {
@@ -157,7 +150,7 @@ function DialogModalMetaData(props) {
     }
     let newDate = new Date(`${year}-${m}-01T00:00:00Z`);
     setStartDate(newDate);
-    setPaper({ ...paper, date: date });
+    setPaper({ ...paper, date: newDate });
   };
   return (
     <div>

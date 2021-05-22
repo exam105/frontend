@@ -19,13 +19,12 @@
   background-color: transparent !important;
 }
 .onHoverHighlightTextAndCursor:hover {
-  background: #d3d3d3 !important;
+  background: #cacfe4 !important;
   cursor: pointer;
 }
 .onHoverHighlightTextAndCursor {
   transition: 0.3s;
 }
-
 #filled-adornment-password,
 #standard-basic {
   background-color: transparent !important;
@@ -56,7 +55,7 @@
 }
 
 .seeSomeText {
-  width: 30%;
+  width: 90vw;
   margin: 0;
   overflow: hidden;
   text-overflow: ellipsis;

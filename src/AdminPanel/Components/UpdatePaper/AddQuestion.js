@@ -221,6 +221,7 @@ function AddQuestion(props) {
         .then((res) => {
           props.getAllQuestions();
           setTopics([]);
+          setTopic("");
           setProgressBarStatus(false);
           setOptions([]);
           setQuestion("");
@@ -570,6 +571,7 @@ function AddQuestion(props) {
                         placeholder="Enter Marks"
                         max="100"
                         min="1"
+                        id="topic"
                       />
                       <br />
                     </div>

@@ -1,11 +1,11 @@
 .paperContainer {
-  border-radius: 0.5rem;
-  border: 1px #d3d3d3 solid;
+  border: 1px #dee1eb solid;
   margin-bottom: 0.2rem;
   transition: 0.3s;
 }
 .paperContainer:hover {
-  background: #d3d3d3 !important;
+  background: #dee1eb !important;
+  border-left: 7px #41528b solid;
   cursor: pointer;
   font-weight: bold;
 }
@@ -13,4 +13,14 @@
   display: flex;
   justify-content: space-around;
   align-items: center;
+  height: 100%;
+  padding-top: 0.2rem;
+}
+.lineOne > div {
+  width: 30px;
+  height: 30px;
+}
+.lineOne > div > img {
+  max-width: 100%;
+  max-height: 100%;
 }
