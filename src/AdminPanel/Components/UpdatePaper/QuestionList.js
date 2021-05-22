@@ -284,6 +284,7 @@ function QuestionList(props) {
         data={rows}
         is_theory={is_theory}
         handleClose={() => setOpenSeeDialog(false)}
+        editThisQuestion={() => setEditQuestionsStatus(true)}
       />
     </div>
   );
