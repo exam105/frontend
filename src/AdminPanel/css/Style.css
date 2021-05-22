@@ -19,7 +19,7 @@
   background-color: transparent !important;
 }
 .onHoverHighlightTextAndCursor:hover {
-  background: #d3d3d3 !important;
+  background: #cacfe4 !important;
   cursor: pointer;
 }
 .onHoverHighlightTextAndCursor {

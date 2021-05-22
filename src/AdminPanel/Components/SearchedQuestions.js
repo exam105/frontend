@@ -138,6 +138,12 @@ const SearchedQuestions = (props) => {
               aria-label="close"
               onClick={() => {
                 handleClose();
+                setImages([]);
+                setOptions([]);
+                setMarks("");
+                setTopics([]);
+                setQuestion("");
+                setAnswer("");
               }}
             >
               <ArrowBackIcon />
@@ -170,12 +176,16 @@ const SearchedQuestions = (props) => {
                       key={index}
                       className="p-0 border"
                       style={{
-                        background: index === selectedRow ? "#d3d3d3" : bg,
+                        background: index === selectedRow ? "#c1c7e0" : bg,
                       }}
                     >
                       <TableRow
                         key={index}
                         className="onHoverHighlightTextAndCursor"
+                        style={{
+                          borderLeft:
+                            index === selectedRow ? "7px solid #41528b" : "",
+                        }}
                         onClick={() => {
                           setSelectedRow(index);
                           loadQuestion(row.id);
@@ -262,7 +272,7 @@ const SearchedQuestions = (props) => {
                       fontSize: "15px",
                       marginTop: "0.5rem",
                       borderRadius: "0.3rem",
-                      background: "#f6f6f6",
+                      border: "1px solid #afb9f07d",
                     }}
                   >
                     <MathpixLoader>
@@ -278,7 +288,7 @@ const SearchedQuestions = (props) => {
                           fontSize: "15px",
                           marginTop: "0.5rem",
                           borderRadius: "0.3rem",
-                          background: "#f6f6f6",
+                          border: "1px solid #afb9f07d",
                         }}
                       >
                         <h5 className="py-1 text-left">Answer:</h5>
