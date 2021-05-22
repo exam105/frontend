@@ -285,6 +285,7 @@ function QuestionList(props) {
         is_theory={is_theory}
         handleClose={() => setOpenSeeDialog(false)}
         editThisQuestion={() => setEditQuestionsStatus(true)}
+        deleteThisQuestion={() => setConfirmDialogStatus(true)}
       />
     </div>
   );

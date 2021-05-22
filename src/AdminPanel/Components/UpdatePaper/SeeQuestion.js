@@ -38,7 +38,8 @@ const useStyles = makeStyles((theme) => ({
 
 export default function SeeQuestion(props) {
   const classes = useStyles();
-  const { editThisQuestion, handleClose, open, is_theory } = props;
+  const { editThisQuestion, deleteThisQuestion, handleClose, open, is_theory } =
+    props;
   const [data, setData] = React.useState([]);
   const loginReducer = useSelector((state) => state.loginReducer);
   const [question, setQuestion] = React.useState("");
@@ -122,7 +123,20 @@ export default function SeeQuestion(props) {
       editThisQuestion();
     }
   };
-  const deleteCurrentQuestion = () => {};
+  const deleteCurrentQuestion = () => {
+    setOptions([]);
+    setTopics([]);
+    setQuestion("");
+    setAnswer("");
+    setImages([]);
+    setMarks("");
+    handleClose();
+    if (window.SeeQuestionId !== undefined) {
+      window.DeleteQuestionsId = window.SeeQuestionId;
+      deleteThisQuestion();
+    }
+  };
+
   return (
     <div>
       <Dialog
