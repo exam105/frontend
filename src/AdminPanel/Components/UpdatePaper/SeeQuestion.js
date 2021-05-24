@@ -50,16 +50,21 @@ export default function SeeQuestion(props) {
   const [marks, setMarks] = React.useState("");
   const [activeQuestionIndex, setActiveQuestionIndex] = React.useState(0);
   const [imageViewStatus, setImageViewStatus] = React.useState(false);
+  const [editQuestionId, setEditQuestionId] = React.useState("");
+  const [deleteQuestionId, setDeleteQuestionId] = React.useState("");
 
   const ImageViewClose = () => {
     setImageViewStatus(false);
   };
 
   React.useEffect(() => {
+    console.log("i got terigg");
     if (window.SeeQuestionId !== undefined) {
       if (window.SeeQuestionIndex !== undefined) {
         setActiveQuestionIndex(window.SeeQuestionIndex);
       }
+      setEditQuestionId(window.SeeQuestionId);
+      setDeleteQuestionId(window.SeeQuestionId);
       getQuestion(window.SeeQuestionId);
     }
   }, [window.SeeQuestionId]);
@@ -68,6 +73,8 @@ export default function SeeQuestion(props) {
     if (props.data) {
       const SeeQuestionId = props.data[activeQuestionIndex];
       if (SeeQuestionId !== undefined) {
+        setEditQuestionId(SeeQuestionId.id);
+        setDeleteQuestionId(SeeQuestionId.id);
         getQuestion(SeeQuestionId.id);
       } else {
         console.log("not See Question id found");
@@ -118,10 +125,9 @@ export default function SeeQuestion(props) {
     setImages([]);
     setMarks("");
     handleClose();
-    if (window.SeeQuestionId !== undefined) {
-      window.EditQuestionId = window.SeeQuestionId;
-      editThisQuestion();
-    }
+    console.log("edit triggered");
+    window.EditQuestionId = editQuestionId;
+    editThisQuestion();
   };
   const deleteCurrentQuestion = () => {
     setOptions([]);
@@ -131,10 +137,9 @@ export default function SeeQuestion(props) {
     setImages([]);
     setMarks("");
     handleClose();
-    if (window.SeeQuestionId !== undefined) {
-      window.DeleteQuestionsId = window.SeeQuestionId;
-      deleteThisQuestion();
-    }
+    console.log("delete triggered");
+    window.DeleteQuestionsId = deleteQuestionId;
+    deleteThisQuestion();
   };
 
   return (

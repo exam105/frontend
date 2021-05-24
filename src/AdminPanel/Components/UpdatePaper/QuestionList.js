@@ -168,8 +168,16 @@ function QuestionList(props) {
                         <p
                           className="seeSomeText onHoverBoldText px-3"
                           onClick={() => {
+                            window.SeeQuestionId = "";
+                            window.SeeQuestionIndex = "";
                             window.SeeQuestionId = row.id;
                             window.SeeQuestionIndex = index;
+                            console.log(
+                              "seeuestion id: ",
+                              window.SeeQuestionId,
+                              " Seeuestion Index: ",
+                              window.SeeQuestionIndex
+                            );
                             setOpenSeeDialog(true);
                           }}
                         >
@@ -201,6 +209,8 @@ function QuestionList(props) {
                             <IconButton
                               aria-label="See Question"
                               onClick={() => {
+                                window.SeeQuestionId = "";
+                                window.SeeQuestionIndex = "";
                                 window.SeeQuestionId = row.id;
                                 window.SeeQuestionIndex = index;
                                 setOpenSeeDialog(true);
