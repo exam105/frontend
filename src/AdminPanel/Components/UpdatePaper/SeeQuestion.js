@@ -1,10 +1,8 @@
 import React from "react";
 import axios from "axios";
 import Button from "@material-ui/core/Button";
-import { useSelector } from "react-redux";
 import { MathpixLoader, MathpixMarkdown } from "mathpix-markdown-it";
 import {
-  DialogActions,
   Dialog,
   DialogContent,
   Slide,
@@ -19,8 +17,8 @@ import CancelIcon from "@material-ui/icons/Cancel";
 import CheckCircleIcon from "@material-ui/icons/CheckCircle";
 import ArrowForwardIcon from "@material-ui/icons/ArrowForward";
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
-import S3 from "react-aws-s3";
 import ImagesCarouselModal from "../../../Modals/ImagesCarouselModal";
+import ConfirmDialog from "../../../Modals/ConfirmDialog";
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="left" ref={ref} {...props} />;
@@ -38,10 +36,14 @@ const useStyles = makeStyles((theme) => ({
 
 export default function SeeQuestion(props) {
   const classes = useStyles();
-  const { editThisQuestion, deleteThisQuestion, handleClose, open, is_theory } =
-    props;
-  const [data, setData] = React.useState([]);
-  const loginReducer = useSelector((state) => state.loginReducer);
+  const {
+    editThisQuestion,
+    getAllQuestions,
+    id,
+    handleClose,
+    open,
+    is_theory,
+  } = props;
   const [question, setQuestion] = React.useState("");
   const [answer, setAnswer] = React.useState("");
   const [options, setOptions] = React.useState([]);
@@ -52,13 +54,13 @@ export default function SeeQuestion(props) {
   const [imageViewStatus, setImageViewStatus] = React.useState(false);
   const [editQuestionId, setEditQuestionId] = React.useState("");
   const [deleteQuestionId, setDeleteQuestionId] = React.useState("");
+  const [confirmDialogStatus, setConfirmDialogStatus] = React.useState(false);
 
   const ImageViewClose = () => {
     setImageViewStatus(false);
   };
 
   React.useEffect(() => {
-    console.log("i got terigg");
     if (window.SeeQuestionId !== undefined) {
       if (window.SeeQuestionIndex !== undefined) {
         setActiveQuestionIndex(window.SeeQuestionIndex);
@@ -117,6 +119,50 @@ export default function SeeQuestion(props) {
       })
       .catch((err) => console.log(err));
   };
+  const deleteQuestion = () => {
+    if (window.DeleteQuestionsId !== "") {
+      if (id.length !== 0) {
+        axios({
+          method: "DELETE",
+          url: is_theory
+            ? `/dashboard/de/question/theory/${window.DeleteQuestionsId}/meta/${id}`
+            : `/dashboard/de/question/${window.DeleteQuestionsId}/meta/${id}`,
+        })
+          .then((res) => {
+            setConfirmDialogStatus(false);
+            getAllQuestions();
+            window.DeleteQuestionsId = "";
+            if (
+              props.data[activeQuestionIndex - 1] === undefined &&
+              props.data[activeQuestionIndex + 1] === undefined
+            ) {
+              setOptions([]);
+              setTopics([]);
+              setQuestion("");
+              setAnswer("");
+              setImages([]);
+              setMarks("");
+              handleClose();
+            } else if (props.data[activeQuestionIndex + 1] === undefined) {
+              const SeeQuestionId = props.data[activeQuestionIndex - 1];
+              setEditQuestionId(SeeQuestionId.id);
+              setDeleteQuestionId(SeeQuestionId.id);
+              getQuestion(SeeQuestionId.id);
+              setActiveQuestionIndex(activeQuestionIndex - 1);
+            } else {
+              const SeeQuestionId = props.data[activeQuestionIndex + 1];
+              setEditQuestionId(SeeQuestionId.id);
+              setDeleteQuestionId(SeeQuestionId.id);
+              getQuestion(SeeQuestionId.id);
+            }
+          })
+          .catch((err) => console.log(err));
+      }
+    } else {
+      alert("Something went wrong. Please Try Again...");
+      setConfirmDialogStatus(false);
+    }
+  };
   const editCurrentQuestion = () => {
     setOptions([]);
     setTopics([]);
@@ -130,16 +176,9 @@ export default function SeeQuestion(props) {
     editThisQuestion();
   };
   const deleteCurrentQuestion = () => {
-    setOptions([]);
-    setTopics([]);
-    setQuestion("");
-    setAnswer("");
-    setImages([]);
-    setMarks("");
-    handleClose();
     console.log("delete triggered");
     window.DeleteQuestionsId = deleteQuestionId;
-    deleteThisQuestion();
+    setConfirmDialogStatus(true);
   };
 
   return (
@@ -150,6 +189,7 @@ export default function SeeQuestion(props) {
         fullWidth={true}
         maxWidth="md"
         TransitionComponent={Transition}
+        style={{ zIndex: "2" }}
         keepMounted
         aria-labelledby="alert-dialog-slide-title"
         aria-describedby="alert-dialog-slide-description"
@@ -392,6 +432,13 @@ export default function SeeQuestion(props) {
           </DialogContent>
         )}
       </Dialog>
+      {/* Confirm Modal Dialog */}
+      <ConfirmDialog
+        delete_mcq_by_id={deleteQuestion}
+        ConfirmDialog={confirmDialogStatus}
+        ConfirmDesc="Are you sure you want to delete this Question?"
+        handleClose={() => setConfirmDialogStatus(false)}
+      />
     </div>
   );
 }

@@ -14,7 +14,6 @@ import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
 import TableContainer from "@material-ui/core/TableContainer";
 import Paper from "@material-ui/core/Paper";
-import { useSelector } from "react-redux";
 import DeleteIcon from "@material-ui/icons/Delete";
 import { MdModeEdit } from "react-icons/md";
 import { BsFillEyeFill } from "react-icons/bs";
@@ -67,7 +66,6 @@ function QuestionList(props) {
     setRows([]);
     setProgressBarStatus("");
     if (id.length === 1) {
-      console.log("i came in question list");
       axios({
         method: "GET",
         url: is_theory
@@ -172,12 +170,6 @@ function QuestionList(props) {
                             window.SeeQuestionIndex = "";
                             window.SeeQuestionId = row.id;
                             window.SeeQuestionIndex = index;
-                            console.log(
-                              "seeuestion id: ",
-                              window.SeeQuestionId,
-                              " Seeuestion Index: ",
-                              window.SeeQuestionIndex
-                            );
                             setOpenSeeDialog(true);
                           }}
                         >
@@ -295,7 +287,10 @@ function QuestionList(props) {
         is_theory={is_theory}
         handleClose={() => setOpenSeeDialog(false)}
         editThisQuestion={() => setEditQuestionsStatus(true)}
-        deleteThisQuestion={() => setConfirmDialogStatus(true)}
+        id={id}
+        getAllQuestions={() => {
+          getAllQuestions();
+        }}
       />
     </div>
   );
