@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import axios from "axios";
 import Dialog from "@material-ui/core/Dialog";
 import AppBar from "@material-ui/core/AppBar";
@@ -9,8 +9,6 @@ import CloseIcon from "@material-ui/icons/Close";
 import { FcPlus } from "react-icons/fc";
 import $ from "jquery";
 import { MathpixLoader, MathpixMarkdown } from "mathpix-markdown-it";
-import { useSelector } from "react-redux";
-import { useHistory } from "react-router-dom";
 import Snackbar from "@material-ui/core/Snackbar";
 import MuiAlert from "@material-ui/lab/Alert";
 // Dialog Box
@@ -24,16 +22,16 @@ import { Fab } from "@material-ui/core";
 import S3 from "react-aws-s3";
 import DeleteIcon from "@material-ui/icons/Delete";
 
-const useStyles = makeStyles((theme) => ({
-  backdrop: {
-    zIndex: theme.zIndex.drawer + 1,
-    color: "#fff",
-  },
-}));
+// const useStyles = makeStyles((theme) => ({
+//   backdrop: {
+//     zIndex: theme.zIndex.drawer + 1,
+//     color: "#fff",
+//   },
+// }));
 
-const Transition = React.forwardRef(function Transition(props, ref) {
-  return <Slide direction="up" ref={ref} {...props} />;
-});
+// const Transition = React.forwardRef(function Transition(props, ref) {
+//   return <Slide direction="up" ref={ref} {...props} />;
+// });
 
 function Alert(props) {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
@@ -85,10 +83,7 @@ function EditQuestion(props) {
   const [DialogTitle, setDialogTitle] = React.useState("Notification");
   const [DialogOk, setDialogOk] = React.useState("Ok");
   const [ProgressBarStatus, setProgressBarStatus] = useState(false);
-  const classes = useStyles();
   const [progress, setProgress] = useState(10);
-  // React Redux
-  const loginReducer = useSelector((state) => state.loginReducer);
   const [getData, setGetData] = useState(true);
 
   const RefreshData = () => {
@@ -347,6 +342,11 @@ function EditQuestion(props) {
           .then((res) => {
             props.getAllQuestions();
             window.EditQuestionId = undefined;
+            setAnswer("");
+            setOptions([]);
+            setQuestion("");
+            setImages([]);
+            setTopics([]);
             onClose(false);
             setProgressBarStatus(false);
           })

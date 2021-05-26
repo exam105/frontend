@@ -18,6 +18,8 @@ import CheckCircleIcon from "@material-ui/icons/CheckCircle";
 import ArrowForwardIcon from "@material-ui/icons/ArrowForward";
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 import ImagesCarouselModal from "../../../Modals/ImagesCarouselModal";
+// Components
+import EditQuestions from "./EditQuestions";
 import ConfirmDialog from "../../../Modals/ConfirmDialog";
 
 const Transition = React.forwardRef(function Transition(props, ref) {
@@ -36,14 +38,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function SeeQuestion(props) {
   const classes = useStyles();
-  const {
-    editThisQuestion,
-    getAllQuestions,
-    id,
-    handleClose,
-    open,
-    is_theory,
-  } = props;
+  const { getAllQuestions, id, handleClose, open, is_theory, metadata } = props;
   const [question, setQuestion] = React.useState("");
   const [answer, setAnswer] = React.useState("");
   const [options, setOptions] = React.useState([]);
@@ -55,6 +50,7 @@ export default function SeeQuestion(props) {
   const [editQuestionId, setEditQuestionId] = React.useState("");
   const [deleteQuestionId, setDeleteQuestionId] = React.useState("");
   const [confirmDialogStatus, setConfirmDialogStatus] = React.useState(false);
+  const [editQuestion, setEditQuestion] = React.useState(false);
 
   const ImageViewClose = () => {
     setImageViewStatus(false);
@@ -163,17 +159,20 @@ export default function SeeQuestion(props) {
       setConfirmDialogStatus(false);
     }
   };
+  const onCloseEditQuestion = () => {
+    window.EditQuestionId = undefined;
+    setEditQuestion(false);
+    const SeeQuestionId = props.data[activeQuestionIndex];
+    if (SeeQuestionId !== undefined) {
+      setEditQuestionId(SeeQuestionId.id);
+      setDeleteQuestionId(SeeQuestionId.id);
+      getQuestion(SeeQuestionId.id);
+    }
+  };
   const editCurrentQuestion = () => {
-    setOptions([]);
-    setTopics([]);
-    setQuestion("");
-    setAnswer("");
-    setImages([]);
-    setMarks("");
-    handleClose();
     console.log("edit triggered");
     window.EditQuestionId = editQuestionId;
-    editThisQuestion();
+    setEditQuestion(true);
   };
   const deleteCurrentQuestion = () => {
     console.log("delete triggered");
@@ -219,6 +218,7 @@ export default function SeeQuestion(props) {
                 setAnswer("");
                 setImages([]);
                 setMarks("");
+                window.SeeQuestionId = undefined;
                 handleClose();
               }}
               aria-label="close"
@@ -438,6 +438,16 @@ export default function SeeQuestion(props) {
         ConfirmDialog={confirmDialogStatus}
         ConfirmDesc="Are you sure you want to delete this Question?"
         handleClose={() => setConfirmDialogStatus(false)}
+      />
+      {/* Edit Questions Modal Dialog */}
+      <EditQuestions
+        metadata={metadata}
+        open={editQuestion}
+        getAllQuestions={getAllQuestions}
+        is_theory={is_theory}
+        onClose={() => {
+          onCloseEditQuestion();
+        }}
       />
     </div>
   );

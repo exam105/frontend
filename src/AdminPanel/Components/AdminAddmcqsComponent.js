@@ -67,6 +67,8 @@ function AdminAddmcqsComponent(props) {
   // for navigation
   const history = useHistory();
 
+  const boardSize = Object.keys(boardReducer).length;
+
   useEffect(() => {
     // GET S3 CREDENTIALS
     axios({
@@ -403,7 +405,7 @@ function AdminAddmcqsComponent(props) {
   // Finish Exam
   const finish_paper = () => {
     setConfirmFinishPaper(false);
-    const data = new Array(boardReducer[0]);
+    const data = new Array(boardReducer[boardSize - 1]);
     mcqReducer.map((item, i) => {
       data.push(item);
     });
@@ -509,7 +511,7 @@ function AdminAddmcqsComponent(props) {
             <div className="table-responsive mx-auto">
               <table className="table p-0 m-0">
                 <tbody>
-                  {boardReducer.map((item, i) => (
+                  {new Array(boardReducer[boardSize - 1]).map((item, i) => (
                     <tr className="text-center">
                       <td style={{ whiteSpace: "nowrap" }}>{item.system}</td>
                       <td style={{ whiteSpace: "nowrap" }}>{item.board}</td>

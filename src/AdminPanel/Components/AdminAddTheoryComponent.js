@@ -75,6 +75,8 @@ function AdminAddTheoryComponent(props) {
   const boardReducer = useSelector((state) => state.boardReducer);
   const history = useHistory();
 
+  const boardSize = Object.keys(boardReducer).length;
+
   useEffect(() => {
     // GET S3 CREDENTIALS
     axios({
@@ -335,7 +337,7 @@ function AdminAddTheoryComponent(props) {
   // Finish Exam
   const finish_paper = () => {
     setConfirmFinishPaper(false);
-    const data1 = new Array(boardReducer[0]);
+    const data1 = new Array(boardReducer[boardSize - 1]);
     const theory = {
       is_theory: true,
     };
@@ -345,7 +347,7 @@ function AdminAddTheoryComponent(props) {
       }
     });
     props.add_board(data1, theory);
-    const data = new Array(boardReducer[0]);
+    const data = new Array(boardReducer[boardSize - 1]);
     theoryReducer.map((item, i) => {
       data.push(item);
     });
@@ -359,7 +361,6 @@ function AdminAddTheoryComponent(props) {
         .then((res) => {
           props.resetState();
           props.resetBoard();
-          console.log("add thoery component got fired.");
           setProgressBarStatus(false);
           history.push("/admin/panel/papers");
         })
@@ -441,7 +442,6 @@ function AdminAddTheoryComponent(props) {
               ))}
             </div>
           </div>
-          {/* Theory question Left Side */}
           <div
             className="col-lg-7 bg-white pb-3"
             style={{ borderRadius: "20px", boxShadow: "0px 0px 2px black" }}
@@ -450,7 +450,7 @@ function AdminAddTheoryComponent(props) {
             <div className="table-responsive mx-auto">
               <table className="table p-0 m-0">
                 <tbody>
-                  {boardReducer.map((item, i) => (
+                  {new Array(boardReducer[boardSize - 1]).map((item, i) => (
                     <tr className="text-center">
                       <td style={{ whiteSpace: "nowrap" }}>{item.system}</td>
                       <td style={{ whiteSpace: "nowrap" }}>{item.board}</td>

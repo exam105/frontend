@@ -64,13 +64,12 @@ function AdminAddBoardComponent(props) {
 
   const submit_data = (e) => {
     e.preventDefault();
-    console.log("initial board: ", paper.date.toJSON());
     if (!paper.date) {
       setNotificationStatus(true);
     } else {
       props.add_board(paper);
-      props.reset_mcq();
-      props.reset_theory();
+      // props.reset_mcq();
+      // props.reset_theory();
       history.push("/admin/panel/add/");
     }
   };

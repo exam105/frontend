@@ -13,8 +13,6 @@ import { FcPlus } from "react-icons/fc";
 import $ from "jquery";
 import { MathpixLoader, MathpixMarkdown } from "mathpix-markdown-it";
 import { useSelector } from "react-redux";
-import Button from "@material-ui/core/Button";
-import Snackbar from "@material-ui/core/Snackbar";
 import MuiAlert from "@material-ui/lab/Alert";
 import axios from "axios";
 // Dialog Box
@@ -681,5 +679,18 @@ function AddQuestion(props) {
     </div>
   );
 }
-
+// const mapDispatchToProps = (dispatch) => {
+//   return {
+//     add_board: (data) => {
+//       dispatch(add_board(data));
+//     },
+//     reset_mcq: () => {
+//       dispatch(reset_mcq());
+//     },
+//     reset_theory: () => {
+//       dispatch(reset_theory());
+//     },
+//   };
+// };
 export default AddQuestion;
+// export default connect(null, mapDispatchToProps)(AddQuestion);

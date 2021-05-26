@@ -278,15 +278,16 @@ function QuestionList(props) {
         onClose={() => {
           window.EditQuestionId = undefined;
           setEditQuestionsStatus(false);
+          console.log("i am triggered in questionlist");
         }}
       />
       {/* See Quesion Modal Dialog */}
       <SeeQuestion
         open={openSeeDialog}
         data={rows}
+        metadata={metadata}
         is_theory={is_theory}
         handleClose={() => setOpenSeeDialog(false)}
-        editThisQuestion={() => setEditQuestionsStatus(true)}
         id={id}
         getAllQuestions={() => {
           getAllQuestions();
