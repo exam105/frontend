@@ -248,7 +248,7 @@ function AdminAddBoardComponent(props) {
         okButton="continue"
         delete_mcq_by_id={() => history.push("/admin/panel/add/mcqs")}
         ConfirmDialog={confirmDialogStatus}
-        ConfirmDesc="Your Paper Already in Progress.Are you sure you want to continue with last Paper? if you add another data old data will be deleted."
+        ConfirmDesc="There is already a paper in progress. Do you want to 'Continue' with the last unsaved paper or 'Cancel' to start adding a new paper. 'Cancel' will permanently delete the unsaved paper."
         handleClose={() => setConfirmDialogStatus(false)}
       />{" "}
     </section>
