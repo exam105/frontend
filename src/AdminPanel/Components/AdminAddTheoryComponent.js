@@ -352,6 +352,7 @@ function AdminAddTheoryComponent(props) {
       data.push(item);
     });
     if (data[1]) {
+      console.log("this i data: ", data);
       setProgressBarStatus(true);
       axios({
         method: "POST",
@@ -452,19 +453,19 @@ function AdminAddTheoryComponent(props) {
                 <tbody>
                   {new Array(boardReducer[boardSize - 1]).map((item, i) => (
                     <tr className="text-center">
-                      <td style={{ whiteSpace: "nowrap" }}>{item.system}</td>
-                      <td style={{ whiteSpace: "nowrap" }}>{item.board}</td>
-                      <td style={{ whiteSpace: "nowrap" }}>{item.subject}</td>
+                      <td style={{ whiteSpace: "nowrap" }}>{item?.system}</td>
+                      <td style={{ whiteSpace: "nowrap" }}>{item?.board}</td>
+                      <td style={{ whiteSpace: "nowrap" }}>{item?.subject}</td>
                       <td style={{ whiteSpace: "nowrap" }}>
-                        {new Date(item.date).getFullYear()}
+                        {new Date(item?.date).getFullYear()}
                       </td>
                       <td style={{ whiteSpace: "nowrap" }}>
-                        {new Date(item.date).toLocaleString("default", {
+                        {new Date(item?.date).toLocaleString("default", {
                           month: "long",
                         })}
                       </td>
-                      <td style={{ whiteSpace: "nowrap" }}>{item.series}</td>
-                      <td style={{ whiteSpace: "nowrap" }}>{item.paper}</td>
+                      <td style={{ whiteSpace: "nowrap" }}>{item?.series}</td>
+                      <td style={{ whiteSpace: "nowrap" }}>{item?.paper}</td>
                     </tr>
                   ))}
                 </tbody>
