@@ -12,6 +12,7 @@ import { useSelector } from "react-redux";
 function AdminAddBoardComponent(props) {
   const history = useHistory();
   const mcqReducer = useSelector((data) => data.mcqReducer);
+  const theoryReducer = useSelector((data) => data.theoryReducer);
   const [startDate, setStartDate] = useState(new Date());
   const [notificationStatus, setNotificationStatus] = useState(false);
   const [confirmDialogStatus, setConfirmDialogStatus] = useState(false);
@@ -68,8 +69,6 @@ function AdminAddBoardComponent(props) {
       setNotificationStatus(true);
     } else {
       props.add_board(paper);
-      // props.reset_mcq();
-      // props.reset_theory();
       history.push("/admin/panel/add/");
     }
   };
@@ -245,11 +244,21 @@ function AdminAddBoardComponent(props) {
       />{" "}
       {/* Modal For Confirmation */} {/* Confirm Modal Dialog Status */}
       <ConfirmDialog
-        okButton="continue"
-        delete_mcq_by_id={() => history.push("/admin/panel/add/mcqs")}
+        theoryButton={
+          theoryReducer.length !== 0 ? "Continue with Theory Paper" : undefined
+        }
+        mcqButton={
+          mcqReducer.length !== 0 ? "Continue with Mcq Paper" : undefined
+        }
+        openMCQ={() => history.push("/admin/panel/add/mcqs")}
+        openTheory={() => history.push("/admin/panel/add/theory")}
         ConfirmDialog={confirmDialogStatus}
-        ConfirmDesc="There is already a paper in progress. Do you want to 'Continue' with the last unsaved paper or 'Cancel' to start adding a new paper. 'Cancel' will permanently delete the unsaved paper."
-        handleClose={() => setConfirmDialogStatus(false)}
+        ConfirmDesc="There is already a paper in progress. Do you want to Continue with the last unsaved paper or 'Cancel' to start adding a new paper. 'Cancel' will permanently delete the unsaved papers."
+        handleClose={() => {
+          setConfirmDialogStatus(false);
+          props.reset_theory();
+          props.reset_mcq();
+        }}
       />{" "}
     </section>
   );

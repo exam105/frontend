@@ -1,8 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import axios from "axios";
 import PropTypes from "prop-types";
-import clsx from "clsx";
-import { lighten, makeStyles } from "@material-ui/core/styles";
+import { makeStyles } from "@material-ui/core/styles";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
 import TableCell from "@material-ui/core/TableCell";
@@ -14,7 +13,6 @@ import TableSortLabel from "@material-ui/core/TableSortLabel";
 import Paper from "@material-ui/core/Paper";
 import Checkbox from "@material-ui/core/Checkbox";
 import EnhancedTableToolbar from "./EnhancedTableToolbar";
-import { useSelector } from "react-redux";
 
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -151,7 +149,6 @@ export default function AdminPapersComponent() {
   const [rowsPerPage, setRowsPerPage] = React.useState(15);
   const [id, setId] = React.useState([]);
   const [isTheory, setIsTheory] = React.useState(false);
-  const loginReducer = useSelector((state) => state.loginReducer);
   const [getData, setGetData] = React.useState("");
   const [progressBarStatus, setProgressBarStatus] = React.useState("");
 

@@ -19,18 +19,12 @@ import MuiAlert from "@material-ui/lab/Alert";
 import S3 from "react-aws-s3";
 import axios from "axios";
 // Dialog Box
-import Dialog from "@material-ui/core/Dialog";
-import DialogActions from "@material-ui/core/DialogActions";
-import DialogContent from "@material-ui/core/DialogContent";
-import DialogContentText from "@material-ui/core/DialogContentText";
-import DialogTitle from "@material-ui/core/DialogTitle";
 import Slide from "@material-ui/core/Slide";
 import ConfirmDialog from "../../Modals/ConfirmDialog";
 import ModelNotification from "../../Modals/ModelNotification";
 import LinearProgressWithLabel from "./LinearProgressBarWithLabel";
 import Backdrop from "@material-ui/core/Backdrop";
 import { makeStyles } from "@material-ui/core/styles";
-import { ProgressBar } from "react-bootstrap";
 import DeleteIcon from "@material-ui/icons/Delete";
 
 const useStyles = makeStyles((theme) => ({
@@ -72,12 +66,19 @@ function AdminAddTheoryComponent(props) {
   const [ProgressBarStatus, setProgressBarStatus] = useState(false);
   // React Redux
   const theoryReducer = useSelector((state) => state.theoryReducer);
+  const mcqReducer = useSelector((state) => state.mcqReducer);
   const boardReducer = useSelector((state) => state.boardReducer);
   const history = useHistory();
 
   const boardSize = Object.keys(boardReducer).length;
 
   useEffect(() => {
+    if (mcqReducer.length !== 0) {
+      alert(
+        "You have to finish the unsaved mcq paper first, before adding any other paper."
+      );
+      history.push("/admin/panel/papers");
+    }
     // GET S3 CREDENTIALS
     axios({
       method: "GET",

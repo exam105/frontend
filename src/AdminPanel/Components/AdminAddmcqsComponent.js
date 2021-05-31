@@ -62,14 +62,20 @@ function AdminAddmcqsComponent(props) {
   const [progress, setProgress] = useState(10);
   // React Redux
   const mcqReducer = useSelector((state) => state.mcqReducer);
+  const theoryReducer = useSelector((state) => state.theoryReducer);
   const boardReducer = useSelector((state) => state.boardReducer);
-  const loginReducer = useSelector((state) => state.loginReducer);
   // for navigation
   const history = useHistory();
 
   const boardSize = Object.keys(boardReducer).length;
 
   useEffect(() => {
+    if (theoryReducer.length !== 0) {
+      alert(
+        "You have to finish the unsaved theory paper first, before adding any other paper."
+      );
+      history.push("/admin/panel/papers");
+    }
     // GET S3 CREDENTIALS
     axios({
       method: "GET",

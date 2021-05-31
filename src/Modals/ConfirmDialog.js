@@ -6,12 +6,17 @@ import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import Slide from "@material-ui/core/Slide";
 import { Button } from "@material-ui/core";
+import { useSelector } from "react-redux";
+import { useHistory } from "react-router-dom";
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
 function ConfirmDialog(props) {
+  const history = useHistory();
+  const mcqReducer = useSelector((data) => data.mcqReducer);
+
   return (
     <Dialog
       style={{ zIndex: "3" }}
@@ -42,13 +47,32 @@ function ConfirmDialog(props) {
             <p className="m-0">{props.cancelButton}</p>
           )}
         </Button>
-        <Button onClick={props.delete_mcq_by_id} color="primary">
-          {props.okButton === undefined ? (
-            <p className="m-0">Yes</p>
-          ) : (
-            <p className="m-0">{props.okButton}</p>
-          )}
-        </Button>
+        {props.mcqButton === undefined ? (
+          <Button onClick={props.delete_mcq_by_id} color="primary">
+            {props.okButton === undefined ? (
+              <p className="m-0">Yes</p>
+            ) : (
+              <p className="m-0">{props.okButton}</p>
+            )}
+          </Button>
+        ) : (
+          ""
+        )}
+
+        {props.mcqButton === undefined ? (
+          ""
+        ) : (
+          <Button onClick={props.openMCQ} color="primary">
+            <p className="m-0">{props.mcqButton}</p>
+          </Button>
+        )}
+        {props.theoryButton === undefined ? (
+          ""
+        ) : (
+          <Button onClick={props.openTheory} color="primary">
+            <p className="m-0">{props.theoryButton}</p>
+          </Button>
+        )}
       </DialogActions>
     </Dialog>
   );

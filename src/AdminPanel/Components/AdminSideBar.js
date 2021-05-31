@@ -1,13 +1,8 @@
 import React, { useEffect } from "react";
 import axios from "axios";
 import { NavLink } from "react-router-dom";
-import {
-  FcRemoveImage,
-  FcPlus,
-  FcTodoList,
-  FcDeleteDatabase,
-  FcSearch,
-} from "react-icons/fc";
+import { FcPlus, FcTodoList, FcDeleteDatabase, FcSearch } from "react-icons/fc";
+import { BiEdit } from "react-icons/bi";
 import { BsFillCaretRightFill } from "react-icons/bs";
 import "../css/AdminSideBar.css";
 import $ from "jquery";
@@ -18,7 +13,8 @@ import Cookies from "js-cookie";
 
 function AdminSideBar(props) {
   const history = useHistory();
-  const loginReducer = useSelector((state) => state.loginReducer);
+  const mcqReducer = useSelector((data) => data.mcqReducer);
+  const theoryReducer = useSelector((data) => data.theoryReducer);
   useEffect(() => {
     axios({
       method: "GET",
@@ -68,6 +64,15 @@ function AdminSideBar(props) {
             <FcSearch /> Search
           </NavLink>
         </li>
+        {theoryReducer.length !== 0 || mcqReducer.length !== 0 ? (
+          <li>
+            <NavLink exact to="/admin/panel/add/papers">
+              <BiEdit /> Resume unsaved paper
+            </NavLink>
+          </li>
+        ) : (
+          ""
+        )}
         <li onClick={logout}>
           <NavLink to="#">
             <FcDeleteDatabase /> Logout
