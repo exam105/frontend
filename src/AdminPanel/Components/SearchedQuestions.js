@@ -10,7 +10,6 @@ import Slide from "@material-ui/core/Slide";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
-import Button from "@material-ui/core/Button";
 import Table from "@material-ui/core/Table";
 import TableRow from "@material-ui/core/TableRow";
 import TableCell from "@material-ui/core/TableCell";
@@ -53,7 +52,7 @@ const SearchedQuestions = (props) => {
   const [marks, setMarks] = React.useState("");
   const [topics, setTopics] = React.useState([]);
   const [images, setImages] = React.useState([]);
-  const [isTheory, setIsTheory] = useState(false);
+  const [isTheory] = useState(false);
   const [imageViewStatus, setImageViewStatus] = React.useState(false);
 
   useEffect(() => {
@@ -73,11 +72,13 @@ const SearchedQuestions = (props) => {
     } else {
       handleClose();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [open]);
   useEffect(() => {
     if (rows?.length > 0) {
       loadQuestion(rows[0]?.id);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [rows]);
   const ImageViewClose = () => {
     setImageViewStatus(false);
@@ -173,14 +174,14 @@ const SearchedQuestions = (props) => {
                   }
                   return (
                     <TableBody
-                      key={index}
+                      key={row.id}
                       className="p-0 border"
                       style={{
                         background: index === selectedRow ? "#c1c7e0" : bg,
                       }}
                     >
                       <TableRow
-                        key={index}
+                        key={row.id}
                         className="onHoverHighlightTextAndCursor"
                         style={{
                           borderLeft:
@@ -246,6 +247,7 @@ const SearchedQuestions = (props) => {
                       ) : (
                         topics.map((item, i) => (
                           <span
+                            key={i}
                             className="pt-1 d-inline"
                             style={{
                               borderBottom: "1px solid rgba(0,0,0,0.3)",
@@ -307,6 +309,7 @@ const SearchedQuestions = (props) => {
                           <div>
                             {options?.map((item, i) => (
                               <div
+                                key={i}
                                 className="pt-3 d-flex"
                                 style={{
                                   borderRadius: "0.3rem",
@@ -347,6 +350,7 @@ const SearchedQuestions = (props) => {
                         if (item.imageurl) {
                           return (
                             <div
+                              key={i}
                               className="align-items-center images"
                               style={{
                                 cursor: "pointer",
@@ -359,7 +363,7 @@ const SearchedQuestions = (props) => {
                               }}
                             >
                               <img
-                                alt="Image Error"
+                                alt="Error"
                                 style={{ height: "120px", width: "100%" }}
                                 className="image "
                                 src={item.imageurl}
@@ -367,6 +371,7 @@ const SearchedQuestions = (props) => {
                             </div>
                           );
                         }
+                        return null;
                       })}
                       {/* Images View Carousel Dialog */}
                       {images.length === 0 ? (

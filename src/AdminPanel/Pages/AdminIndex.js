@@ -1,9 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import "../css/Style.css";
-// import { IconButton, Input , InputLabel , InputAdornment , FormControl, TextField } from '@material-ui/core';
-// import { Visibility , VisibilityOff } from '@material-ui/icons';
 import { useHistory } from "react-router-dom";
-import { connect, useSelector } from "react-redux";
+import { connect } from "react-redux";
 import Dialog from "@material-ui/core/Dialog";
 import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
@@ -27,12 +25,6 @@ function AdminIndex(props) {
   });
   const [DialogStatus, setDialogStatus] = React.useState(false);
   const history = useHistory();
-  // const loginReducer = useSelector((state) => state.loginReducer);
-  // useEffect(() => {
-  //   if (loginReducer) {
-  //     history.push("/admin/panel/papers");
-  //   }
-  // }, []);
   const handleChange = (prop) => (e) => {
     setValues({ ...values, [prop]: e.target.value });
   };
@@ -122,7 +114,7 @@ function AdminIndex(props) {
         TransitionComponent={Transition}
         keepMounted
         maxWidth="xs"
-        fullWidth="true"
+        fullWidth={true}
         aria-labelledby="alert-dialog-slide-title"
         aria-describedby="alert-dialog-slide-description"
       >

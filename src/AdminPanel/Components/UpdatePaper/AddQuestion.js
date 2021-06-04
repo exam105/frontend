@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import {
   AppBar,
@@ -12,8 +12,6 @@ import CloseIcon from "@material-ui/icons/Close";
 import { FcPlus } from "react-icons/fc";
 import $ from "jquery";
 import { MathpixLoader, MathpixMarkdown } from "mathpix-markdown-it";
-import { useSelector } from "react-redux";
-import MuiAlert from "@material-ui/lab/Alert";
 import axios from "axios";
 // Dialog Box
 import ModelNotification from "../../../Modals/ModelNotification";
@@ -43,14 +41,6 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Transition = React.forwardRef(function Transition(props, ref) {
-  return <Slide direction="up" ref={ref} {...props} />;
-});
-
-function Alert(props) {
-  return <MuiAlert elevation={6} variant="filled" {...props} />;
-}
-
 function AddQuestion(props) {
   const classes2 = useStyles2();
   const { is_theory, open } = props;
@@ -70,11 +60,9 @@ function AddQuestion(props) {
   // Dialog Hooks
   const [DialogStatus, setDialogStatus] = React.useState(false);
   const [DialogDesc, setDialogDesc] = React.useState("Are you Sure?");
-  const [DialogTitle, setDialogTitle] = React.useState("Notification");
-  const [DialogOk, setDialogOk] = React.useState("Ok");
+  const [DialogTitle] = React.useState("Notification");
+  const [DialogOk] = React.useState("Ok");
   const classes = useStyles();
-  // React Redux
-  const loginReducer = useSelector((state) => state.loginReducer);
 
   // UseEffect Hook
   React.useEffect(() => {
@@ -265,6 +253,7 @@ function AddQuestion(props) {
                 .catch((err) => {
                   console.log(err);
                 });
+              return null;
             });
           } else {
             add_questions_after_image_upload(imageLocations, mark);
@@ -308,6 +297,7 @@ function AddQuestion(props) {
                   .catch((err) => {
                     console.log(err);
                   });
+                return null;
               });
             } else {
               add_questions_after_image_upload(imageLocations, mark);
@@ -637,9 +627,12 @@ function AddQuestion(props) {
                       {images.map((item, i) => {
                         var url = URL.createObjectURL(item);
                         return (
-                          <div className="position-relative d-flex align-items-center w-50">
+                          <div
+                            key={i}
+                            className="position-relative d-flex align-items-center w-50"
+                          >
                             <img
-                              alt="Image Error"
+                              alt="Error"
                               style={{ height: "80px", width: "100%" }}
                               className="img-fluid p-2"
                               src={url}

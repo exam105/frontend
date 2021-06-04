@@ -1,14 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Dialog from "@material-ui/core/Dialog";
-import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import Slide from "@material-ui/core/Slide";
-import { useSelector } from "react-redux";
 import DatePicker from "react-datepicker";
 import ModelNotification from "../../../Modals/ModelNotification";
-import { MenuItem, Select } from "@material-ui/core";
 import axios from "axios";
-import $ from "jquery";
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
@@ -16,12 +12,11 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 
 function DialogModalMetaData(props) {
   const [open, setOpen] = React.useState(props.DialogStatus);
-  const loginReducer = useSelector((state) => state.loginReducer);
   const { callUseEffect } = props;
 
   const [startDate, setStartDate] = useState(new Date());
   const [notificationStatus, setNotificationStatus] = useState(false);
-  const [systems, setSystems] = useState([
+  const [systems] = useState([
     { system: "GCSE" },
     { system: "IGCSE" },
     { system: "AS" },
@@ -32,13 +27,13 @@ function DialogModalMetaData(props) {
   ]);
   const [boards, setBoards] = useState([]);
 
-  const [subjects, setSubjects] = useState([
+  const [subjects] = useState([
     { subject: "Math" },
     { subject: "Physics" },
     { subject: "Biology" },
   ]);
 
-  const [series, setSeries] = useState([
+  const [series] = useState([
     { series: "1" },
     { series: "2" },
     { series: "3" },
@@ -47,7 +42,7 @@ function DialogModalMetaData(props) {
     { series: "6" },
   ]);
 
-  const [papers, setPapers] = useState([
+  const [papers] = useState([
     { paper: "Paper 1" },
     { paper: "Paper 2" },
     { paper: "Paper 3" },
@@ -137,6 +132,7 @@ function DialogModalMetaData(props) {
       const newDate = new Date(props.data.date);
       setStartDate(newDate);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [props.DialogStatus]);
   const change_month_and_year = (date) => {
     let monthNumber = date.getMonth();
@@ -158,7 +154,7 @@ function DialogModalMetaData(props) {
         open={open}
         TransitionComponent={Transition}
         keepMounted
-        fullWidth="true"
+        fullWidth={true}
         maxWidth="sm"
         onClose={props.handleClose}
         aria-labelledby="alert-dialog-slide-title"
@@ -177,13 +173,17 @@ function DialogModalMetaData(props) {
                 id="system"
                 name="system"
                 onChange={change_input}
-                id="grouped-select"
+                // id="grouped-select"
                 className="form-control form-select"
                 required
               >
                 <option>None</option>
                 {systems.map((item, i) => {
-                  return <option value={item.system}>{item.system}</option>;
+                  return (
+                    <option key={i} value={item.system}>
+                      {item.system}
+                    </option>
+                  );
                 })}
               </select>
             </div>
@@ -193,13 +193,17 @@ function DialogModalMetaData(props) {
                 value={paper.board}
                 name="board"
                 onChange={change_input}
-                id="grouped-select"
+                id="board"
                 className="form-control form-select"
                 required
               >
                 <option value="">None</option>
                 {boards.map((item, i) => {
-                  return <option value={item.board}>{item.board}</option>;
+                  return (
+                    <option key={i} value={item.board}>
+                      {item.board}
+                    </option>
+                  );
                 })}
               </select>
             </div>
@@ -209,13 +213,17 @@ function DialogModalMetaData(props) {
                 value={paper.subject}
                 name="subject"
                 onChange={change_input}
-                id="grouped-select"
+                id="subject"
                 className="form-control form-select"
                 required
               >
                 <option value="">None</option>
                 {subjects.map((item, i) => {
-                  return <option value={item.subject}>{item.subject}</option>;
+                  return (
+                    <option key={i} value={item.subject}>
+                      {item.subject}
+                    </option>
+                  );
                 })}
               </select>
             </div>
@@ -241,13 +249,17 @@ function DialogModalMetaData(props) {
                 value={paper.series}
                 name="series"
                 onChange={change_input}
-                id="grouped-select"
+                id="series"
                 className="form-control form-select"
                 required
               >
                 <option value="">None</option>
                 {series.map((item, i) => {
-                  return <option value={item.series}>{item.series}</option>;
+                  return (
+                    <option key={i} value={item.series}>
+                      {item.series}
+                    </option>
+                  );
                 })}
               </select>
             </div>
@@ -257,13 +269,17 @@ function DialogModalMetaData(props) {
                 value={paper.paper}
                 name="paper"
                 onChange={change_input}
-                id="grouped-select"
+                id="paper"
                 className="form-control form-select"
                 required
               >
                 <option value="">None</option>
                 {papers.map((item, i) => {
-                  return <option value={item.paper}>{item.paper}</option>;
+                  return (
+                    <option key={i} value={item.paper}>
+                      {item.paper}
+                    </option>
+                  );
                 })}
               </select>
             </div>

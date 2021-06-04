@@ -43,6 +43,7 @@ const ImagesCarouselModal = (props) => {
     if (window.activeImageinImageCarousel !== undefined) {
       setActiveStep(window.activeImageinImageCarousel);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [window.activeImageinImageCarousel]);
 
   const handleNext = () => {

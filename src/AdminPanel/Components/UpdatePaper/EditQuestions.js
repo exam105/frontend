@@ -22,17 +22,6 @@ import { Fab } from "@material-ui/core";
 import S3 from "react-aws-s3";
 import DeleteIcon from "@material-ui/icons/Delete";
 
-// const useStyles = makeStyles((theme) => ({
-//   backdrop: {
-//     zIndex: theme.zIndex.drawer + 1,
-//     color: "#fff",
-//   },
-// }));
-
-// const Transition = React.forwardRef(function Transition(props, ref) {
-//   return <Slide direction="up" ref={ref} {...props} />;
-// });
-
 function Alert(props) {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
 }
@@ -80,8 +69,8 @@ function EditQuestion(props) {
   // Dialog Hooks
   const [DialogStatus, setDialogStatus] = React.useState(false);
   const [DialogDesc, setDialogDesc] = React.useState("Are you Sure?");
-  const [DialogTitle, setDialogTitle] = React.useState("Notification");
-  const [DialogOk, setDialogOk] = React.useState("Ok");
+  const [DialogTitle] = React.useState("Notification");
+  const [DialogOk] = React.useState("Ok");
   const [ProgressBarStatus, setProgressBarStatus] = useState(false);
   const [progress, setProgress] = useState(10);
   const [getData, setGetData] = useState(true);
@@ -148,6 +137,7 @@ function EditQuestion(props) {
     return () => {
       clearInterval(timer);
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -231,6 +221,7 @@ function EditQuestion(props) {
           console.log(err);
         });
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [window.EditQuestionId, getData]);
   // on option created
   ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -411,6 +402,7 @@ function EditQuestion(props) {
                   update_questions_after_image_upload(imageLocations, mark);
                 }
               }
+              return null;
             });
           } else {
             update_questions_after_image_upload(imageLocations, mark);
@@ -476,6 +468,7 @@ function EditQuestion(props) {
                     update_questions_after_image_upload(imageLocations, mark);
                   }
                 }
+                return null;
               });
             } else {
               update_questions_after_image_upload(imageLocations, mark);
@@ -511,7 +504,7 @@ function EditQuestion(props) {
     var newFiles = [];
 
     var oldImageNames = [];
-    for (var i = 0; i < images.length; i++) {
+    for (let i = 0; i < images.length; i++) {
       var lastSegment = "";
       if (images[i].imageurl) {
         var parts = images[i].imageurl.split("/");
@@ -522,7 +515,7 @@ function EditQuestion(props) {
       }
     }
 
-    for (var i = 0; i < files.length; i++) {
+    for (let i = 0; i < files.length; i++) {
       if (!oldImageNames.includes(files[i].name)) {
         newFiles.push(files[i]);
       }
@@ -840,7 +833,7 @@ function EditQuestion(props) {
                             className="position-relative d-flex align-items-center w-50"
                           >
                             <img
-                              alt="Image Error"
+                              alt="Errror"
                               style={{ height: "80px", width: "100%" }}
                               className="img-fluid p-2"
                               src={item.imageurl}
@@ -864,7 +857,7 @@ function EditQuestion(props) {
                           className="position-relative d-flex align-items-center w-50"
                         >
                           <img
-                            alt="Image Error"
+                            alt="Eror"
                             style={{ height: "80px", width: "100%" }}
                             className="img-fluid p-2"
                             src={url}

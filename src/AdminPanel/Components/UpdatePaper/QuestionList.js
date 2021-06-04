@@ -35,7 +35,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Transition2 = React.forwardRef(function Transition(props, ref) {
+const Transition2 = React.forwardRef(function Transition2(props, ref) {
   return <Slide direction="left" ref={ref} {...props} />;
 });
 
@@ -84,6 +84,7 @@ function QuestionList(props) {
     } else {
       onClose(false);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id, getQuestions]);
 
   const deleteQuestion = () => {
@@ -159,47 +160,14 @@ function QuestionList(props) {
                   className="p-0 border"
                   style={{ background: bg }}
                 >
-                  <div className="container-fluid">
-                    <div className="row">
-                      <div className="col-10 p-0 d-flex align-items-center">
-                        {/* <TableCell className="onHoverBoldText" onClick={() => { window.SeeQuestionId = row.id; setOpenSeeDialog(true) }} style={{ cursor: 'pointer' }}>{(row.questions.length >= 130) ? row.questions.slice(0, 130)+'...' : row.questions }</TableCell> */}
-                        <p
-                          className="seeSomeText onHoverBoldText px-3"
-                          onClick={() => {
-                            window.SeeQuestionId = "";
-                            window.SeeQuestionIndex = "";
-                            window.SeeQuestionId = row.id;
-                            window.SeeQuestionIndex = index;
-                            setOpenSeeDialog(true);
-                          }}
-                        >
-                          {row.question}
-                        </p>
-                      </div>
-                      <div className="col-2">
-                        <div className="d-flex">
-                          <Tooltip title="Delete this question" arrow>
-                            <IconButton
-                              aria-label="Delete Question"
-                              onClick={() => openConfirmDialog(row.id)}
-                            >
-                              <DeleteIcon />
-                            </IconButton>
-                          </Tooltip>
-                          <Tooltip title="Edit this question" arrow>
-                            <IconButton
-                              aria-label="Edit Question"
-                              onClick={() => {
-                                window.EditQuestionId = row.id;
-                                setEditQuestionsStatus(true);
-                              }}
-                            >
-                              <MdModeEdit />
-                            </IconButton>
-                          </Tooltip>
-                          <Tooltip title="Open this question" arrow>
-                            <IconButton
-                              aria-label="See Question"
+                  <tr>
+                    <td>
+                      <div className="container-fluid">
+                        <div className="row">
+                          <div className="col-10 p-0 d-flex align-items-center">
+                            {/* <TableCell className="onHoverBoldText" onClick={() => { window.SeeQuestionId = row.id; setOpenSeeDialog(true) }} style={{ cursor: 'pointer' }}>{(row.questions.length >= 130) ? row.questions.slice(0, 130)+'...' : row.questions }</TableCell> */}
+                            <p
+                              className="seeSomeText onHoverBoldText px-3"
                               onClick={() => {
                                 window.SeeQuestionId = "";
                                 window.SeeQuestionIndex = "";
@@ -208,47 +176,96 @@ function QuestionList(props) {
                                 setOpenSeeDialog(true);
                               }}
                             >
-                              <BsFillEyeFill />
-                            </IconButton>
-                          </Tooltip>
+                              {row.question}
+                            </p>
+                          </div>
+                          <div className="col-2">
+                            <div className="d-flex">
+                              <Tooltip title="Delete this question" arrow>
+                                <IconButton
+                                  aria-label="Delete Question"
+                                  onClick={() => openConfirmDialog(row.id)}
+                                >
+                                  <DeleteIcon />
+                                </IconButton>
+                              </Tooltip>
+                              <Tooltip title="Edit this question" arrow>
+                                <IconButton
+                                  aria-label="Edit Question"
+                                  onClick={() => {
+                                    window.EditQuestionId = row.id;
+                                    setEditQuestionsStatus(true);
+                                  }}
+                                >
+                                  <MdModeEdit />
+                                </IconButton>
+                              </Tooltip>
+                              <Tooltip title="Open this question" arrow>
+                                <IconButton
+                                  aria-label="See Question"
+                                  onClick={() => {
+                                    window.SeeQuestionId = "";
+                                    window.SeeQuestionIndex = "";
+                                    window.SeeQuestionId = row.id;
+                                    window.SeeQuestionIndex = index;
+                                    setOpenSeeDialog(true);
+                                  }}
+                                >
+                                  <BsFillEyeFill />
+                                </IconButton>
+                              </Tooltip>
+                            </div>
+                          </div>
                         </div>
                       </div>
-                    </div>
-                  </div>
+                    </td>
+                  </tr>
                 </TableBody>
               );
             })}
-            <Fab
-              color="primary"
-              style={{ position: "fixed", bottom: "100px", right: "50px" }}
-              aria-label="refresh"
-              onClick={getAllQuestions}
-            >
-              <RefreshIcon />
-            </Fab>
-            <Fab
-              color="primary"
-              style={{ position: "fixed", bottom: "30px", right: "50px" }}
-              aria-label="add"
-              onClick={() => {
-                window.AddQuestionId = setOpenAddQuestion(true);
-              }}
-            >
-              <AddIcon />
-            </Fab>
-            {/* Add Question Dialog */}
-            <Tooltip
-              TransitionComponent={AddQuestion}
-              title="Add a new question to this paper"
-            >
-              <AddQuestion
-                getAllQuestions={getAllQuestions}
-                id={id}
-                is_theory={is_theory}
-                open={openAddQuestion}
-                handleClose={() => setOpenAddQuestion(false)}
-              />
-            </Tooltip>
+            <tbody>
+              <tr>
+                <td>
+                  <Fab
+                    color="primary"
+                    style={{
+                      position: "fixed",
+                      bottom: "100px",
+                      right: "50px",
+                    }}
+                    aria-label="refresh"
+                    onClick={getAllQuestions}
+                  >
+                    <RefreshIcon />
+                  </Fab>
+                  <Fab
+                    color="primary"
+                    style={{ position: "fixed", bottom: "30px", right: "50px" }}
+                    aria-label="add"
+                    onClick={() => {
+                      window.AddQuestionId = setOpenAddQuestion(true);
+                    }}
+                  >
+                    <AddIcon />
+                  </Fab>
+                  {/* Add Question Dialog */}
+                  <Tooltip
+                    TransitionComponent={AddQuestion}
+                    title="Add a new question to this paper"
+                  >
+                    <span>
+                      <AddQuestion
+                        getAllQuestions={getAllQuestions}
+                        id={id}
+                        is_theory={is_theory}
+                        open={openAddQuestion}
+                        handleClose={() => setOpenAddQuestion(false)}
+                      />
+                    </span>
+                  </Tooltip>
+                </td>
+              </tr>
+            </tbody>
           </Table>
           <br />
           <br />
@@ -278,7 +295,6 @@ function QuestionList(props) {
         onClose={() => {
           window.EditQuestionId = undefined;
           setEditQuestionsStatus(false);
-          console.log("i am triggered in questionlist");
         }}
       />
       {/* See Quesion Modal Dialog */}

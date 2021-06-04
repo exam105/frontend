@@ -17,7 +17,6 @@ import Snackbar from "@material-ui/core/Snackbar";
 import MuiAlert from "@material-ui/lab/Alert";
 import axios from "axios";
 // Dialog Box
-import Slide from "@material-ui/core/Slide";
 import ModelNotification from "../../Modals/ModelNotification";
 import ConfirmDialog from "../../Modals/ConfirmDialog";
 import LinearProgressWithLabel from "./LinearProgressBarWithLabel";
@@ -25,7 +24,6 @@ import Backdrop from "@material-ui/core/Backdrop";
 import { makeStyles } from "@material-ui/core/styles";
 import S3 from "react-aws-s3";
 import DeleteIcon from "@material-ui/icons/Delete";
-import { CollectionsOutlined } from "@material-ui/icons";
 
 const useStyles = makeStyles((theme) => ({
   backdrop: {
@@ -55,8 +53,8 @@ function AdminAddmcqsComponent(props) {
   // Dialog Hooks
   const [DialogStatus, setDialogStatus] = React.useState(false);
   const [DialogDesc, setDialogDesc] = React.useState("Are you Sure?");
-  const [DialogTitle, setDialogTitle] = React.useState("Notification");
-  const [DialogOk, setDialogOk] = React.useState("Ok");
+  const [DialogTitle] = React.useState("Notification");
+  const [DialogOk] = React.useState("Ok");
   const [ProgressBarStatus, setProgressBarStatus] = useState(false);
   const classes = useStyles();
   const [progress, setProgress] = useState(10);
@@ -107,6 +105,7 @@ function AdminAddmcqsComponent(props) {
     return () => {
       clearInterval(timer);
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   // Math compiler
   // question input changehandler
@@ -258,6 +257,7 @@ function AdminAddmcqsComponent(props) {
               .catch((err) => {
                 console.log(err);
               });
+            return null;
           });
         } else {
           add_questions_after_image_upload(imageLocations, mark);
@@ -312,7 +312,7 @@ function AdminAddmcqsComponent(props) {
     } else {
       const items = [...options];
       let status = 0;
-      for (var i = 0; i < items.length; i++) {
+      for (let i = 0; i < items.length; i++) {
         if (items[i].correct === true) {
           status = 1;
         }
@@ -320,7 +320,7 @@ function AdminAddmcqsComponent(props) {
       if (status === 1) {
         setProgressBarStatus(true);
         const ReactS3Client = new S3(config);
-        for (var i = 0; i < deleteImagesNames.length; i++) {
+        for (let i = 0; i < deleteImagesNames.length; i++) {
           ReactS3Client.deleteFile(deleteImagesNames[i]);
         }
         console.log(config);
@@ -352,6 +352,7 @@ function AdminAddmcqsComponent(props) {
                 update_questions_after_image_upload(imageLocations, mark);
               }
             }
+            return null;
           });
         } else {
           update_questions_after_image_upload(imageLocations, mark);
@@ -414,6 +415,7 @@ function AdminAddmcqsComponent(props) {
     const data = new Array(boardReducer[boardSize - 1]);
     mcqReducer.map((item, i) => {
       data.push(item);
+      return null;
     });
     if (data[1]) {
       setProgressBarStatus(true);
@@ -446,11 +448,11 @@ function AdminAddmcqsComponent(props) {
     let files = e.target.files;
     var newFiles = [];
 
-    var oldImageNames = [];
-    for (var i = 0; i < images.length; i++) {
-      var lastSegment = "";
+    let oldImageNames = [];
+    for (let i = 0; i < images.length; i++) {
+      let lastSegment = "";
       if (images[i].imageurl) {
-        var parts = images[i].imageurl.split("/");
+        let parts = images[i].imageurl.split("/");
         lastSegment = parts.pop() || parts.pop();
         oldImageNames.push(lastSegment);
       } else {
@@ -458,7 +460,7 @@ function AdminAddmcqsComponent(props) {
       }
     }
 
-    for (var i = 0; i < files.length; i++) {
+    for (let i = 0; i < files.length; i++) {
       if (!oldImageNames.includes(files[i].name)) {
         newFiles.push(files[i]);
       }
@@ -518,7 +520,7 @@ function AdminAddmcqsComponent(props) {
               <table className="table p-0 m-0">
                 <tbody>
                   {new Array(boardReducer[boardSize - 1]).map((item, i) => (
-                    <tr className="text-center">
+                    <tr key={i} className="text-center">
                       <td style={{ whiteSpace: "nowrap" }}>{item?.system}</td>
                       <td style={{ whiteSpace: "nowrap" }}>{item?.board}</td>
                       <td style={{ whiteSpace: "nowrap" }}>{item?.subject}</td>
@@ -786,9 +788,12 @@ function AdminAddmcqsComponent(props) {
                 {images.map((item, i) => {
                   if (item.imageurl) {
                     return (
-                      <div className="position-relative d-flex align-items-center w-50">
+                      <div
+                        key={i}
+                        className="position-relative d-flex align-items-center w-50"
+                      >
                         <img
-                          alt="Image Error"
+                          alt="Error"
                           style={{ height: "80px", width: "100%" }}
                           className="img-fluid p-2"
                           src={item.imageurl}
@@ -805,7 +810,7 @@ function AdminAddmcqsComponent(props) {
                   return (
                     <div className="position-relative d-flex align-items-center w-50">
                       <img
-                        alt="Image Error"
+                        alt="Error"
                         style={{ height: "80px", width: "100%" }}
                         className="img-fluid p-2"
                         src={url}

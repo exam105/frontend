@@ -6,17 +6,12 @@ import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import Slide from "@material-ui/core/Slide";
 import { Button } from "@material-ui/core";
-import { useSelector } from "react-redux";
-import { useHistory } from "react-router-dom";
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
 function ConfirmDialog(props) {
-  const history = useHistory();
-  const mcqReducer = useSelector((data) => data.mcqReducer);
-
   return (
     <Dialog
       style={{ zIndex: "3" }}
@@ -24,7 +19,7 @@ function ConfirmDialog(props) {
       TransitionComponent={Transition}
       keepMounted
       maxWidth="xs"
-      fullWidth="true"
+      fullWidth={true}
       aria-labelledby="alert-dialog-slide-title"
       aria-describedby="alert-dialog-slide-description"
     >

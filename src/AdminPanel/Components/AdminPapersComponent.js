@@ -145,7 +145,7 @@ export default function AdminPapersComponent() {
   const [orderBy, setOrderBy] = React.useState("");
   const [selected, setSelected] = React.useState([]);
   const [page, setPage] = React.useState(0);
-  const [dense, setDense] = React.useState(true);
+  const [dense] = React.useState(true);
   const [rowsPerPage, setRowsPerPage] = React.useState(15);
   const [id, setId] = React.useState([]);
   const [isTheory, setIsTheory] = React.useState(false);
@@ -200,12 +200,14 @@ export default function AdminPapersComponent() {
       if (i === index) {
         return n.is_theory ? n.is_theory : false;
       }
+      return null;
     });
     let theory;
     newTheory.map((n, i) => {
       if (n !== undefined) {
         theory = n;
       }
+      return null;
     });
     setIsTheory(theory);
     if (selectedIndex === -1) {
@@ -301,7 +303,7 @@ export default function AdminPapersComponent() {
                       role="checkbox"
                       aria-checked={isItemSelected}
                       tabIndex={-1}
-                      key={index}
+                      key={row?.id}
                       selected={isItemSelected}
                     >
                       <TableCell padding="checkbox">

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import axios from "axios";
 import clsx from "clsx";
 import { lighten, makeStyles } from "@material-ui/core/styles";
@@ -13,9 +13,10 @@ import { useHistory } from "react-router-dom";
 import QuestionList from "./UpdatePaper/QuestionList";
 import { BsFillEyeFill } from "react-icons/bs";
 import DialogModalMetaData from "./UpdatePaper/DialogModalMetaData";
-import { useSelector } from "react-redux";
 import ConfirmDialog from "../../Modals/ConfirmDialog";
 import RefreshIcon from "@material-ui/icons/Refresh";
+// Unique ID Generator for rendering components
+import { v4 as uuidv4 } from "uuid";
 
 const useToolbarStyles = makeStyles((theme) => ({
   root: {
@@ -45,7 +46,6 @@ const EnhancedTableToolbar = (props) => {
   const numSelected = selected.length;
   const history = useHistory();
   const [singleIdMetaData, setSingleIdMetaData] = useState([]);
-  const loginReducer = useSelector((state) => state.loginReducer);
   const [confirmDialogStatus, setConfirmDialogStatus] = useState(false);
   const { callUseEffect } = props;
 
@@ -54,6 +54,7 @@ const EnhancedTableToolbar = (props) => {
       if (item.id === id[0]) {
         setSingleIdMetaData(item);
       }
+      return null;
     });
     setDialogMetaData(true);
   };
@@ -65,7 +66,7 @@ const EnhancedTableToolbar = (props) => {
   const deletePapers = async () => {
     if (id) {
       id.map((item, i) => {
-        axios({
+        return axios({
           method: "DELETE",
           url: `/dashboard/de/metadata/${item}`,
         })
@@ -84,6 +85,7 @@ const EnhancedTableToolbar = (props) => {
         if (item.id === id[0]) {
           setSingleIdMetaData(item);
         }
+        return null;
       });
       setEditQuestion(false);
     }
@@ -110,6 +112,7 @@ const EnhancedTableToolbar = (props) => {
         data={singleIdMetaData}
         DialogStatus={dialogMetaData}
         id={id}
+        key={() => uuidv4()}
         handleClose={() => setDialogMetaData(false)}
       />
 

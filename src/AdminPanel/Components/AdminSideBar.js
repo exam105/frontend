@@ -27,6 +27,7 @@ function AdminSideBar(props) {
         }
       })
       .catch((err) => console.log(err));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   const sidebar_open = () => {
     $(".Admin_Sidebar").toggleClass("open_sidebar");
@@ -45,9 +46,7 @@ function AdminSideBar(props) {
     <section className="Admin_Sidebar">
       <ul className="sidebar_ul">
         <li className="admin_panel_heading_li">
-          <h4 exact to="/admin/panel/">
-            Admin Panel
-          </h4>
+          <h4>Admin Panel</h4>
         </li>
         <li>
           <NavLink exact to="/admin/panel/papers">

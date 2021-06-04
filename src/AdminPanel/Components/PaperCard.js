@@ -45,6 +45,7 @@ const PaperCard = ({
         }}
         open={questionsList}
         id={id}
+        key={id}
       />
     </div>
   );

@@ -117,9 +117,9 @@ const AdminSearchComponent = (props) => {
   // Dialog Hooks
   const [DialogStatus, setDialogStatus] = useState(false);
   const [DialogDesc, setDialogDesc] = useState("Are you Sure?");
-  const [DialogTitle, setDialogTitle] = useState("Notification");
+  const [DialogTitle] = useState("Notification");
   const [progressBarStatus, setProgressBarStatus] = React.useState(false);
-  const [progress, setProgress] = useState(10);
+  const [progress] = useState(10);
   const [notificationStatus, setNotificationStatus] = useState(false);
   const [systems] = useState([
     { system: "GCSE" },
@@ -257,7 +257,9 @@ const AdminSearchComponent = (props) => {
                 >
                   {systems.map((item, i) => {
                     return (
-                      <MenuItem value={item.system}>{item.system}</MenuItem>
+                      <MenuItem key={i} value={item.system}>
+                        {item.system}
+                      </MenuItem>
                     );
                   })}
                 </Select>
@@ -280,7 +282,11 @@ const AdminSearchComponent = (props) => {
                   required
                 >
                   {boards.map((item, i) => {
-                    return <MenuItem value={item.board}>{item.board}</MenuItem>;
+                    return (
+                      <MenuItem key={i} value={item.board}>
+                        {item.board}
+                      </MenuItem>
+                    );
                   })}
                 </Select>
               </FormControl>
@@ -303,7 +309,9 @@ const AdminSearchComponent = (props) => {
                 >
                   {subjects.map((item, i) => {
                     return (
-                      <MenuItem value={item.subject}>{item.subject}</MenuItem>
+                      <MenuItem key={i} value={item.subject}>
+                        {item.subject}
+                      </MenuItem>
                     );
                   })}
                 </Select>

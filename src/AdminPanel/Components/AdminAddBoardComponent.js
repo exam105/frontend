@@ -61,6 +61,7 @@ function AdminAddBoardComponent(props) {
     if (mcqReducer.length !== 0) {
       setConfirmDialogStatus(true);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const submit_data = (e) => {
@@ -138,13 +139,17 @@ function AdminAddBoardComponent(props) {
               id="system"
               name="system"
               onChange={change_input}
-              id="grouped-select"
+              // id="grouped-select"
               className="form-control form-select"
               required
             >
               <option>None</option>
               {systems.map((item, i) => {
-                return <option value={item.system}>{item.system}</option>;
+                return (
+                  <option key={i} value={item.system}>
+                    {item.system}
+                  </option>
+                );
               })}
             </select>
           </div>
@@ -154,13 +159,17 @@ function AdminAddBoardComponent(props) {
               value={paper.board}
               name="board"
               onChange={change_input}
-              id="grouped-select"
+              id="board"
               className="form-control form-select"
               required
             >
               <option value="">None</option>
               {boards.map((item, i) => {
-                return <option value={item.board}>{item.board}</option>;
+                return (
+                  <option key={i} value={item.board}>
+                    {item.board}
+                  </option>
+                );
               })}
             </select>
           </div>
@@ -170,13 +179,17 @@ function AdminAddBoardComponent(props) {
               value={paper.subject}
               name="subject"
               onChange={change_input}
-              id="grouped-select"
+              id="subject"
               className="form-control form-select"
               required
             >
               <option value="">None</option>
               {subjects.map((item, i) => {
-                return <option value={item.subject}>{item.subject}</option>;
+                return (
+                  <option key={i} value={item.subject}>
+                    {item.subject}
+                  </option>
+                );
               })}
             </select>
           </div>
@@ -202,13 +215,17 @@ function AdminAddBoardComponent(props) {
               value={paper.series}
               name="series"
               onChange={change_input}
-              id="grouped-select"
+              id="series"
               className="form-control form-select"
               required
             >
               <option value="">None</option>
               {series.map((item, i) => {
-                return <option value={item.series}>{item.series}</option>;
+                return (
+                  <option key={i} value={item.series}>
+                    {item.series}
+                  </option>
+                );
               })}
             </select>
           </div>
@@ -218,13 +235,17 @@ function AdminAddBoardComponent(props) {
               value={paper.paper}
               name="paper"
               onChange={change_input}
-              id="grouped-select"
+              id="paper"
               className="form-control form-select"
               required
             >
               <option value="">None</option>
               {papers.map((item, i) => {
-                return <option value={item.paper}>{item.paper}</option>;
+                return (
+                  <option key={i} value={item.paper}>
+                    {item.paper}
+                  </option>
+                );
               })}
             </select>
           </div>

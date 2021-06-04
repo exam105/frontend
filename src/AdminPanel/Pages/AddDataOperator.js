@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Button, TextField } from "@material-ui/core";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
@@ -7,7 +7,6 @@ import TableContainer from "@material-ui/core/TableContainer";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
-import { useSelector } from "react-redux";
 import { FcEditImage, FcDeleteDatabase } from "react-icons/fc";
 import Snackbar from "@material-ui/core/Snackbar";
 import MuiAlert from "@material-ui/lab/Alert";
@@ -20,7 +19,6 @@ function Alert(props) {
 }
 
 const DataOperatorUI = () => {
-  const loginReducer = useSelector((state) => state.loginReducer);
   const [data, setData] = useState({
     username: "",
     email: "",
@@ -83,7 +81,7 @@ const DataOperatorUI = () => {
 
   const setOperatorData = (id) => {
     rows.map((item, i) => {
-      if (item.id == id) {
+      if (item.id === id) {
         window.updateId = item.id;
         setData({ username: item.username, email: item.email });
         // Update Button Show
@@ -93,6 +91,7 @@ const DataOperatorUI = () => {
         $(".addButton").addClass("d-none");
         $(".addButton").removeClass("d-flex");
       }
+      return null;
     });
   };
 

@@ -65,6 +65,7 @@ export default function SeeQuestion(props) {
       setDeleteQuestionId(window.SeeQuestionId);
       getQuestion(window.SeeQuestionId);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [window.SeeQuestionId]);
 
   React.useEffect(() => {
@@ -78,6 +79,7 @@ export default function SeeQuestion(props) {
         console.log("not See Question id found");
       }
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [activeQuestionIndex]);
 
   const getQuestion = (id) => {
@@ -271,6 +273,7 @@ export default function SeeQuestion(props) {
                       ) : (
                         topics.map((item, i) => (
                           <span
+                            key={i}
                             className="pt-1 d-inline"
                             style={{
                               borderBottom: "1px solid rgba(0,0,0,0.3)",
@@ -335,6 +338,7 @@ export default function SeeQuestion(props) {
                         <div>
                           {options?.map((item, i) => (
                             <div
+                              key={i}
                               className="pt-3 d-flex"
                               style={{
                                 borderBottom: "1px solid rgba(0,0,0,0.3)",
@@ -369,6 +373,7 @@ export default function SeeQuestion(props) {
                       if (item.imageurl) {
                         return (
                           <div
+                            key={i}
                             className="position-relative p-2 d-flex align-items-center col-2"
                             style={{ cursor: "pointer" }}
                             onClick={() => {
@@ -377,7 +382,7 @@ export default function SeeQuestion(props) {
                             }}
                           >
                             <img
-                              alt="Image Error"
+                              alt="Error"
                               style={{ height: "120px", width: "100%" }}
                               className="img-fluid px-1"
                               src={item.imageurl}
@@ -385,6 +390,7 @@ export default function SeeQuestion(props) {
                           </div>
                         );
                       }
+                      return null;
                     })
                   )}
                   {/* Images View Carousel Dialog */}

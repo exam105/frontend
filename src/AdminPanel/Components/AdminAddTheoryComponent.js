@@ -5,7 +5,6 @@ import $ from "jquery";
 import { MathpixLoader, MathpixMarkdown } from "mathpix-markdown-it";
 import {
   add_theory,
-  remove_theory,
   reset_board,
   reset_theory,
   update_theory,
@@ -19,7 +18,6 @@ import MuiAlert from "@material-ui/lab/Alert";
 import S3 from "react-aws-s3";
 import axios from "axios";
 // Dialog Box
-import Slide from "@material-ui/core/Slide";
 import ConfirmDialog from "../../Modals/ConfirmDialog";
 import ModelNotification from "../../Modals/ModelNotification";
 import LinearProgressWithLabel from "./LinearProgressBarWithLabel";
@@ -33,10 +31,6 @@ const useStyles = makeStyles((theme) => ({
     color: "#fff",
   },
 }));
-
-const Transition = React.forwardRef(function Transition(props, ref) {
-  return <Slide direction="up" ref={ref} {...props} />;
-});
 
 function Alert(props) {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
@@ -60,8 +54,8 @@ function AdminAddTheoryComponent(props) {
   // Dialog Hooks
   const [DialogStatus, setDialogStatus] = useState(false);
   const [DialogDesc, setDialogDesc] = useState("Are you Sure?");
-  const [DialogTitle, setDialogTitle] = useState("Notification");
-  const [DialogOk, setDialogOk] = useState("Ok");
+  const [DialogTitle] = useState("Notification");
+  const [DialogOk] = useState("Ok");
   const [progress, setProgress] = useState(10);
   const [ProgressBarStatus, setProgressBarStatus] = useState(false);
   // React Redux
@@ -110,6 +104,7 @@ function AdminAddTheoryComponent(props) {
     return () => {
       clearInterval(timer);
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   // Math compiler
   // question input changehandler
@@ -157,6 +152,7 @@ function AdminAddTheoryComponent(props) {
             .catch((err) => {
               console.log(err);
             });
+          return null;
         });
       } else {
         add_theory_question_after_image_upload(imageLocations, mark);
@@ -255,6 +251,7 @@ function AdminAddTheoryComponent(props) {
                 update_theory_question_after_image_upload(imageLocations, mark);
               }
             }
+            return null;
           });
         } else {
           update_theory_question_after_image_upload(imageLocations, mark);
@@ -346,11 +343,13 @@ function AdminAddTheoryComponent(props) {
       if (item.is_theory === false) {
         item.is_theory = true;
       }
+      return null;
     });
     props.add_board(data1, theory);
     const data = new Array(boardReducer[boardSize - 1]);
     theoryReducer.map((item, i) => {
       data.push(item);
+      return null;
     });
     if (data[1]) {
       console.log("this i data: ", data);
@@ -453,7 +452,7 @@ function AdminAddTheoryComponent(props) {
               <table className="table p-0 m-0">
                 <tbody>
                   {new Array(boardReducer[boardSize - 1]).map((item, i) => (
-                    <tr className="text-center">
+                    <tr key={i} className="text-center">
                       <td style={{ whiteSpace: "nowrap" }}>{item?.system}</td>
                       <td style={{ whiteSpace: "nowrap" }}>{item?.board}</td>
                       <td style={{ whiteSpace: "nowrap" }}>{item?.subject}</td>
@@ -688,9 +687,12 @@ function AdminAddTheoryComponent(props) {
                 {images.map((item, i) => {
                   if (item.imageurl) {
                     return (
-                      <div className="position-relative d-flex align-items-center w-50">
+                      <div
+                        key={i}
+                        className="position-relative d-flex align-items-center w-50"
+                      >
                         <img
-                          alt="Image Error"
+                          alt="Error"
                           style={{ height: "80px", width: "100%" }}
                           className="img-fluid p-2"
                           src={item.imageurl}
@@ -707,7 +709,7 @@ function AdminAddTheoryComponent(props) {
                   return (
                     <div className="position-relative d-flex align-items-center w-50">
                       <img
-                        alt="Image Error"
+                        alt="Error"
                         style={{ height: "80px", width: "100%" }}
                         className="img-fluid p-2"
                         src={url}
