@@ -171,6 +171,10 @@ export default function AdminPapersComponent() {
         }
       })
       .catch((err) => console.log(err));
+    return () => {
+      setRows([]);
+      setSelected([]);
+    };
   }, [getData]);
 
   const handleRequestSort = (event, property) => {

@@ -104,6 +104,7 @@ function AdminAddmcqsComponent(props) {
     }, 800);
     return () => {
       clearInterval(timer);
+      setConfig({});
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -521,19 +522,29 @@ function AdminAddmcqsComponent(props) {
                 <tbody>
                   {new Array(boardReducer[boardSize - 1]).map((item, i) => (
                     <tr key={i} className="text-center">
-                      <td style={{ whiteSpace: "nowrap" }}>{item?.system}</td>
-                      <td style={{ whiteSpace: "nowrap" }}>{item?.board}</td>
-                      <td style={{ whiteSpace: "nowrap" }}>{item?.subject}</td>
+                      <td
+                        style={{ whiteSpace: "nowrap" }}
+                      >{`${item?.system}`}</td>
+                      <td
+                        style={{ whiteSpace: "nowrap" }}
+                      >{`${item?.board}`}</td>
+                      <td
+                        style={{ whiteSpace: "nowrap" }}
+                      >{`${item?.subject}`}</td>
                       <td style={{ whiteSpace: "nowrap" }}>
-                        {new Date(item?.date).getFullYear()}
+                        {new Date(`${item?.date}`).getFullYear()}
                       </td>
                       <td style={{ whiteSpace: "nowrap" }}>
-                        {new Date(item?.date).toLocaleString("default", {
+                        {new Date(`${item?.date}`).toLocaleString("default", {
                           month: "long",
                         })}
                       </td>
-                      <td style={{ whiteSpace: "nowrap" }}>{item?.series}</td>
-                      <td style={{ whiteSpace: "nowrap" }}>{item?.paper}</td>
+                      <td style={{ whiteSpace: "nowrap" }}>
+                        {isNaN(item?.series) ? "" : item?.series}
+                      </td>
+                      <td
+                        style={{ whiteSpace: "nowrap" }}
+                      >{`${item?.paper}`}</td>
                     </tr>
                   ))}
                 </tbody>
@@ -808,7 +819,10 @@ function AdminAddmcqsComponent(props) {
                   }
                   var url = URL.createObjectURL(item);
                   return (
-                    <div className="position-relative d-flex align-items-center w-50">
+                    <div
+                      key={i}
+                      className="position-relative d-flex align-items-center w-50"
+                    >
                       <img
                         alt="Error"
                         style={{ height: "80px", width: "100%" }}

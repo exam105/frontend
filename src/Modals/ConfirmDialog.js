@@ -42,18 +42,14 @@ function ConfirmDialog(props) {
             <p className="m-0">{props.cancelButton}</p>
           )}
         </Button>
-        {props.mcqButton === undefined ? (
-          <Button onClick={props.delete_mcq_by_id} color="primary">
-            {props.okButton === undefined ? (
-              <p className="m-0">Yes</p>
-            ) : (
-              <p className="m-0">{props.okButton}</p>
-            )}
-          </Button>
-        ) : (
-          ""
-        )}
-
+        <Button onClick={props.delete_mcq_by_id} color="primary">
+          {props.okButton === undefined ? (
+            <p className="m-0">Yes</p>
+          ) : (
+            <p className="m-0">{props.okButton}</p>
+          )}
+        </Button>
+        {/* 
         {props.mcqButton === undefined ? (
           ""
         ) : (
@@ -67,7 +63,7 @@ function ConfirmDialog(props) {
           <Button onClick={props.openTheory} color="primary">
             <p className="m-0">{props.theoryButton}</p>
           </Button>
-        )}
+        )} */}
       </DialogActions>
     </Dialog>
   );

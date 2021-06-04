@@ -58,7 +58,7 @@ function AdminAddBoardComponent(props) {
   });
 
   React.useEffect(() => {
-    if (mcqReducer.length !== 0) {
+    if (mcqReducer.length !== 0 || theoryReducer.length !== 0) {
       setConfirmDialogStatus(true);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -265,16 +265,25 @@ function AdminAddBoardComponent(props) {
       />{" "}
       {/* Modal For Confirmation */} {/* Confirm Modal Dialog Status */}
       <ConfirmDialog
-        theoryButton={
-          theoryReducer.length !== 0 ? "Continue with Theory Paper" : undefined
-        }
-        mcqButton={
-          mcqReducer.length !== 0 ? "Continue with Mcq Paper" : undefined
-        }
-        openMCQ={() => history.push("/admin/panel/add/mcqs")}
-        openTheory={() => history.push("/admin/panel/add/theory")}
+        // theoryButton={
+        //   theoryReducer.length !== 0 ? "Continue with Theory Paper" : undefined
+        // }
+        // mcqButton={
+        //   mcqReducer.length !== 0 ? "Continue with Mcq Paper" : undefined
+        // }
+        // openMCQ={() => history.push("/admin/panel/add/mcqs")}
+        // openTheory={() => history.push("/admin/panel/add/theory")}
         ConfirmDialog={confirmDialogStatus}
-        ConfirmDesc="There is already a paper in progress. Do you want to Continue with the last unsaved paper or 'Cancel' to start adding a new paper. 'Cancel' will permanently delete the unsaved papers."
+        delete_mcq_by_id={() => {
+          if (mcqReducer.length !== 0) {
+            history.push("/admin/panel/add/mcqs");
+          }
+          if (theoryReducer.length !== 0) {
+            history.push("/admin/panel/add/theory");
+          }
+        }}
+        okButton="Continue"
+        ConfirmDesc="There is already a paper in progress. Do you want to 'Continue' with the last unsaved paper or 'Cancel' to start adding a new paper. 'Cancel' will permanently delete the unsaved papers."
         handleClose={() => {
           setConfirmDialogStatus(false);
           props.reset_theory();

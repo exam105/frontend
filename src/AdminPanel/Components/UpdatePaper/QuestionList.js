@@ -84,6 +84,9 @@ function QuestionList(props) {
     } else {
       onClose(false);
     }
+    return () => {
+      setRows([]);
+    };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id, getQuestions]);
 
