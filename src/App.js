@@ -25,8 +25,8 @@ const AddDataOperator = React.lazy(() =>
 
 function App() {
   return (
-    <Switch>
-      <Suspense fallback={<div>Loading...</div>}>
+    <Suspense fallback={<div>Loading...</div>}>
+      <Switch>
         <Route exact path="/admin/panel/" component={AdminIndex} />
         <Route exact path="/admin/panel/papers" component={AdminPapers} />
         <Route exact path="/admin/panel/search" component={AdminSearch} />
@@ -47,8 +47,8 @@ function App() {
           path="/d/a/t/a/e/n/t/r/y/o/p/e/r/a/t/o/r/"
           component={AddDataOperator}
         />
-      </Suspense>
-    </Switch>
+      </Switch>
+    </Suspense>
   );
 }
 
