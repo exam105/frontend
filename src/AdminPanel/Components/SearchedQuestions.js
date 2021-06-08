@@ -1,28 +1,43 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 // Framer Motion
-import { motion, AnimatePresence } from "framer-motion";
+import { AnimatedDiv, AnimatedPresence } from "./LazyImports/FramerMotion";
 import ImagesCarouselModal from "../../Modals/ImagesCarouselModal";
-import { MathpixLoader, MathpixMarkdown } from "mathpix-markdown-it";
-//Material UI / Dialog Box / Table / Icons
-import Dialog from "@material-ui/core/Dialog";
-import Slide from "@material-ui/core/Slide";
-import AppBar from "@material-ui/core/AppBar";
-import Toolbar from "@material-ui/core/Toolbar";
-import Typography from "@material-ui/core/Typography";
-import Table from "@material-ui/core/Table";
-import TableRow from "@material-ui/core/TableRow";
-import TableCell from "@material-ui/core/TableCell";
-import TableBody from "@material-ui/core/TableBody";
-import TableContainer from "@material-ui/core/TableContainer";
-import Paper from "@material-ui/core/Paper";
-import IconButton from "@material-ui/core/IconButton";
-import ArrowBackIcon from "@material-ui/icons/ArrowBack";
-import CancelIcon from "@material-ui/icons/Cancel";
-import CheckCircleIcon from "@material-ui/icons/CheckCircle";
+import { MathpixLoader, MathpixMarkdown } from "./LazyImports/Markdown";
 //Styles
-import { makeStyles } from "@material-ui/core/styles";
 import "../css/SearchedQuestions.css";
+import { makeStyles } from "@material-ui/core/styles";
+import Slide from "@material-ui/core/Slide";
+//Material UI / Dialog Box / Table / Icons
+import {
+  Dialog,
+  AppBar,
+  Toolbar,
+  Typography,
+  Table,
+  TableRow,
+  TableCell,
+  TableBody,
+  TableContainer,
+  Paper,
+  IconButton,
+  ArrowBackIcon,
+  CancelIcon,
+  CheckCircleIcon,
+} from "./LazyImports/MaterialUI";
+// import AppBar from "@material-ui/core/AppBar";
+// import Toolbar from "@material-ui/core/Toolbar";
+// import Typography from "@material-ui/core/Typography";
+// import Table from "@material-ui/core/Table";
+// import TableRow from "@material-ui/core/TableRow";
+// import TableCell from "@material-ui/core/TableCell";
+// import TableBody from "@material-ui/core/TableBody";
+// import TableContainer from "@material-ui/core/TableContainer";
+// import Paper from "@material-ui/core/Paper";
+// import IconButton from "@material-ui/core/IconButton";
+// import ArrowBackIcon from "@material-ui/icons/ArrowBack";
+// import CancelIcon from "@material-ui/icons/Cancel";
+// import CheckCircleIcon from "@material-ui/icons/CheckCircle";
 
 const useStyles = makeStyles((theme) => ({
   appBar: {
@@ -335,9 +350,9 @@ const SearchedQuestions = (props) => {
                   )}
                 </div>
                 <br />
-                <AnimatePresence>
+                <AnimatedPresence>
                   {images.length > 0 && (
-                    <motion.div
+                    <AnimatedDiv
                       variants={imageAnim}
                       initial="hidden"
                       animate="show"
@@ -383,9 +398,9 @@ const SearchedQuestions = (props) => {
                           data={images}
                         />
                       )}
-                    </motion.div>
+                    </AnimatedDiv>
                   )}
-                </AnimatePresence>
+                </AnimatedPresence>
               </div>
             )}
           </div>

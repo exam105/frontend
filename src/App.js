@@ -17,7 +17,7 @@ const AdminChoiceAndTheory = React.lazy(() =>
 );
 const AdminSearch = React.lazy(() => import("./AdminPanel/Pages/AdminSearch"));
 const AdminAddTheory = React.lazy(() =>
-  import("./AdminPanel/Pages/AdminAddTheory.js")
+  import("./AdminPanel/Pages/AdminAddTheory")
 );
 const AddDataOperator = React.lazy(() =>
   import("./AdminPanel/Pages/AddDataOperator")
@@ -25,7 +25,7 @@ const AddDataOperator = React.lazy(() =>
 
 function App() {
   return (
-    <Suspense fallback={<div>Loading...</div>}>
+    <Suspense fallback={null}>
       <Switch>
         <Route exact path="/admin/panel/" component={AdminIndex} />
         <Route exact path="/admin/panel/papers" component={AdminPapers} />
