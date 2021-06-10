@@ -2,19 +2,25 @@ import React, { useState } from "react";
 import axios from "axios";
 import clsx from "clsx";
 import { lighten, makeStyles } from "@material-ui/core/styles";
-import Toolbar from "@material-ui/core/Toolbar";
-import Typography from "@material-ui/core/Typography";
-import IconButton from "@material-ui/core/IconButton";
+//Material UI
+import {
+  Toolbar,
+  Typography,
+  DeleteIcon,
+  RefreshIcon,
+} from "./LazyImports/MaterialUI";
 import Tooltip from "@material-ui/core/Tooltip";
-import DeleteIcon from "@material-ui/icons/Delete";
-import { Button } from "@material-ui/core";
+import Button from "@material-ui/core/Button";
+import IconButton from "@material-ui/core/IconButton";
+// Components
+import {
+  ConfirmDialog,
+  QuestionList,
+  DialogModalMetaData,
+} from "./LazyImports/LocalComponents";
 import { MdModeEdit } from "react-icons/md";
 import { useHistory } from "react-router-dom";
-import QuestionList from "./UpdatePaper/QuestionList";
 import { BsFillEyeFill } from "react-icons/bs";
-import DialogModalMetaData from "./UpdatePaper/DialogModalMetaData";
-import ConfirmDialog from "../../Modals/ConfirmDialog";
-import RefreshIcon from "@material-ui/icons/Refresh";
 // Unique ID Generator for rendering components
 import { v4 as uuidv4 } from "uuid";
 

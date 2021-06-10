@@ -1,14 +1,16 @@
-import React from 'react'
-import AdminSideBar from '../Components/AdminSideBar'
-import AdminAddTheoryComponent from '../Components/AdminAddTheoryComponent'
+import React from "react";
+import {
+  AdminAddTheoryComponent,
+  AdminSideBar,
+} from "../Components/LazyImports/LocalComponents";
 
 function AdminAddTheory() {
-    return (
-        <div>
-            <AdminSideBar />            
-            <AdminAddTheoryComponent />
-        </div>
-    )
+  return (
+    <div>
+      <AdminSideBar />
+      <AdminAddTheoryComponent />
+    </div>
+  );
 }
 
-export default AdminAddTheory
+export default AdminAddTheory;

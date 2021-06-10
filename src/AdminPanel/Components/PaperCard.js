@@ -1,5 +1,5 @@
 import React from "react";
-import SearchedQuestions from "./SearchedQuestions";
+import { SearchedQuestions } from "./LazyImports/LocalComponents";
 // Styles
 import "../css/PaperCard.css";
 // Images

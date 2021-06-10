@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 // Framer Motion
 import { AnimatedDiv, AnimatedPresence } from "./LazyImports/FramerMotion";
-import ImagesCarouselModal from "../../Modals/ImagesCarouselModal";
+import { ImagesCarouselModal } from "./LazyImports/LocalComponents";
 import { MathpixLoader, MathpixMarkdown } from "./LazyImports/Markdown";
 //Styles
 import "../css/SearchedQuestions.css";
@@ -25,19 +25,6 @@ import {
   CancelIcon,
   CheckCircleIcon,
 } from "./LazyImports/MaterialUI";
-// import AppBar from "@material-ui/core/AppBar";
-// import Toolbar from "@material-ui/core/Toolbar";
-// import Typography from "@material-ui/core/Typography";
-// import Table from "@material-ui/core/Table";
-// import TableRow from "@material-ui/core/TableRow";
-// import TableCell from "@material-ui/core/TableCell";
-// import TableBody from "@material-ui/core/TableBody";
-// import TableContainer from "@material-ui/core/TableContainer";
-// import Paper from "@material-ui/core/Paper";
-// import IconButton from "@material-ui/core/IconButton";
-// import ArrowBackIcon from "@material-ui/icons/ArrowBack";
-// import CancelIcon from "@material-ui/icons/Cancel";
-// import CheckCircleIcon from "@material-ui/icons/CheckCircle";
 
 const useStyles = makeStyles((theme) => ({
   appBar: {

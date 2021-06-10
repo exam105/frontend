@@ -1,16 +1,16 @@
-import React from 'react';
-import AdminSideBar from '../Components/AdminSideBar';
-import AdminAddmcqsComponent  from '../Components/AdminAddmcqsComponent';
-
+import React from "react";
+import {
+  AdminAddmcqsComponent,
+  AdminSideBar,
+} from "../Components/LazyImports/LocalComponents";
 
 function AdminAddmcqs() {
-    return (
-        <section>
-        <AdminSideBar />
-        <AdminAddmcqsComponent />
-
-        </section>
-    )
+  return (
+    <section>
+      <AdminSideBar />
+      <AdminAddmcqsComponent />
+    </section>
+  );
 }
 
-export default AdminAddmcqs
+export default AdminAddmcqs;

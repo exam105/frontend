@@ -1,8 +1,12 @@
 import React, { useEffect, useState } from "react";
-import "../css/AdminAddmcqs.css";
-import { FcPlus } from "react-icons/fc";
+import { useHistory } from "react-router-dom";
+import S3 from "react-aws-s3";
+import axios from "axios";
 import $ from "jquery";
-import { MathpixLoader, MathpixMarkdown } from "mathpix-markdown-it";
+// Markdown Libraries
+import { MathpixLoader, MathpixMarkdown } from "./LazyImports/Markdown";
+// Redux
+import { connect, useSelector } from "react-redux";
 import {
   add_theory,
   reset_board,
@@ -10,20 +14,25 @@ import {
   update_theory,
   add_board,
 } from "../../action/index";
-import { connect, useSelector } from "react-redux";
-import { useHistory } from "react-router-dom";
+// Material UI
+import {
+  Snackbar,
+  MuiAlert,
+  DeleteIcon,
+  Backdrop,
+} from "./LazyImports/MaterialUI";
 import Button from "@material-ui/core/Button";
-import Snackbar from "@material-ui/core/Snackbar";
-import MuiAlert from "@material-ui/lab/Alert";
-import S3 from "react-aws-s3";
-import axios from "axios";
-// Dialog Box
-import ConfirmDialog from "../../Modals/ConfirmDialog";
-import ModelNotification from "../../Modals/ModelNotification";
+// Components
+import {
+  ConfirmDialog,
+  ModelNotification,
+} from "./LazyImports/LocalComponents";
+// Icons
+import { FcPlus } from "react-icons/fc";
+// Styles
 import LinearProgressWithLabel from "./LinearProgressBarWithLabel";
-import Backdrop from "@material-ui/core/Backdrop";
 import { makeStyles } from "@material-ui/core/styles";
-import DeleteIcon from "@material-ui/icons/Delete";
+import "../css/AdminAddmcqs.css";
 
 const useStyles = makeStyles((theme) => ({
   backdrop: {

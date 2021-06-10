@@ -1,24 +1,28 @@
 import React, { useState } from "react";
-import { makeStyles } from "@material-ui/core/styles";
+import S3 from "react-aws-s3";
+import $ from "jquery";
+import axios from "axios";
+// Components
+import { ModelNotification } from "../LazyImports/LocalComponents";
+// Material UI
 import {
   AppBar,
   Dialog,
   Typography,
-  Slide,
   Toolbar,
   IconButton,
-} from "@material-ui/core";
-import CloseIcon from "@material-ui/icons/Close";
+  DeleteIcon,
+  Backdrop,
+  CloseIcon,
+} from "../LazyImports/MaterialUI";
+// Markdown Libraries
+import { MathpixLoader, MathpixMarkdown } from "../LazyImports/Markdown";
+// Icons
 import { FcPlus } from "react-icons/fc";
-import $ from "jquery";
-import { MathpixLoader, MathpixMarkdown } from "mathpix-markdown-it";
-import axios from "axios";
-// Dialog Box
-import ModelNotification from "../../../Modals/ModelNotification";
-import S3 from "react-aws-s3";
-import DeleteIcon from "@material-ui/icons/Delete";
+// Styles
+import { Slide } from "@material-ui/core";
 import LinearProgressWithLabel from "../LinearProgressBarWithLabel";
-import Backdrop from "@material-ui/core/Backdrop";
+import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles2 = makeStyles((theme) => ({
   appBar: {

@@ -3,10 +3,12 @@ import "../css/AdminAddmcqs.css";
 import { add_board, reset_mcq, reset_theory } from "../../action/index";
 import { connect } from "react-redux";
 import { useHistory } from "react-router-dom";
-import DatePicker from "react-datepicker";
+import { DatePicker } from "./LazyImports/React";
 import "react-datepicker/dist/react-datepicker.css";
-import ModelNotification from "../../Modals/ModelNotification";
-import ConfirmDialog from "../../Modals/ConfirmDialog";
+import {
+  ConfirmDialog,
+  ModelNotification,
+} from "./LazyImports/LocalComponents";
 import { useSelector } from "react-redux";
 
 function AdminAddBoardComponent(props) {

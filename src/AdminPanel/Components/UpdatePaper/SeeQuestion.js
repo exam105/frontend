@@ -1,26 +1,30 @@
 import React from "react";
 import axios from "axios";
-import Button from "@material-ui/core/Button";
-import { MathpixLoader, MathpixMarkdown } from "mathpix-markdown-it";
+// Markdown Libraries
+import { MathpixLoader, MathpixMarkdown } from "../LazyImports/Markdown";
+// Material UI
 import {
   Dialog,
   DialogContent,
-  Slide,
   AppBar,
-  makeStyles,
   IconButton,
   Typography,
   Toolbar,
-} from "@material-ui/core";
-import CloseIcon from "@material-ui/icons/Close";
-import CancelIcon from "@material-ui/icons/Cancel";
-import CheckCircleIcon from "@material-ui/icons/CheckCircle";
-import ArrowForwardIcon from "@material-ui/icons/ArrowForward";
-import ArrowBackIcon from "@material-ui/icons/ArrowBack";
-import ImagesCarouselModal from "../../../Modals/ImagesCarouselModal";
+  CancelIcon,
+  CheckCircleIcon,
+  ArrowBackIcon,
+  ArrowForwardIcon,
+  CloseIcon,
+} from "../LazyImports/MaterialUI";
+import Button from "@material-ui/core/Button";
 // Components
-import EditQuestions from "./EditQuestions";
-import ConfirmDialog from "../../../Modals/ConfirmDialog";
+import {
+  ImagesCarouselModal,
+  ConfirmDialog,
+  EditQuestions,
+} from "../LazyImports/LocalComponents";
+// Styles
+import { Slide, makeStyles } from "@material-ui/core";
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="left" ref={ref} {...props} />;

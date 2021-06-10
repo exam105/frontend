@@ -1,29 +1,35 @@
 import React from "react";
-import Dialog from "@material-ui/core/Dialog";
-import AppBar from "@material-ui/core/AppBar";
-import Toolbar from "@material-ui/core/Toolbar";
-import IconButton from "@material-ui/core/IconButton";
-import Typography from "@material-ui/core/Typography";
-import CloseIcon from "@material-ui/icons/Close";
 import axios from "axios";
+// Components
+import {
+  ConfirmDialog,
+  EditQuestions,
+  AddQuestion,
+  SeeQuestion,
+} from "../LazyImports/LocalComponents";
+// Material UI
+import {
+  Dialog,
+  AppBar,
+  Toolbar,
+  Typography,
+  CloseIcon,
+  Table,
+  TableBody,
+  TableContainer,
+  Paper,
+  DeleteIcon,
+  Fab,
+  RefreshIcon,
+  AddIcon,
+} from "../LazyImports/MaterialUI";
+import IconButton from "@material-ui/core/IconButton";
 import Tooltip from "@material-ui/core/Tooltip";
-// Dialog Box
+// Styles
 import Slide from "@material-ui/core/Slide";
 import { makeStyles } from "@material-ui/core/styles";
-import Table from "@material-ui/core/Table";
-import TableBody from "@material-ui/core/TableBody";
-import TableContainer from "@material-ui/core/TableContainer";
-import Paper from "@material-ui/core/Paper";
-import DeleteIcon from "@material-ui/icons/Delete";
 import { MdModeEdit } from "react-icons/md";
 import { BsFillEyeFill } from "react-icons/bs";
-import ConfirmDialog from "../../../Modals/ConfirmDialog";
-import EditQuestions from "./EditQuestions";
-import Fab from "@material-ui/core/Fab";
-import AddIcon from "@material-ui/icons/Add";
-import AddQuestion from "../UpdatePaper/AddQuestion";
-import RefreshIcon from "@material-ui/icons/Refresh";
-import SeeQuestion from "./SeeQuestion";
 
 const useStyles = makeStyles((theme) => ({
   appBar: {

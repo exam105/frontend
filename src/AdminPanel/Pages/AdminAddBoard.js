@@ -1,15 +1,17 @@
-import React from 'react'
-import AdminAddBoardComponent from '../Components/AdminAddBoardComponent'
-import AdminSideBar from '../Components/AdminSideBar'
-import '../css/AdminAddBoard.css'
+import React from "react";
+import {
+  AdminAddBoardComponent,
+  AdminSideBar,
+} from "../Components/LazyImports/LocalComponents";
+import "../css/AdminAddBoard.css";
 
 function AdminAddBoard() {
-    return (
-        <div>
-            <AdminSideBar />
-            <AdminAddBoardComponent />
-        </div>
-    )
+  return (
+    <div>
+      <AdminSideBar />
+      <AdminAddBoardComponent />
+    </div>
+  );
 }
 
 export default AdminAddBoard;

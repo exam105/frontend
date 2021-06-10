@@ -1,6 +1,8 @@
 import React from "react";
-import AdminSearchComponent from "../Components/AdminSearchComponent";
-import AdminSideBar from "../Components/AdminSideBar";
+import {
+  AdminSearchComponent,
+  AdminSideBar,
+} from "../Components/LazyImports/LocalComponents";
 
 const AdminSearch = () => {
   return (

@@ -1,18 +1,24 @@
 import React, { useState } from "react";
-import { Button, TextField } from "@material-ui/core";
-import Table from "@material-ui/core/Table";
-import TableBody from "@material-ui/core/TableBody";
-import TableCell from "@material-ui/core/TableCell";
-import TableContainer from "@material-ui/core/TableContainer";
-import TableHead from "@material-ui/core/TableHead";
-import TableRow from "@material-ui/core/TableRow";
-import Paper from "@material-ui/core/Paper";
-import { FcEditImage, FcDeleteDatabase } from "react-icons/fc";
-import Snackbar from "@material-ui/core/Snackbar";
-import MuiAlert from "@material-ui/lab/Alert";
-import ConfirmDialog from "../../Modals/ConfirmDialog";
 import axios from "axios";
 import $ from "jquery";
+// Material UI
+import {
+  TextField,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  Paper,
+  Snackbar,
+  MuiAlert,
+} from "../Components/LazyImports/MaterialUI";
+import Button from "@material-ui/core/Button";
+// Components
+import { ConfirmDialog } from "../Components/LazyImports/LocalComponents";
+// Icons
+import { FcEditImage, FcDeleteDatabase } from "react-icons/fc";
 
 function Alert(props) {
   return <MuiAlert elevation={6} variant="filled" {...props} />;

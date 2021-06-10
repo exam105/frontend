@@ -1,26 +1,32 @@
 import React, { useState } from "react";
 import axios from "axios";
-import Dialog from "@material-ui/core/Dialog";
-import AppBar from "@material-ui/core/AppBar";
-import Toolbar from "@material-ui/core/Toolbar";
-import IconButton from "@material-ui/core/IconButton";
-import Typography from "@material-ui/core/Typography";
-import CloseIcon from "@material-ui/icons/Close";
-import { FcPlus } from "react-icons/fc";
 import $ from "jquery";
-import { MathpixLoader, MathpixMarkdown } from "mathpix-markdown-it";
-import Snackbar from "@material-ui/core/Snackbar";
-import MuiAlert from "@material-ui/lab/Alert";
-// Dialog Box
-import Slide from "@material-ui/core/Slide";
-import ModelNotification from "../../../Modals/ModelNotification";
-import LinearProgressWithLabel from "../LinearProgressBarWithLabel";
-import Backdrop from "@material-ui/core/Backdrop";
-import { makeStyles } from "@material-ui/core/styles";
-import RefreshIcon from "@material-ui/icons/Refresh";
-import { Fab } from "@material-ui/core";
 import S3 from "react-aws-s3";
-import DeleteIcon from "@material-ui/icons/Delete";
+// Components
+import { ModelNotification } from "../LazyImports/LocalComponents";
+// Material UI
+import {
+  Dialog,
+  AppBar,
+  Toolbar,
+  IconButton,
+  Typography,
+  CloseIcon,
+  Snackbar,
+  MuiAlert,
+  Backdrop,
+  RefreshIcon,
+  Fab,
+  DeleteIcon,
+} from "../LazyImports/MaterialUI";
+// Markdown Libraries
+import { MathpixLoader, MathpixMarkdown } from "../LazyImports/Markdown";
+// Icons
+import { FcPlus } from "react-icons/fc";
+// Styles
+import Slide from "@material-ui/core/Slide";
+import LinearProgressWithLabel from "../LinearProgressBarWithLabel";
+import { makeStyles } from "@material-ui/core/styles";
 
 function Alert(props) {
   return <MuiAlert elevation={6} variant="filled" {...props} />;

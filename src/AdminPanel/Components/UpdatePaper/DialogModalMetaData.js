@@ -1,10 +1,11 @@
 import React, { useState } from "react";
-import Dialog from "@material-ui/core/Dialog";
-import DialogContent from "@material-ui/core/DialogContent";
-import Slide from "@material-ui/core/Slide";
-import DatePicker from "react-datepicker";
-import ModelNotification from "../../../Modals/ModelNotification";
 import axios from "axios";
+// Components
+import { ModelNotification } from "../LazyImports/LocalComponents";
+// Material UI
+import { Dialog, DialogContent } from "../LazyImports/MaterialUI";
+import { DatePicker } from "../LazyImports/React";
+import Slide from "@material-ui/core/Slide";
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;

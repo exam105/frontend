@@ -2,11 +2,13 @@ import React, { useState } from "react";
 import "../css/Style.css";
 import { useHistory } from "react-router-dom";
 import { connect } from "react-redux";
-import Dialog from "@material-ui/core/Dialog";
-import DialogActions from "@material-ui/core/DialogActions";
-import DialogContent from "@material-ui/core/DialogContent";
-import DialogContentText from "@material-ui/core/DialogContentText";
-import DialogTitle from "@material-ui/core/DialogTitle";
+import {
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
+} from "../Components/LazyImports/MaterialUI";
 import { Button, TextField } from "@material-ui/core";
 import Slide from "@material-ui/core/Slide";
 import axios from "axios";

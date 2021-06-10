@@ -1,5 +1,5 @@
 import React from "react";
-import AdminSideBar from "../Components/AdminSideBar";
+import { AdminSideBar } from "../Components/LazyImports/LocalComponents";
 import { Button } from "@material-ui/core";
 import { useHistory } from "react-router-dom";
 

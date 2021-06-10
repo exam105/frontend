@@ -1,31 +1,32 @@
 import React, { useState } from "react";
-import PaperCard from "./PaperCard";
 import axios from "axios";
-import AppBar from "@material-ui/core/AppBar";
-import Toolbar from "@material-ui/core/Toolbar";
 import useScrollTrigger from "@material-ui/core/useScrollTrigger";
-import Box from "@material-ui/core/Box";
 import "react-datepicker/dist/react-datepicker.css";
-import Container from "@material-ui/core/Container";
-import Fab from "@material-ui/core/Fab";
-import KeyboardArrowUpIcon from "@material-ui/icons/KeyboardArrowUp";
-import Zoom from "@material-ui/core/Zoom";
-import DatePicker from "react-datepicker";
-import Radio from "@material-ui/core/Radio";
-import RadioGroup from "@material-ui/core/RadioGroup";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import FormControl from "@material-ui/core/FormControl";
-import FormLabel from "@material-ui/core/FormLabel";
-import InputLabel from "@material-ui/core/InputLabel";
-import MenuItem from "@material-ui/core/MenuItem";
-import Select from "@material-ui/core/Select";
 import magnifier from "../images/magnifier.svg";
-import ModelNotification from "../../Modals/ModelNotification";
 import LinearProgressWithLabel from "./LinearProgressBarWithLabel";
-import Backdrop from "@material-ui/core/Backdrop";
+import { DatePicker } from "./LazyImports/React";
+import {
+  AppBar,
+  Toolbar,
+  Backdrop,
+  Select,
+  InputLabel,
+  FormLabel,
+  FormControl,
+  FormControlLabel,
+  RadioGroup,
+  Radio,
+  Zoom,
+  KeyboardArrowUpIcon,
+  Fab,
+  Container,
+  Box,
+} from "./LazyImports/MaterialUI";
+import { PaperCard, ModelNotification } from "./LazyImports/LocalComponents";
 //Styles
 import { makeStyles } from "@material-ui/core/styles";
 import CssBaseline from "@material-ui/core/CssBaseline";
+import MenuItem from "@material-ui/core/MenuItem";
 import "bootstrap/dist/css/bootstrap.css";
 import "bootstrap-daterangepicker/daterangepicker.css";
 import "../css/AdminSearchComponent.css";

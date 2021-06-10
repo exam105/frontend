@@ -1,14 +1,16 @@
-import React from 'react'
-import AdminSideBar from '../Components/AdminSideBar'
-import AdminPapersComponent from '../Components/AdminPapersComponent'
+import React from "react";
+import {
+  AdminPapersComponent,
+  AdminSideBar,
+} from "../Components/LazyImports/LocalComponents";
 
 function AdminPapers() {
-    return (
-        <div>
-            <AdminSideBar />
-            <AdminPapersComponent />
-        </div>
-    )
+  return (
+    <div>
+      <AdminSideBar />
+      <AdminPapersComponent />
+    </div>
+  );
 }
 
-export default AdminPapers
+export default AdminPapers;
