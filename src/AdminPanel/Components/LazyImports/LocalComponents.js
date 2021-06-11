@@ -128,3 +128,61 @@ export const SeeQuestion = (props) => (
     <LCSeeQuestion {...props} />
   </Suspense>
 );
+
+const LCAdminAddmcqs = lazy(() => import("../../Pages/AdminAddmcqs"));
+export const AdminAddmcqs = (props) => (
+  <Suspense fallback={null}>
+    <LCAdminAddmcqs {...props} />
+  </Suspense>
+);
+
+const LCAdminAddBoard = lazy(() => import("../../Pages/AdminAddBoard"));
+export const AdminAddBoard = (props) => (
+  <Suspense fallback={null}>
+    <LCAdminAddBoard {...props} />
+  </Suspense>
+);
+
+const LCAdminChoiceAndTheory = lazy(() =>
+  import("../../Pages/AdminChoiceAndTheory")
+);
+export const AdminChoiceAndTheory = (props) => (
+  <Suspense fallback={null}>
+    <LCAdminChoiceAndTheory {...props} />
+  </Suspense>
+);
+
+const LCAdminSearch = lazy(() => import("../../Pages/AdminSearch"));
+export const AdminSearch = (props) => (
+  <Suspense fallback={null}>
+    <LCAdminSearch {...props} />
+  </Suspense>
+);
+
+const LCAdminAddTheory = lazy(() => import("../../Pages/AdminAddTheory"));
+export const AdminAddTheory = (props) => (
+  <Suspense fallback={null}>
+    <LCAdminAddTheory {...props} />
+  </Suspense>
+);
+
+const LCAddDataOperator = lazy(() => import("../../Pages/AddDataOperator"));
+export const AddDataOperator = (props) => (
+  <Suspense fallback={null}>
+    <LCAddDataOperator {...props} />
+  </Suspense>
+);
+
+const LCAdminIndex = lazy(() => import("../../Pages/AdminIndex"));
+export const AdminIndex = (props) => (
+  <Suspense fallback={null}>
+    <LCAdminIndex {...props} />
+  </Suspense>
+);
+
+const LCAdminPapers = lazy(() => import("../../Pages/AdminPapers"));
+export const AdminPapers = (props) => (
+  <Suspense fallback={null}>
+    <LCAdminPapers {...props} />
+  </Suspense>
+);
