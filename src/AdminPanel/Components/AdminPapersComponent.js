@@ -6,7 +6,6 @@ import { makeStyles } from "@material-ui/core/styles";
 import {
   Table,
   TableBody,
-  TableCell,
   TableContainer,
   TableHead,
   TableRow,
@@ -15,6 +14,7 @@ import {
   Checkbox,
 } from "./LazyImports/MaterialUI";
 import Paper from "@material-ui/core/Paper";
+import TableCell from "@material-ui/core/TableCell";
 // Components
 import { EnhancedTableToolbar } from "./LazyImports/LocalComponents";
 
