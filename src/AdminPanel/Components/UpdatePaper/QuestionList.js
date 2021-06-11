@@ -10,7 +10,6 @@ import {
 // Material UI
 import {
   Dialog,
-  AppBar,
   Toolbar,
   Typography,
   CloseIcon,
@@ -25,6 +24,7 @@ import {
 } from "../LazyImports/MaterialUI";
 import IconButton from "@material-ui/core/IconButton";
 import Tooltip from "@material-ui/core/Tooltip";
+import AppBar from "@material-ui/core/AppBar";
 // Styles
 import Slide from "@material-ui/core/Slide";
 import { makeStyles } from "@material-ui/core/styles";
@@ -147,7 +147,6 @@ function QuestionList(props) {
             </IconButton>
           </Toolbar>
         </AppBar>
-        <br />
         <div className="d-flex justify-content-center">
           <div
             className={`${progressBarStatus} spinner-border`}

@@ -3,14 +3,18 @@ import axios from "axios";
 import PropTypes from "prop-types";
 import { makeStyles } from "@material-ui/core/styles";
 //Material UI
-import { TableBody, TablePagination, Checkbox } from "./LazyImports/MaterialUI";
-import Paper from "@material-ui/core/Paper";
-import Table from "@material-ui/core/Table";
+import {
+  Paper,
+  TablePagination,
+  Checkbox,
+  Table,
+  TableBody,
+  TableContainer,
+} from "./LazyImports/MaterialUI";
 import TableSortLabel from "@material-ui/core/TableSortLabel";
 import TableCell from "@material-ui/core/TableCell";
 import TableRow from "@material-ui/core/TableRow";
 import TableHead from "@material-ui/core/TableHead";
-import TableContainer from "@material-ui/core/TableContainer";
 // Components
 import { EnhancedTableToolbar } from "./LazyImports/LocalComponents";
 

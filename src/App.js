@@ -14,6 +14,7 @@ import {
 // Bootstrap and Styles
 import "bootstrap/dist/css/bootstrap.css";
 import "./App.css";
+import "./AdminPanel/css/Style.css";
 
 function App() {
   return (
