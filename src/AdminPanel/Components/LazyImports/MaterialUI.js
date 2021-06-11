@@ -263,7 +263,7 @@ export const TableHead = (props) => (
 
 const MUISnackbar = lazy(() => import("@material-ui/core/Snackbar"));
 export const Snackbar = (props) => (
-  <Suspense fallback={null}>
+  <Suspense fallback={<div className={props.className}>{props.children}</div>}>
     <MUISnackbar {...props} />
   </Suspense>
 );
@@ -334,5 +334,51 @@ const MUIAddIcon = lazy(() => import("@material-ui/icons/Add"));
 export const AddIcon = (props) => (
   <Suspense fallback={null}>
     <MUIAddIcon {...props} />
+  </Suspense>
+);
+
+const MUIMobileStepper = lazy(() => import("@material-ui/core/MobileStepper"));
+export const MobileStepper = (props) => (
+  <Suspense fallback={null}>
+    <MUIMobileStepper {...props} />
+  </Suspense>
+);
+
+const MUIKeyboardArrowLeft = lazy(() =>
+  import("@material-ui/icons/KeyboardArrowLeft")
+);
+export const KeyboardArrowLeft = (props) => (
+  <Suspense fallback={null}>
+    <MUIKeyboardArrowLeft {...props} />
+  </Suspense>
+);
+
+const MUIKeyboardArrowRight = lazy(() =>
+  import("@material-ui/icons/KeyboardArrowRight")
+);
+export const KeyboardArrowRight = (props) => (
+  <Suspense fallback={null}>
+    <MUIKeyboardArrowRight {...props} />
+  </Suspense>
+);
+
+const MUIList = lazy(() => import("@material-ui/core/List"));
+export const List = (props) => (
+  <Suspense fallback={null}>
+    <MUIList {...props} />
+  </Suspense>
+);
+
+const MUIListItem = lazy(() => import("@material-ui/core/ListItem"));
+export const ListItem = (props) => (
+  <Suspense fallback={null}>
+    <MUIListItem {...props} />
+  </Suspense>
+);
+
+const MUIListItemText = lazy(() => import("@material-ui/core/ListItemText"));
+export const ListItemText = (props) => (
+  <Suspense fallback={null}>
+    <MUIListItemText {...props} />
   </Suspense>
 );

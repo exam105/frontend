@@ -10,11 +10,11 @@ import {
   Dialog,
   Typography,
   Toolbar,
-  IconButton,
-  DeleteIcon,
   Backdrop,
   CloseIcon,
 } from "../LazyImports/MaterialUI";
+import IconButton from "@material-ui/core/IconButton";
+import DeleteIcon from "@material-ui/icons/Delete";
 // Markdown Libraries
 import { MathpixLoader, MathpixMarkdown } from "../LazyImports/Markdown";
 // Icons
@@ -23,6 +23,7 @@ import { FcPlus } from "react-icons/fc";
 import { Slide } from "@material-ui/core";
 import LinearProgressWithLabel from "../LinearProgressBarWithLabel";
 import { makeStyles } from "@material-ui/core/styles";
+import "../../css/AdminAddmcqs.css";
 
 const useStyles2 = makeStyles((theme) => ({
   appBar: {

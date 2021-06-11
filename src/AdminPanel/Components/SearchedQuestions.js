@@ -20,11 +20,11 @@ import {
   TableBody,
   TableContainer,
   Paper,
-  IconButton,
   ArrowBackIcon,
   CancelIcon,
   CheckCircleIcon,
 } from "./LazyImports/MaterialUI";
+import IconButton from "@material-ui/core/IconButton";
 
 const useStyles = makeStyles((theme) => ({
   appBar: {

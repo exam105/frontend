@@ -7,7 +7,6 @@ import {
   Dialog,
   DialogContent,
   AppBar,
-  IconButton,
   Typography,
   Toolbar,
   CancelIcon,
@@ -16,6 +15,7 @@ import {
   ArrowForwardIcon,
   CloseIcon,
 } from "../LazyImports/MaterialUI";
+import IconButton from "@material-ui/core/IconButton";
 import Button from "@material-ui/core/Button";
 // Components
 import {

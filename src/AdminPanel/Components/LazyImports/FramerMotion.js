@@ -10,7 +10,7 @@ export const AnimatedDiv = (props) => (
 
 const MotionPresence = lazy(() => import("framer-motion"), "AnimatePresence");
 export const AnimatedPresence = (props) => (
-  <Suspense fallback={<div className={props.className}>{props.childred}</div>}>
+  <Suspense fallback={<div className={props.className}>{props.children}</div>}>
     <MotionPresence {...props} />
   </Suspense>
 );

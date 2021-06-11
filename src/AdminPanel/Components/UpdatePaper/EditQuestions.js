@@ -9,7 +9,6 @@ import {
   Dialog,
   AppBar,
   Toolbar,
-  IconButton,
   Typography,
   CloseIcon,
   Snackbar,
@@ -17,8 +16,9 @@ import {
   Backdrop,
   RefreshIcon,
   Fab,
-  DeleteIcon,
 } from "../LazyImports/MaterialUI";
+import IconButton from "@material-ui/core/IconButton";
+import DeleteIcon from "@material-ui/icons/Delete";
 // Markdown Libraries
 import { MathpixLoader, MathpixMarkdown } from "../LazyImports/Markdown";
 // Icons
@@ -27,6 +27,7 @@ import { FcPlus } from "react-icons/fc";
 import Slide from "@material-ui/core/Slide";
 import LinearProgressWithLabel from "../LinearProgressBarWithLabel";
 import { makeStyles } from "@material-ui/core/styles";
+import "../../css/AdminAddmcqs.css";
 
 function Alert(props) {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
@@ -798,7 +799,7 @@ function EditQuestion(props) {
                         return (
                           <div
                             key={i}
-                            className={`topicDisplay`}
+                            className="topicDisplay"
                             style={{ fontSize: "12px", fontWeight: "500" }}
                           >
                             <p className="option_text my-1">{item.topic}</p>

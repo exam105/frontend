@@ -1,8 +1,11 @@
 import React from "react";
-import List from "@material-ui/core/List";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemText from "@material-ui/core/ListItemText";
-import Dialog from "@material-ui/core/Dialog";
+// Material UI
+import {
+  Dialog,
+  List,
+  ListItem,
+  ListItemText,
+} from "../AdminPanel/Components/LazyImports/MaterialUI";
 
 const SelectDialog = (props) => {
   const { onClose, selectedValue, items, open } = props;

@@ -247,31 +247,35 @@ function QuestionList(props) {
                   >
                     <RefreshIcon />
                   </Fab>
+
                   <Fab
                     color="primary"
-                    style={{ position: "fixed", bottom: "30px", right: "50px" }}
+                    style={{
+                      position: "fixed",
+                      bottom: "30px",
+                      right: "50px",
+                    }}
                     aria-label="add"
                     onClick={() => {
                       window.AddQuestionId = setOpenAddQuestion(true);
                     }}
                   >
+                    {/* <Tooltip
+                      TransitionComponent={AddQuestion}
+                      title="Add a new question to this paper"
+                    > */}
                     <AddIcon />
                   </Fab>
                   {/* Add Question Dialog */}
-                  <Tooltip
-                    TransitionComponent={AddQuestion}
-                    title="Add a new question to this paper"
-                  >
-                    <span>
-                      <AddQuestion
-                        getAllQuestions={getAllQuestions}
-                        id={id}
-                        is_theory={is_theory}
-                        open={openAddQuestion}
-                        handleClose={() => setOpenAddQuestion(false)}
-                      />
-                    </span>
-                  </Tooltip>
+                  <span>
+                    <AddQuestion
+                      getAllQuestions={getAllQuestions}
+                      id={id}
+                      is_theory={is_theory}
+                      open={openAddQuestion}
+                      handleClose={() => setOpenAddQuestion(false)}
+                    />
+                  </span>
                 </td>
               </tr>
             </tbody>
