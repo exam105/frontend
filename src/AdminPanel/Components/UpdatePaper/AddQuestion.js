@@ -323,8 +323,30 @@ function AddQuestion(props) {
   };
 
   const handleAddImage = (e) => {
-    const files = e.target.files;
-    setImages([...files]);
+    e.preventDefault();
+    let files = e.target.files;
+    var newFiles = [];
+
+    let oldImageNames = [];
+    for (let i = 0; i < images.length; i++) {
+      let lastSegment = "";
+      if (images[i].imageurl) {
+        let parts = images[i].imageurl.split("/");
+        lastSegment = parts.pop() || parts.pop();
+        oldImageNames.push(lastSegment);
+      } else {
+        oldImageNames.push(images[i].name);
+      }
+    }
+
+    for (let i = 0; i < files.length; i++) {
+      if (!oldImageNames.includes(files[i].name)) {
+        newFiles.push(files[i]);
+      }
+    }
+
+    setImages([...images, ...newFiles]);
+
     var filesInput = $(".upload_images_input_for_mcqs");
     filesInput.replaceWith(filesInput.val(""));
   };
