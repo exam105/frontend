@@ -80,7 +80,7 @@ export default function SeeQuestion(props) {
         setDeleteQuestionId(SeeQuestionId.id);
         getQuestion(SeeQuestionId.id);
       } else {
-        console.log("not See Question id found");
+        console.log("-");
       }
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -102,7 +102,6 @@ export default function SeeQuestion(props) {
       .then((res) => {
         setQuestion(res?.data.question);
         if (is_theory) {
-          console.log("this is isTheory: ", is_theory);
           setAnswer(res?.data.answer);
         } else {
           setOptions(res?.data.options);
@@ -176,12 +175,10 @@ export default function SeeQuestion(props) {
     }
   };
   const editCurrentQuestion = () => {
-    console.log("edit triggered");
     window.EditQuestionId = editQuestionId;
     setEditQuestion(true);
   };
   const deleteCurrentQuestion = () => {
-    console.log("delete triggered");
     window.DeleteQuestionsId = deleteQuestionId;
     setConfirmDialogStatus(true);
   };

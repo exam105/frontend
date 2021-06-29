@@ -201,7 +201,6 @@ function AddQuestion(props) {
         topics: topics,
         images: imageLocations,
       };
-      console.log("sentData: ", is_theory ? theoryData : mcqData);
       axios({
         method: "PUT",
         url: is_theory

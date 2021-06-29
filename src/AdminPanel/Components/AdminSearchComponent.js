@@ -186,7 +186,6 @@ const AdminSearchComponent = (props) => {
     if (!paper.date) {
       setNotificationStatus(true);
     } else {
-      console.log("This is paper: ", paper);
       setRows([]);
       setProgressBarStatus(true);
       axios({
@@ -201,7 +200,6 @@ const AdminSearchComponent = (props) => {
           } else {
             setRows(res.data);
             setResult(false);
-            console.log("This is result: ", res.data);
           }
         })
         .catch((err) => {

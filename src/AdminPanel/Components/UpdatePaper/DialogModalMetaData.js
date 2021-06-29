@@ -59,7 +59,6 @@ function DialogModalMetaData(props) {
   });
 
   const submit_data = (e) => {
-    console.log("initial board: ", paper.date.toJSON());
     e.preventDefault();
     axios({
       method: "POST",

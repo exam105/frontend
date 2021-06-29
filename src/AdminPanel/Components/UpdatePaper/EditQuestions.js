@@ -128,7 +128,6 @@ function EditQuestion(props) {
               accessKeyId: res.data.accesskey,
               secretAccessKey: res.data.secretkey,
             });
-            console.log(config);
           }
         }
       })
@@ -176,7 +175,6 @@ function EditQuestion(props) {
                   accessKeyId: res.data.accesskey,
                   secretAccessKey: res.data.secretkey,
                 });
-                console.log(config);
               }
             }
           })
@@ -439,7 +437,6 @@ function EditQuestion(props) {
           if (status === 1) {
             setProgressBarStatus(true);
             const ReactS3Client = new S3(config);
-            console.log(config);
             for (let i = 0; i < deleteImagesNames.length; i++) {
               ReactS3Client.deleteFile(deleteImagesNames[i]);
             }

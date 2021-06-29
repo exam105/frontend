@@ -225,7 +225,6 @@ function AdminAddTheoryComponent(props) {
         for (let i = 0; i < deleteImagesNames.length; i++) {
           ReactS3Client.deleteFile(deleteImagesNames[i]);
         }
-        console.log(config);
         let imageLocations = [];
         if (images.length !== 0) {
           images.map((image, i) => {
@@ -358,7 +357,6 @@ function AdminAddTheoryComponent(props) {
       return null;
     });
     if (data[1]) {
-      console.log("this i data: ", data);
       setProgressBarStatus(true);
       axios({
         method: "POST",
@@ -420,7 +418,6 @@ function AdminAddTheoryComponent(props) {
           const lastSegment = parts.pop() || parts.pop();
           setDeleteImagesNames([...deleteImagesNames, lastSegment]);
           setImages(images.filter((item, index) => index !== data));
-          console.log(deleteImagesNames);
         }
       } else {
         setImages(images.filter((item, index) => index !== data));

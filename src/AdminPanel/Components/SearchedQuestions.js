@@ -66,7 +66,6 @@ const SearchedQuestions = (props) => {
         url: `/dashboard/de/questions/${id}`,
       })
         .then((res) => {
-          console.log("data: ", res.data);
           setRows(res.data);
           setListLoadStatus("d-none");
         })
@@ -98,7 +97,6 @@ const SearchedQuestions = (props) => {
       url: `/dashboard/de/question/${rowId}`,
     })
       .then((res) => {
-        console.log("questionData: ", res.data);
         setQuestion(res?.data.question);
         if (isTheory) {
           setAnswer(res?.data.answer);

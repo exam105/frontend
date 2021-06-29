@@ -329,7 +329,6 @@ function AdminAddmcqsComponent(props) {
         for (let i = 0; i < deleteImagesNames.length; i++) {
           ReactS3Client.deleteFile(deleteImagesNames[i]);
         }
-        console.log(config);
         var imageLocations = [];
         if (images.length !== 0) {
           images.map((image, i) => {
@@ -486,7 +485,6 @@ function AdminAddmcqsComponent(props) {
           const lastSegment = parts.pop() || parts.pop();
           setDeleteImagesNames([...deleteImagesNames, lastSegment]);
           setImages(images.filter((item, index) => index !== data));
-          console.log(deleteImagesNames);
         }
       } else {
         setImages(images.filter((item, index) => index !== data));
