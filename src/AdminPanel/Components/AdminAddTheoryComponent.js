@@ -397,13 +397,20 @@ function AdminAddTheoryComponent(props) {
         oldImageNames.push(images[i].name);
       }
     }
-
+    let check = false;
     for (let i = 0; i < files.length; i++) {
-      if (!oldImageNames.includes(files[i].name)) {
-        newFiles.push(files[i]);
+      if (files[i].size <= 1000000) {
+        if (!oldImageNames.includes(files[i].name)) {
+          newFiles.push(files[i]);
+        }
+      } else {
+        check = true;
       }
     }
-
+    if (check === true)
+      alert(
+        "Some image/s were not added because their size exceeded the 1MB limit."
+      );
     setImages([...images, ...newFiles]);
 
     var filesInput = $(".upload_images_input_for_mcqs");
