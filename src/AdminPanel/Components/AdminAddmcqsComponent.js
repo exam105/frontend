@@ -79,7 +79,7 @@ function AdminAddmcqsComponent(props) {
       );
       history.push("/admin/panel/papers");
     }
-    // GET S3 CREDENTIALS
+    // GET S3 CREDENTIALS 
     axios({
       method: "GET",
       url: "/dashboard/de/question/s3credentials",

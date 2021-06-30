@@ -153,6 +153,7 @@ export default function AdminPapersComponent() {
   const [rowsPerPage, setRowsPerPage] = React.useState(15);
   const [id, setId] = React.useState([]);
   const [isTheory, setIsTheory] = React.useState(false);
+  const [subject, setSubject] = React.useState(false);
   const [getData, setGetData] = React.useState("");
   const [progressBarStatus, setProgressBarStatus] = React.useState("");
 
@@ -205,6 +206,7 @@ export default function AdminPapersComponent() {
     let newId = [];
     const newTheory = rows?.map((n, i) => {
       if (i === index) {
+        setSubject(n?.subject);
         return n.is_theory ? n.is_theory : false;
       }
       return null;
@@ -272,6 +274,7 @@ export default function AdminPapersComponent() {
           progressBarStatus={progressBarStatus}
           id={id}
           is_theory={isTheory}
+          subject={subject}
           selected={selected}
           callUseEffect={callUseEffect}
         />

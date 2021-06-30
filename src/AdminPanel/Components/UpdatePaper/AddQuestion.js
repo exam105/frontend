@@ -48,7 +48,7 @@ const useStyles = makeStyles((theme) => ({
 
 function AddQuestion(props) {
   const classes2 = useStyles2();
-  const { is_theory, open } = props;
+  const { is_theory, open, subject } = props;
 
   //   Add Question
   // React State hooks
@@ -80,6 +80,7 @@ function AddQuestion(props) {
         if (!res.data.message) {
           setConfig({
             bucketName: "exam105",
+            dirName: subject,
             region: res.data.region,
             accessKeyId: res.data.accesskey,
             secretAccessKey: res.data.secretkey,
@@ -98,6 +99,7 @@ function AddQuestion(props) {
     return () => {
       clearInterval(timer);
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // question input changehandler

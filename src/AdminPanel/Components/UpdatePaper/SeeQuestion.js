@@ -42,7 +42,15 @@ const useStyles = makeStyles((theme) => ({
 
 export default function SeeQuestion(props) {
   const classes = useStyles();
-  const { getAllQuestions, id, handleClose, open, is_theory, metadata } = props;
+  const {
+    getAllQuestions,
+    id,
+    handleClose,
+    open,
+    is_theory,
+    subject,
+    metadata,
+  } = props;
   const [question, setQuestion] = React.useState("");
   const [answer, setAnswer] = React.useState("");
   const [options, setOptions] = React.useState([]);
@@ -452,6 +460,7 @@ export default function SeeQuestion(props) {
         open={editQuestion}
         getAllQuestions={getAllQuestions}
         is_theory={is_theory}
+        subject={subject}
         onClose={() => {
           onCloseEditQuestion();
         }}

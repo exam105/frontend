@@ -47,7 +47,7 @@ const Transition2 = React.forwardRef(function Transition2(props, ref) {
 
 function QuestionList(props) {
   const classes = useStyles();
-  const { open, metadata, onClose, id, is_theory } = props;
+  const { open, metadata, onClose, id, is_theory, subject } = props;
   const [rows, setRows] = React.useState([]);
   const [openSeeDialog, setOpenSeeDialog] = React.useState(false);
   const [confirmDialogStatus, setConfirmDialogStatus] = React.useState(false);
@@ -270,6 +270,7 @@ function QuestionList(props) {
                       getAllQuestions={getAllQuestions}
                       id={id}
                       is_theory={is_theory}
+                      subject={subject}
                       open={openAddQuestion}
                       handleClose={() => setOpenAddQuestion(false)}
                     />
@@ -303,6 +304,7 @@ function QuestionList(props) {
         open={editQuestionsStatus}
         getAllQuestions={getAllQuestions}
         is_theory={is_theory}
+        subject={subject}
         onClose={() => {
           window.EditQuestionId = undefined;
           setEditQuestionsStatus(false);
