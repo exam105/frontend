@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import "../css/AdminAddmcqs.css";
+// import "../css/AdminAddmcqs.css"; if any problem occurs with the UI of this component, then pls try uncommenting this line and comment the line below it
+import "../css/AdminAddBoard.css";
 import { add_board, reset_mcq, reset_theory } from "../../action/index";
 import { connect } from "react-redux";
 import { useHistory } from "react-router-dom";
