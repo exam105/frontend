@@ -18,8 +18,6 @@ import "./AdminPanel/css/Style.css";
 
 function App() {
   return (
-    <div>
-      This is root page for test
     <Switch>
       <Route exact path="/admin/panel/" component={AdminIndex} />
       <Route exact path="/admin/panel/papers" component={AdminPapers} />
@@ -34,7 +32,6 @@ function App() {
         component={AddDataOperator}
       />
     </Switch>
-    </div>
   );
 }
 
