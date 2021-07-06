@@ -6,6 +6,9 @@ import { ModelNotification } from "../LazyImports/LocalComponents";
 import { Dialog, DialogContent } from "../LazyImports/MaterialUI";
 import { DatePicker } from "../LazyImports/React";
 import Slide from "@material-ui/core/Slide";
+import "react-datepicker/dist/react-datepicker.css";
+// import "../../css/AdminAddmcqs.css"; if any problem occurs with the UI of this component, then pls try uncommenting this line and comment the line below it
+import "../../css/AdminAddBoard.css";
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
@@ -59,7 +62,6 @@ function DialogModalMetaData(props) {
   });
 
   const submit_data = (e) => {
-    console.log("initial board: ", paper.date.toJSON());
     e.preventDefault();
     axios({
       method: "POST",

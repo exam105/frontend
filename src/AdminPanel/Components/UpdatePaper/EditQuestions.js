@@ -53,7 +53,7 @@ const Transition2 = React.forwardRef(function Transition(props, ref) {
 
 function EditQuestion(props) {
   const classes2 = useStyles2();
-  const { open, metadata, onClose, is_theory } = props;
+  const { open, metadata, onClose, is_theory, subject } = props;
 
   const handleCloseDialogBox = () => {
     onClose(false);
@@ -68,7 +68,7 @@ function EditQuestion(props) {
   const [topics, setTopics] = useState([]);
   const [openAlertDelete, setOpenAlertDelete] = React.useState(false);
   const [openAlertUpdate, setOpenAlertUpdate] = React.useState(false);
-  const [ConfirmDialogStatus, setConfirmDialog] = React.useState(false);
+  const [, setConfirmDialog] = React.useState(false);
   const [markdownFontSize, setMarkdownFontSize] = React.useState("14px");
   const [images, setImages] = React.useState([]);
   const [deleteImagesNames, setDeleteImagesNames] = React.useState([]);
@@ -123,12 +123,12 @@ function EditQuestion(props) {
           } else {
             setConfig({
               bucketName: "exam105",
+              dirName: subject,
               region: res.data.region,
               dirName: metadata.subject,
               accessKeyId: res.data.accesskey,
               secretAccessKey: res.data.secretkey,
             });
-            console.log(config);
           }
         }
       })
@@ -171,12 +171,12 @@ function EditQuestion(props) {
               } else {
                 setConfig({
                   bucketName: "exam105",
+                  dirName: subject,
                   region: res.data.region,
                   dirName: metadata.subject,
                   accessKeyId: res.data.accesskey,
                   secretAccessKey: res.data.secretkey,
                 });
-                console.log(config);
               }
             }
           })
@@ -185,7 +185,6 @@ function EditQuestion(props) {
             console.log(err);
           });
       }
-
       setProgressBarStatus(true);
       axios({
         method: "GET",
@@ -439,7 +438,6 @@ function EditQuestion(props) {
           if (status === 1) {
             setProgressBarStatus(true);
             const ReactS3Client = new S3(config);
-            console.log(config);
             for (let i = 0; i < deleteImagesNames.length; i++) {
               ReactS3Client.deleteFile(deleteImagesNames[i]);
             }
@@ -521,13 +519,20 @@ function EditQuestion(props) {
         oldImageNames.push(images[i].name);
       }
     }
-
+    let check = false;
     for (let i = 0; i < files.length; i++) {
-      if (!oldImageNames.includes(files[i].name)) {
-        newFiles.push(files[i]);
+      if (files[i].size <= 1000000) {
+        if (!oldImageNames.includes(files[i].name)) {
+          newFiles.push(files[i]);
+        }
+      } else {
+        check = true;
       }
     }
-
+    if (check === true)
+      alert(
+        "Some image/s were not added because their size exceeded the 1MB limit."
+      );
     setImages([...images, ...newFiles]);
 
     var filesInput = $(".upload_images_input_for_mcqs");

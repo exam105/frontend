@@ -79,7 +79,7 @@ function AdminAddmcqsComponent(props) {
       );
       history.push("/admin/panel/papers");
     }
-    // GET S3 CREDENTIALS
+    // GET S3 CREDENTIALS 
     axios({
       method: "GET",
       url: "/dashboard/de/question/s3credentials",
@@ -329,7 +329,6 @@ function AdminAddmcqsComponent(props) {
         for (let i = 0; i < deleteImagesNames.length; i++) {
           ReactS3Client.deleteFile(deleteImagesNames[i]);
         }
-        console.log(config);
         var imageLocations = [];
         if (images.length !== 0) {
           images.map((image, i) => {
@@ -465,13 +464,20 @@ function AdminAddmcqsComponent(props) {
         oldImageNames.push(images[i].name);
       }
     }
-
+    let check = false;
     for (let i = 0; i < files.length; i++) {
-      if (!oldImageNames.includes(files[i].name)) {
-        newFiles.push(files[i]);
+      if (files[i].size <= 1000000) {
+        if (!oldImageNames.includes(files[i].name)) {
+          newFiles.push(files[i]);
+        }
+      } else {
+        check = true;
       }
     }
-
+    if (check === true)
+      alert(
+        "Some image/s were not added because their size exceeded the 1MB limit."
+      );
     setImages([...images, ...newFiles]);
 
     var filesInput = $(".upload_images_input_for_mcqs");
@@ -486,7 +492,6 @@ function AdminAddmcqsComponent(props) {
           const lastSegment = parts.pop() || parts.pop();
           setDeleteImagesNames([...deleteImagesNames, lastSegment]);
           setImages(images.filter((item, index) => index !== data));
-          console.log(deleteImagesNames);
         }
       } else {
         setImages(images.filter((item, index) => index !== data));

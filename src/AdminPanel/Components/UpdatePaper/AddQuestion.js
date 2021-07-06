@@ -48,7 +48,7 @@ const useStyles = makeStyles((theme) => ({
 
 function AddQuestion(props) {
   const classes2 = useStyles2();
-  const { is_theory, open } = props;
+  const { is_theory, open, subject } = props;
 
   //   Add Question
   // React State hooks
@@ -80,6 +80,7 @@ function AddQuestion(props) {
         if (!res.data.message) {
           setConfig({
             bucketName: "exam105",
+            dirName: subject,
             region: res.data.region,
             accessKeyId: res.data.accesskey,
             secretAccessKey: res.data.secretkey,
@@ -98,6 +99,7 @@ function AddQuestion(props) {
     return () => {
       clearInterval(timer);
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // question input changehandler
@@ -201,7 +203,6 @@ function AddQuestion(props) {
         topics: topics,
         images: imageLocations,
       };
-      console.log("sentData: ", is_theory ? theoryData : mcqData);
       axios({
         method: "PUT",
         url: is_theory
@@ -323,8 +324,37 @@ function AddQuestion(props) {
   };
 
   const handleAddImage = (e) => {
-    const files = e.target.files;
-    setImages([...files]);
+    e.preventDefault();
+    let files = e.target.files;
+    var newFiles = [];
+
+    let oldImageNames = [];
+    for (let i = 0; i < images.length; i++) {
+      let lastSegment = "";
+      if (images[i].imageurl) {
+        let parts = images[i].imageurl.split("/");
+        lastSegment = parts.pop() || parts.pop();
+        oldImageNames.push(lastSegment);
+      } else {
+        oldImageNames.push(images[i].name);
+      }
+    }
+    let check = false;
+    for (let i = 0; i < files.length; i++) {
+      if (files[i].size <= 1000000) {
+        if (!oldImageNames.includes(files[i].name)) {
+          newFiles.push(files[i]);
+        }
+      } else {
+        check = true;
+      }
+    }
+    if (check === true)
+      alert(
+        "Some image/s were not added because their size exceeded the 1MB limit."
+      );
+    setImages([...images, ...newFiles]);
+
     var filesInput = $(".upload_images_input_for_mcqs");
     filesInput.replaceWith(filesInput.val(""));
   };

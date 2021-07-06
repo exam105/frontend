@@ -43,7 +43,10 @@ const TokenValidate = async () => {
       });
     } else {
       console.log("refreshToken expired");
+      Cookies.remove("access");
+      localStorage.removeItem("refresh_token");
       history.push("/admin/panel");
+      alert("Your session has expired, please login again.");
     }
     return access_token;
   }
