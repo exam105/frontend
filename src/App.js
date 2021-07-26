@@ -26,11 +26,7 @@ function App() {
       <Route exact path="/admin/panel/add/mcqs" component={AdminAddmcqs} />
       <Route exact path="/admin/panel/add/papers" component={AdminAddBoard} />
       <Route exact path="/admin/panel/add/theory" component={AdminAddTheory} />
-      <Route
-        exact
-        path="/d/a/t/a/e/n/t/r/y/o/p/e/r/a/t/o/r/"
-        component={AddDataOperator}
-      />
+      <Route exact path="/poweruser" component={AddDataOperator} />
     </Switch>
   );
 }
