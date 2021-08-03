@@ -10641,6 +10641,7 @@
     "walker" "~1.0.5"
 
 "sanitize-html@git+https://github.com/Mathpix/sanitize-html.git":
+  "integrity" "sha512-V9w+RseRCN1J4SOPjptX31fzExURT7mLWJtB2J24kaKMIiIxYOQOMLZ4v3v9VKnFUYPhMAdCPu1Ccy6nehKioQ=="
   "resolved" "git+ssh://git@github.com/Mathpix/sanitize-html.git#2da76a400b9bd76fb9c567d394caffdafc75a255"
   "version" "1.27.4"
   dependencies:
