@@ -53,7 +53,7 @@ const Transition2 = React.forwardRef(function Transition(props, ref) {
 
 function EditQuestion(props) {
   const classes2 = useStyles2();
-  const { open, metadata, onClose, is_theory, subject } = props;
+  const { open, metadata, onClose, is_theory } = props;
 
   const handleCloseDialogBox = () => {
     onClose(false);
@@ -123,7 +123,6 @@ function EditQuestion(props) {
           } else {
             setConfig({
               bucketName: "exam105",
-              dirName: subject,
               region: res.data.region,
               dirName: metadata.subject,
               accessKeyId: res.data.accesskey,
@@ -171,7 +170,6 @@ function EditQuestion(props) {
               } else {
                 setConfig({
                   bucketName: "exam105",
-                  dirName: subject,
                   region: res.data.region,
                   dirName: metadata.subject,
                   accessKeyId: res.data.accesskey,

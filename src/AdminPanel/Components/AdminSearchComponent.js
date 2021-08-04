@@ -111,8 +111,6 @@ const AdminSearchComponent = (props) => {
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date());
   const [date, setDate] = useState(new Date());
-  const [rangeStartDate, setRangeStartDate] = useState(new Date());
-  const [rangeEndDate, setRangeEndDate] = useState(new Date());
   const [isDateRange, setIsDateRange] = useState(false);
   const [boards, setBoards] = useState([]);
   // Dialog Hooks
@@ -136,6 +134,8 @@ const AdminSearchComponent = (props) => {
     system: "",
     board: "",
     date: "",
+    from_date: "",
+    to_date: "",
   });
   const [subjects] = useState([
     { subject: "Math" },
@@ -183,35 +183,93 @@ const AdminSearchComponent = (props) => {
   };
   const submit_data = (e) => {
     e.preventDefault();
-    if (!paper.date) {
-      setNotificationStatus(true);
-    } else {
-      setRows([]);
-      setProgressBarStatus(true);
-      axios({
-        method: "POST",
-        url: "/dashboard/de/search/date",
-        data: paper,
-      })
-        .then((res) => {
-          setProgressBarStatus(false);
-          if (res.data === null) {
-            setResult(true);
-          } else {
-            setRows(res.data);
-            setResult(false);
-          }
+    if (isDateRange === true) {
+      paper.date = undefined;
+      if (!paper.from_date || !paper.to_date) {
+        setNotificationStatus(true);
+      } else {
+        setRows([]);
+        setProgressBarStatus(true);
+        axios({
+          method: "POST",
+          url: "/dashboard/de/search/daterange",
+          data: paper,
         })
-        .catch((err) => {
-          console.log(err);
-          setProgressBarStatus(false);
-          setDialogDesc("Something went wrong. Please try Again.");
-          setDialogStatus(true);
-        });
+          .then((res) => {
+            setProgressBarStatus(false);
+            if (res.data === null) {
+              setResult(true);
+            } else {
+              setRows(res.data);
+              setResult(false);
+            }
+          })
+          .catch((err) => {
+            console.log(err);
+            setProgressBarStatus(false);
+            setDialogDesc("Something went wrong. Please try Again.");
+            setDialogStatus(true);
+          });
+      }
+    } else {
+      paper.from_date = undefined;
+      paper.to_date = undefined;
+      if (!paper.date) {
+        setNotificationStatus(true);
+      } else {
+        setRows([]);
+        setProgressBarStatus(true);
+        axios({
+          method: "POST",
+          url: "/dashboard/de/search/date",
+          data: paper,
+        })
+          .then((res) => {
+            setProgressBarStatus(false);
+            if (res.data === null) {
+              setResult(true);
+            } else {
+              setRows(res.data);
+              setResult(false);
+            }
+          })
+          .catch((err) => {
+            console.log(err);
+            setProgressBarStatus(false);
+            setDialogDesc("Something went wrong. Please try Again.");
+            setDialogStatus(true);
+          });
+      }
     }
   };
-  const change_start_month_and_year = (date) => {};
-  const change_end_month_and_year = (date) => {};
+  const change_start_month_and_year = (date) => {
+    let monthNumber = date.getMonth();
+    monthNumber = monthNumber + 1;
+    const year = date.getFullYear();
+    let m;
+    if (monthNumber < 10) {
+      m = `0${monthNumber}`;
+    } else {
+      m = `${monthNumber}`;
+    }
+    let newDate = new Date(`${year}-${m}-01T00:00:00Z`);
+    setStartDate(newDate);
+    setPaper({ ...paper, from_date: newDate });
+  };
+  const change_end_month_and_year = (date) => {
+    let monthNumber = date.getMonth();
+    monthNumber = monthNumber + 1;
+    const year = date.getFullYear();
+    let m;
+    if (monthNumber < 10) {
+      m = `0${monthNumber}`;
+    } else {
+      m = `${monthNumber}`;
+    }
+    let newDate = new Date(`${year}-${m}-01T00:00:00Z`);
+    setEndDate(newDate);
+    setPaper({ ...paper, to_date: newDate });
+  };
   const change_month_and_year = (date) => {
     let monthNumber = date.getMonth();
     monthNumber = monthNumber + 1;
