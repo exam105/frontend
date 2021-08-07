@@ -205,17 +205,14 @@ export default function AdminPapersComponent() {
     let newSelected = [];
     let newId = [];
     const newTheory = rows?.map((n, i) => {
-      if (i === index) {
+      if (n.id === id2) {
         setSubject(n?.subject);
         return n.is_theory ? n.is_theory : false;
       }
-      return null;
     });
     let theory;
     newTheory.map((n, i) => {
-      if (n !== undefined) {
-        theory = n;
-      }
+      if (n !== undefined) return (theory = n);
       return null;
     });
     setIsTheory(theory);
