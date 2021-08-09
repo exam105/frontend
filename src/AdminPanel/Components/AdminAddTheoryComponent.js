@@ -67,6 +67,7 @@ function AdminAddTheoryComponent(props) {
   const theoryReducer = useSelector((state) => state.theoryReducer);
   const mcqReducer = useSelector((state) => state.mcqReducer);
   const boardReducer = useSelector((state) => state.boardReducer);
+  // for navigation
   const history = useHistory();
 
   const boardSize = Object.keys(boardReducer).length;
@@ -99,6 +100,7 @@ function AdminAddTheoryComponent(props) {
       });
 
     if (boardReducer.length === 0) {
+      console.log("saved meta: ", boardReducer);
       history.push("/admin/panel/add/papers/");
     }
     const timer = setInterval(() => {
@@ -356,6 +358,7 @@ function AdminAddTheoryComponent(props) {
       data.push(item);
       return null;
     });
+    console.log("that is before: ", data);
     if (data[1]) {
       setProgressBarStatus(true);
       axios({
@@ -364,12 +367,14 @@ function AdminAddTheoryComponent(props) {
         data: data,
       })
         .then((res) => {
+          console.log("i came to reset");
           props.resetState();
           props.resetBoard();
           setProgressBarStatus(false);
           history.push("/admin/panel/papers");
         })
         .catch((err) => {
+          console.log("came in err");
           console.log(err);
           setProgressBarStatus(false);
           setDialogDesc("Something went wrong. Please try Again.");

@@ -3213,8 +3213,6 @@
     "is-glob" "~4.0.1"
     "normalize-path" "~3.0.0"
     "readdirp" "~3.5.0"
-  optionalDependencies:
-    "fsevents" "~2.3.1"
 
 "chokidar@3.3.0":
   "integrity" "sha512-dGmKLDdT3Gdl7fBUe8XK+gAtGmzy5Fn0XkkWQuYxGIgWVPPse2CxFA5mtrlD0TOHaHjEUqkWNyP1XdHoJES/4A=="
