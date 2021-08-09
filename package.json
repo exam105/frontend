@@ -17,7 +17,7 @@
     "jquery": "^3.6.0",
     "js-cookie": "^2.2.1",
     "jwt-decode": "^3.1.2",
-    "mathpix-markdown-it": "^1.0.54",
+    "mathpix-markdown-it": "^1.0.23",
     "moment": "^2.29.1",
     "popper.js": "^1.16.1",
     "react": "^17.0.2",
@@ -32,7 +32,7 @@
     "react-redux": "^7.2.4",
     "react-router": "^5.2.0",
     "react-router-dom": "^5.2.0",
-    "react-scripts": "3.4.1",
+    "react-scripts": "^4.0.3",
     "redux": "^4.1.0",
     "uuid": "^8.3.2",
     "web-vitals": "^0.2.4"
