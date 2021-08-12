@@ -100,7 +100,6 @@ function AdminAddTheoryComponent(props) {
       });
 
     if (boardReducer.length === 0) {
-      console.log("saved meta: ", boardReducer);
       history.push("/admin/panel/add/papers/");
     }
     const timer = setInterval(() => {
@@ -342,6 +341,20 @@ function AdminAddTheoryComponent(props) {
   // Finish Exam
   const finish_paper = () => {
     setConfirmFinishPaper(false);
+    console.log("before: ", boardReducer);
+    boardReducer.map((item, i) => {
+      if (i === boardReducer.length - 1) {
+        const values = Object.values(item);
+        for (const value of values) {
+          if (value === undefined) {
+            boardReducer.pop();
+            break;
+          }
+        }
+      }
+      return new Array(boardReducer[boardReducer.length - 1]);
+    });
+    console.log("after :", boardReducer);
     const data1 = new Array(boardReducer[boardSize - 1]);
     const theory = {
       is_theory: true,
@@ -358,23 +371,21 @@ function AdminAddTheoryComponent(props) {
       data.push(item);
       return null;
     });
-    console.log("that is before: ", data);
     if (data[1]) {
       setProgressBarStatus(true);
+      console.log("inside", boardReducer);
       axios({
         method: "POST",
         url: "/dashboard/de/questions/theory",
         data: data,
       })
         .then((res) => {
-          console.log("i came to reset");
           props.resetState();
           props.resetBoard();
           setProgressBarStatus(false);
           history.push("/admin/panel/papers");
         })
         .catch((err) => {
-          console.log("came in err");
           console.log(err);
           setProgressBarStatus(false);
           setDialogDesc("Something went wrong. Please try Again.");
