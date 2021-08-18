@@ -37,6 +37,7 @@ function AdminAddBoardComponent(props) {
   ]);
 
   const [series] = useState([
+    { series: "0" },
     { series: "1" },
     { series: "2" },
     { series: "3" },

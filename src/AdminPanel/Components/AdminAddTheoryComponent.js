@@ -107,6 +107,19 @@ function AdminAddTheoryComponent(props) {
         prevProgress >= 90 ? 10 : prevProgress + 7
       );
     }, 800);
+    // The below code is used to handle the bug where an undefined array is automatically added when the refreshToken is expired && finish button is pressed
+    boardReducer.map((item, i) => {
+      if (i === boardReducer.length - 1) {
+        const values = Object.values(item);
+        for (const value of values) {
+          if (value === undefined) {
+            boardReducer.pop();
+            break;
+          }
+        }
+      }
+      return new Array(boardReducer[boardReducer.length - 1]);
+    });
     return () => {
       clearInterval(timer);
       setConfig({});
@@ -341,7 +354,6 @@ function AdminAddTheoryComponent(props) {
   // Finish Exam
   const finish_paper = () => {
     setConfirmFinishPaper(false);
-    console.log("before: ", boardReducer);
     boardReducer.map((item, i) => {
       if (i === boardReducer.length - 1) {
         const values = Object.values(item);
@@ -354,7 +366,6 @@ function AdminAddTheoryComponent(props) {
       }
       return new Array(boardReducer[boardReducer.length - 1]);
     });
-    console.log("after :", boardReducer);
     const data1 = new Array(boardReducer[boardSize - 1]);
     const theory = {
       is_theory: true,
@@ -373,7 +384,6 @@ function AdminAddTheoryComponent(props) {
     });
     if (data[1]) {
       setProgressBarStatus(true);
-      console.log("inside", boardReducer);
       axios({
         method: "POST",
         url: "/dashboard/de/questions/theory",
