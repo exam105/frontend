@@ -38,6 +38,7 @@ function DialogModalMetaData(props) {
   ]);
 
   const [series] = useState([
+    { series: "0" },
     { series: "1" },
     { series: "2" },
     { series: "3" },
@@ -47,9 +48,13 @@ function DialogModalMetaData(props) {
   ]);
 
   const [papers] = useState([
+    { paper: "Paper 0" },
     { paper: "Paper 1" },
     { paper: "Paper 2" },
     { paper: "Paper 3" },
+    { paper: "Paper 4" },
+    { paper: "Paper 5" },
+    { paper: "Paper 6" },
   ]);
 
   const [paper, setPaper] = useState({
