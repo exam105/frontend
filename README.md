@@ -2,7 +2,7 @@
 
 
 ## Mission Statement: 
-Exam105.com is a platform where the students and teachers will be able to get, search, and interact with the past papers of Cambridge Board Education System. It would provide its users with a lot of benefits. The users will be able to pick and choose from a wide range of papers conducted over the years, all the way from 2011, and make a customized pdf book to download and work with it however they may prefer; be it to prepare for the upcoming exams (from students' perspective), or to make new papers (from teachers' perspective). And as we progress, there will be more functionalities provided by the system in future.
+Exam105.com is a platform where the students and teachers will be able to get, search, and interact with the past papers of Cambridge Board Education System. It would provide its users with a lot of benefits. The users will be able to pick and choose from a wide range of papers conducted over the years, all the way from 2011, and make a customized pdf book to download and work with it online however they may prefer; be it to prepare for the upcoming exams (from students' perspective), or to make new papers (from teachers' perspective). And as we progress, there will be more functionalities provided by the system in future.
 
 ---
 
