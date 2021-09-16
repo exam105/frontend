@@ -37,7 +37,10 @@ const useStyles = makeStyles((theme) => ({
   },
   title: {
     marginLeft: theme.spacing(2),
-    flex: 1,
+    flex: 0.5,
+  },
+  paper: {
+    flex: 0.5,
   },
 }));
 
@@ -47,7 +50,8 @@ const Transition2 = React.forwardRef(function Transition2(props, ref) {
 
 function QuestionList(props) {
   const classes = useStyles();
-  const { open, metadata, onClose, id, is_theory, subject } = props;
+  const { open, metadata, onClose, id, is_theory, subject, system, board } =
+    props;
   const [rows, setRows] = React.useState([]);
   const [openSeeDialog, setOpenSeeDialog] = React.useState(false);
   const [confirmDialogStatus, setConfirmDialogStatus] = React.useState(false);
@@ -135,6 +139,9 @@ function QuestionList(props) {
           <Toolbar>
             <Typography variant="h6" className={classes.title}>
               Update Questions
+            </Typography>
+            <Typography className={classes.paper}>
+              {system} - {board}
             </Typography>
             <IconButton
               edge="start"

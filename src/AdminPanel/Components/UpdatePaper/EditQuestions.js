@@ -147,7 +147,7 @@ function EditQuestion(props) {
   }, []);
 
   ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-  // Get Mcqs From API
+  // Get Questions From API
   React.useEffect(() => {
     if (window.EditQuestionId !== undefined) {
       if (

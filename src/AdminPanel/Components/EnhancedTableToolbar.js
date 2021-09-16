@@ -41,13 +41,13 @@ const useToolbarStyles = makeStyles((theme) => ({
         },
   title: {
     flex: "1 1 100%",
-  },
+  }, 
 }));
 
 const EnhancedTableToolbar = (props) => {
   const classes = useToolbarStyles();
   const [editQuestion, setEditQuestion] = useState(false);
-  const { selected, id, data, is_theory, subject } = props;
+  const { selected, id, data, is_theory, subject, system, board } = props;
   const [dialogMetaData, setDialogMetaData] = useState(false);
   const numSelected = selected.length;
   const history = useHistory();
@@ -110,6 +110,8 @@ const EnhancedTableToolbar = (props) => {
         id={id}
         is_theory={is_theory}
         subject={subject}
+        system={system}
+        board={board}
         onClose={onHideQuestionList}
       />
 

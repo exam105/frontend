@@ -154,6 +154,8 @@ export default function AdminPapersComponent() {
   const [id, setId] = React.useState([]);
   const [isTheory, setIsTheory] = React.useState(false);
   const [subject, setSubject] = React.useState(false);
+  const [system, setSystem] = React.useState(false);
+  const [board, setBoard] = React.useState(false);
   const [getData, setGetData] = React.useState("");
   const [progressBarStatus, setProgressBarStatus] = React.useState("");
 
@@ -207,6 +209,8 @@ export default function AdminPapersComponent() {
     const newTheory = rows?.map((n, i) => {
       if (n.id === id2) {
         setSubject(n?.subject);
+        setSystem(n?.system);
+        setBoard(n?.board);
         return n.is_theory ? n.is_theory : false;
       }
     });
@@ -272,6 +276,8 @@ export default function AdminPapersComponent() {
           id={id}
           is_theory={isTheory}
           subject={subject}
+          system={system}
+          board={board}
           selected={selected}
           callUseEffect={callUseEffect}
         />
