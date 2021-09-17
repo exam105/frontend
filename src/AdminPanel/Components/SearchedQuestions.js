@@ -277,6 +277,7 @@ const SearchedQuestions = (props) => {
                       border: "1px solid #afb9f07d",
                     }}
                   >
+                    <h5 className="py-1 text-left">Question:</h5>
                     <MathpixLoader>
                       <MathpixMarkdown text={question} />
                     </MathpixLoader>
