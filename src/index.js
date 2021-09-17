@@ -12,6 +12,12 @@ import allReducers from "./reducers/index";
 import { createStore } from "redux";
 import { Provider } from "react-redux";
 import StateLoader from "./reducers/PresistedState";
+// Google Analytics
+import ReactGA from "react-ga";
+
+const TRACKING_ID = `${process.env.EXAM105_TRACK_ID}`;
+ReactGA.initialize(TRACKING_ID);
+
 const stateLoader = new StateLoader();
 
 let store = createStore(

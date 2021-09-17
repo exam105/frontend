@@ -1,5 +1,6 @@
 import React from "react";
-import { Route, Switch } from "react-router-dom";
+import { Route, Switch, useHistory } from "react-router-dom";
+
 // Components
 import {
   AdminIndex,
@@ -15,8 +16,12 @@ import {
 import "bootstrap/dist/css/bootstrap.css";
 import "./App.css";
 import "./AdminPanel/css/Style.css";
+import UrlChangeTracker from "./AdminPanel/Components/UrlChangeTracker";
 
 function App() {
+  const history = useHistory();
+  //To track the routes of visitors
+  UrlChangeTracker(history);
   return (
     <Switch>
       <Route exact path="/admin/panel/" component={AdminIndex} />
