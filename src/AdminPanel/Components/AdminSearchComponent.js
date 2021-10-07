@@ -142,6 +142,7 @@ const AdminSearchComponent = (props) => {
     { subject: "Math" },
     { subject: "Physics" },
     { subject: "Biology" },
+    { subject: "Chemistry" },
   ]);
   const [rows, setRows] = useState([]);
 

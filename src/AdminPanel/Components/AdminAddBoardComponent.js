@@ -34,6 +34,7 @@ function AdminAddBoardComponent(props) {
     { subject: "Math" },
     { subject: "Physics" },
     { subject: "Biology" },
+    { subject: "Chemistry" },
   ]);
 
   const [series] = useState([
