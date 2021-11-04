@@ -24,13 +24,25 @@ function App() {
   UrlChangeTracker(history);
   return (
     <Switch>
-      <Route exact path="/admin/panel/" component={AdminIndex} />
-      <Route exact path="/admin/panel/papers" component={AdminPapers} />
-      <Route exact path="/admin/panel/search" component={AdminSearch} />
-      <Route exact path="/admin/panel/add/" component={AdminChoiceAndTheory} />
-      <Route exact path="/admin/panel/add/mcqs" component={AdminAddmcqs} />
-      <Route exact path="/admin/panel/add/papers" component={AdminAddBoard} />
-      <Route exact path="/admin/panel/add/theory" component={AdminAddTheory} />
+      <Route exact path="/data/admin/panel/" component={AdminIndex} />
+      <Route exact path="/data/admin/panel/papers" component={AdminPapers} />
+      <Route exact path="/data/admin/panel/search" component={AdminSearch} />
+      <Route
+        exact
+        path="/data/admin/panel/add/"
+        component={AdminChoiceAndTheory}
+      />
+      <Route exact path="/data/admin/panel/add/mcqs" component={AdminAddmcqs} />
+      <Route
+        exact
+        path="/data/admin/panel/add/papers"
+        component={AdminAddBoard}
+      />
+      <Route
+        exact
+        path="/data/admin/panel/add/theory"
+        component={AdminAddTheory}
+      />
       <Route exact path="/poweruser" component={AddDataOperator} />
     </Switch>
   );
