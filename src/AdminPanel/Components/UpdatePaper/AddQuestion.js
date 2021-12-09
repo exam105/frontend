@@ -2,6 +2,12 @@ import React, { useState } from "react";
 import S3 from "react-aws-s3";
 import $ from "jquery";
 import axios from "axios";
+import {
+  BUCKET_NAME,
+  S3_ACCESS_KEY,
+  S3_REGION,
+  S3_SECRET_ACCESS_KEY,
+} from "../../../config";
 // Components
 import { ModelNotification } from "../LazyImports/LocalComponents";
 // Material UI
@@ -72,24 +78,31 @@ function AddQuestion(props) {
   // UseEffect Hook
   React.useEffect(() => {
     // GET S3 CREDENTIALS
-    axios({
-      method: "GET",
-      url: "/dashboard/de/question/s3credentials",
-    })
-      .then((res) => {
-        if (!res.data.message) {
-          setConfig({
-            bucketName: "exam105",
-            dirName: subject,
-            region: res.data.region,
-            accessKeyId: res.data.accesskey,
-            secretAccessKey: res.data.secretkey,
-          });
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    setConfig({
+      bucketName: BUCKET_NAME,
+      dirName: subject,
+      region: S3_REGION,
+      accessKeyId: S3_ACCESS_KEY,
+      secretAccessKey: S3_SECRET_ACCESS_KEY,
+    });
+    // axios({
+    //   method: "GET",
+    //   url: "/dashboard/de/question/s3credentials",
+    // })
+    //   .then((res) => {
+    //     if (!res.data.message) {
+    //       setConfig({
+    //         bucketName: "exam105",
+    //         dirName: subject,
+    //         region: res.data.region,
+    //         accessKeyId: res.data.accesskey,
+    //         secretAccessKey: res.data.secretkey,
+    //       });
+    //     }
+    //   })
+    //   .catch((err) => {
+    //     console.log(err);
+    //   });
 
     const timer = setInterval(() => {
       setProgress((prevProgress) =>

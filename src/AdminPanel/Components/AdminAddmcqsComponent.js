@@ -3,6 +3,12 @@ import axios from "axios";
 import S3 from "react-aws-s3";
 import { useHistory } from "react-router-dom";
 import $ from "jquery";
+import {
+  BUCKET_NAME,
+  S3_ACCESS_KEY,
+  S3_REGION,
+  S3_SECRET_ACCESS_KEY,
+} from "../../config";
 // Markdown Libraries
 import { MathpixLoader, MathpixMarkdown } from "./LazyImports/Markdown";
 // Redux
@@ -80,24 +86,31 @@ function AdminAddmcqsComponent(props) {
       history.push("/admin/panel/papers");
     }
     // GET S3 CREDENTIALS
-    axios({
-      method: "GET",
-      url: "/dashboard/de/question/s3credentials",
-    })
-      .then((res) => {
-        if (!res.data.message) {
-          setConfig({
-            bucketName: "exam105",
-            dirName: boardReducer[0].subject,
-            region: res.data.region,
-            accessKeyId: res.data.accesskey,
-            secretAccessKey: res.data.secretkey,
-          });
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    setConfig({
+      bucketName: BUCKET_NAME,
+      dirName: boardReducer[0].subject,
+      region: S3_REGION,
+      accessKeyId: S3_ACCESS_KEY,
+      secretAccessKey: S3_SECRET_ACCESS_KEY,
+    });
+    // axios({
+    //   method: "GET",
+    //   url: "/dashboard/de/question/s3credentials",
+    // })
+    //   .then((res) => {
+    //     if (!res.data.message) {
+    //       setConfig({
+    //         bucketName: "exam105",
+    //         dirName: boardReducer[0].subject,
+    //         region: res.data.region,
+    //         accessKeyId: res.data.accesskey,
+    //         secretAccessKey: res.data.secretkey,
+    //       });
+    //     }
+    //   })
+    //   .catch((err) => {
+    //     console.log(err);
+    //   });
 
     if (boardReducer.length === 0) {
       history.push("/admin/panel/add/papers/");
