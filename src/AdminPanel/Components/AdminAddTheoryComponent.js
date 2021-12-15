@@ -525,6 +525,9 @@ function AdminAddTheoryComponent(props) {
                       <td
                         style={{ whiteSpace: "nowrap" }}
                       >{`${item?.paper}`}</td>
+                      <td style={{ whiteSpace: "nowrap" }}>{`${
+                        item?.reference ? item.reference : ""
+                      }`}</td>
                     </tr>
                   ))}
                 </tbody>

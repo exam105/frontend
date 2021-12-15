@@ -64,6 +64,7 @@ function AdminAddBoardComponent(props) {
     date: "",
     series: "",
     paper: "",
+    reference: "",
   });
 
   React.useEffect(() => {
@@ -141,6 +142,7 @@ function AdminAddBoardComponent(props) {
       <div className="add_board_child px-md-5 px-4">
         <h1 className="text-center board_titile py-3"> Paper Meta Data </h1>
         <form className="board_form mx-auto" onSubmit={submit_data} id="myForm">
+          {/* System Field */}
           <div className="form-group">
             <label htmlFor="system">Select System : </label>
             <select
@@ -162,6 +164,7 @@ function AdminAddBoardComponent(props) {
               })}
             </select>
           </div>
+          {/* Board Field */}
           <div className="form-group">
             <label htmlFor="">Select Board : </label>
             <select
@@ -182,6 +185,7 @@ function AdminAddBoardComponent(props) {
               })}
             </select>
           </div>
+          {/* Subject Field */}
           <div className="form-group">
             <label htmlFor="">Select Subject :</label>
             <select
@@ -202,6 +206,7 @@ function AdminAddBoardComponent(props) {
               })}
             </select>
           </div>
+          {/* Date Field */}
           <div className="form-group datepicker_main">
             <label htmlFor="">Select Year And Month :</label>
             <br />
@@ -218,6 +223,7 @@ function AdminAddBoardComponent(props) {
               onChange={change_month_and_year}
             />
           </div>
+          {/* Series Field */}
           <div className="form-group">
             <label htmlFor="">Select Series : </label>
             <select
@@ -238,6 +244,7 @@ function AdminAddBoardComponent(props) {
               })}
             </select>
           </div>
+          {/* Paper No Field */}
           <div className="form-group">
             <label htmlFor="">Select Paper :</label>
             <select
@@ -257,6 +264,20 @@ function AdminAddBoardComponent(props) {
                 );
               })}
             </select>
+          </div>
+          {/* Reference Field */}
+          <div className="form-group">
+            <label htmlFor="">Enter Reference Number :</label>
+            {/* add an input field to save input in paper.reference */}
+            <input
+              type="text"
+              name="reference"
+              value={paper.reference}
+              onChange={change_input}
+              className="form-control"
+              placeholder="Reference Number"
+              required
+            />
           </div>
           <div className="form-group justify-content-center d-flex">
             <button type="submit" className="btn px-5 py-2 bg-info mybutton">

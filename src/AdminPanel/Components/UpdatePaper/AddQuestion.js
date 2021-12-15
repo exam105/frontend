@@ -259,8 +259,10 @@ function AddQuestion(props) {
           setProgressBarStatus(true);
           const ReactS3Client = new S3(config);
           let imageLocations = [];
+
           if (images.length !== 0) {
             images.map((image, i) => {
+              console.log("this be image:", { image, subject });
               ReactS3Client.uploadFile(image, image.name)
                 .then((res) => {
                   const imageURL = { imageurl: res.location };

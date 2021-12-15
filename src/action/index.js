@@ -8,6 +8,7 @@ export const add_board = (data, theory) => {
     paper: data.paper,
     date: data.date,
     is_theory: theory ? true : false,
+    reference: data.reference,
   };
 };
 

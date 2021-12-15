@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import axios from "axios";
 // Components
 import { ModelNotification } from "../LazyImports/LocalComponents";
@@ -15,6 +15,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 });
 
 function DialogModalMetaData(props) {
+  // const reference = useRef(null);
   const [open, setOpen] = React.useState(props.DialogStatus);
   const { callUseEffect } = props;
 
@@ -65,8 +66,44 @@ function DialogModalMetaData(props) {
     date: "",
     series: "",
     paper: "",
+    reference: "",
   });
-
+  // React.useEffect(() => {
+  //   if (reference.value === true) {
+  //     axios({
+  //       method: "POST",
+  //       url: `/dashboard/de/metadata/${props.id}`,
+  //       data: paper,
+  //     })
+  //       .then((res) => {
+  //         reference.current = null;
+  //         props.handleClose();
+  //         callUseEffect();
+  //       })
+  //       .catch((err) => console.log(err));
+  //   }
+  // }, [reference]);
+  React.useEffect(() => {
+    const e = {
+      target: { name: "system", value: props.data.system },
+    };
+    change_input(e);
+    setPaper({
+      system: props?.data?.system,
+      board: props?.data?.board,
+      subject: props?.data?.subject,
+      date: props?.data?.date,
+      series: props?.data?.series,
+      paper: props?.data?.paper,
+      reference: props?.data?.reference ? props?.data?.reference : "",
+    });
+    setOpen(props.DialogStatus);
+    if (props.data.date !== undefined) {
+      const newDate = new Date(props.data.date);
+      setStartDate(newDate);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [props.DialogStatus]);
   const submit_data = (e) => {
     e.preventDefault();
     axios({
@@ -75,10 +112,13 @@ function DialogModalMetaData(props) {
       data: paper,
     })
       .then((res) => {
+        // reference.current = null;
         props.handleClose();
         callUseEffect();
       })
       .catch((err) => console.log(err));
+    // reference.current = true;
+    // setPaper({ ...paper, [`reference`]: reference.current });
   };
 
   const change_input = (e) => {
@@ -123,26 +163,6 @@ function DialogModalMetaData(props) {
     setPaper({ ...paper, [e.target.name]: value });
   };
 
-  React.useEffect(() => {
-    const e = {
-      target: { name: "system", value: props.data.system },
-    };
-    change_input(e);
-    setPaper({
-      system: props?.data?.system,
-      board: props?.data?.board,
-      subject: props?.data?.subject,
-      date: props?.data?.date,
-      series: props?.data?.series,
-      paper: props?.data?.paper,
-    });
-    setOpen(props.DialogStatus);
-    if (props.data.date !== undefined) {
-      const newDate = new Date(props.data.date);
-      setStartDate(newDate);
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [props.DialogStatus]);
   const change_month_and_year = (date) => {
     let monthNumber = date.getMonth();
     monthNumber = monthNumber + 1;
@@ -172,7 +192,7 @@ function DialogModalMetaData(props) {
         <DialogContent className="px-5">
           <form
             className="board_form mx-auto"
-            onSubmit={submit_data}
+            onSubmit={(e) => submit_data(e)}
             id="myForm"
           >
             <div className="form-group">
@@ -292,6 +312,19 @@ function DialogModalMetaData(props) {
                 })}
               </select>
             </div>
+            <div className="form-group">
+              <label htmlFor="">Enter Reference Number:</label>
+              <input
+                type="text"
+                className="form-control"
+                name="reference"
+                placeholder="Reference Number"
+                value={paper.reference}
+                onChange={change_input}
+                required
+              />
+            </div>
+
             <div className="form-group justify-content-center d-flex">
               <button type="submit" className="btn px-5 py-2 bg-info mybutton">
                 Submit

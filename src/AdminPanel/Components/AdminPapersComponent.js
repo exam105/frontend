@@ -51,6 +51,12 @@ const headCells = [
   { id: "date", numeric: false, disablePadding: false, label: "Date" },
   { id: "series", numeric: false, disablePadding: false, label: "Series" },
   { id: "paper", numeric: false, disablePadding: false, label: "Paper" },
+  {
+    id: "reference",
+    numeric: false,
+    disablePadding: false,
+    label: "Reference",
+  },
 ];
 
 function EnhancedTableHead(props) {
@@ -343,6 +349,9 @@ export default function AdminPapersComponent() {
                       </TableCell>
                       <TableCell align="left">{row.series}</TableCell>
                       <TableCell align="left">{row.paper}</TableCell>
+                      <TableCell align="left">
+                        {row.reference ? row.reference : ""}
+                      </TableCell>
                     </TableRow>
                   );
                 })}
