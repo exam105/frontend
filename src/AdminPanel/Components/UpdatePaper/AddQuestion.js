@@ -78,31 +78,31 @@ function AddQuestion(props) {
   // UseEffect Hook
   React.useEffect(() => {
     // GET S3 CREDENTIALS
-    setConfig({
-      bucketName: BUCKET_NAME,
-      dirName: subject,
-      region: S3_REGION,
-      accessKeyId: S3_ACCESS_KEY,
-      secretAccessKey: S3_SECRET_ACCESS_KEY,
-    });
-    // axios({
-    //   method: "GET",
-    //   url: "/dashboard/de/question/s3credentials",
-    // })
-    //   .then((res) => {
-    //     if (!res.data.message) {
-    //       setConfig({
-    //         bucketName: "exam105",
-    //         dirName: subject,
-    //         region: res.data.region,
-    //         accessKeyId: res.data.accesskey,
-    //         secretAccessKey: res.data.secretkey,
-    //       });
-    //     }
-    //   })
-    //   .catch((err) => {
-    //     console.log(err);
-    //   });
+    // setConfig({
+    //   bucketName: BUCKET_NAME,
+    //   dirName: subject,
+    //   region: S3_REGION,
+    //   accessKeyId: S3_ACCESS_KEY,
+    //   secretAccessKey: S3_SECRET_ACCESS_KEY,
+    // });
+    axios({
+      method: "GET",
+      url: "/dashboard/de/question/s3credentials",
+    })
+      .then((res) => {
+        if (!res.data.message) {
+          setConfig({
+            bucketName: "exam105",
+            dirName: subject,
+            region: res.data.region,
+            accessKeyId: res.data.accesskey,
+            secretAccessKey: res.data.secretkey,
+          });
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
 
     const timer = setInterval(() => {
       setProgress((prevProgress) =>
