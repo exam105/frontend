@@ -8,6 +8,14 @@ import {
   S3_REGION,
   S3_SECRET_ACCESS_KEY,
 } from "../../../config";
+// Redux
+import { connect, useSelector } from "react-redux";
+import {
+  add_single_theory,
+  reset_single_theory,
+  add_single_mcq,
+  reset_single_mcq,
+} from "../../../action";
 // Components
 import { ModelNotification } from "../LazyImports/LocalComponents";
 // Material UI
@@ -235,7 +243,16 @@ function AddQuestion(props) {
           props.handleClose();
           $(".marks").val("");
         })
-        .catch((err) => console.log(err));
+        .catch((err) => {
+          if (is_theory) {
+            props.add_theory_state(theoryData);
+          } else {
+            props.add_mcq_state(mcqData);
+          }
+          setProgressBarStatus(false);
+          alert("This question was not saved, please try again.");
+          console.log(err);
+        });
     } else {
       props.handleClose();
     }
@@ -722,18 +739,21 @@ function AddQuestion(props) {
     </div>
   );
 }
-// const mapDispatchToProps = (dispatch) => {
-//   return {
-//     add_board: (data) => {
-//       dispatch(add_board(data));
-//     },
-//     reset_mcq: () => {
-//       dispatch(reset_mcq());
-//     },
-//     reset_theory: () => {
-//       dispatch(reset_theory());
-//     },
-//   };
-// };
-export default AddQuestion;
-// export default connect(null, mapDispatchToProps)(AddQuestion);
+const mapDispatchToProps = (dispatch) => {
+  return {
+    add_mcq_state: (data) => {
+      dispatch(add_single_mcq(data));
+    },
+    add_theory_state: (data) => {
+      dispatch(add_single_theory(data));
+    },
+    reset_mcq_state: () => {
+      dispatch(reset_single_mcq());
+    },
+    reset_theory_state: () => {
+      dispatch(reset_single_theory());
+    },
+  };
+};
+// export default AddQuestion;
+export default connect(null, mapDispatchToProps)(AddQuestion);

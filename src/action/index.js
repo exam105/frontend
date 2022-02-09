@@ -36,6 +36,16 @@ export const add_mcq = (data) => {
     images: data.images,
   };
 };
+export const add_single_mcq = (data) => {
+  return {
+    type: "add_single_mcq",
+    question: data.question,
+    marks: data.marks,
+    options: data.options,
+    topics: data.topics,
+    images: data.images,
+  };
+};
 
 export const update_mcq = (data) => {
   return {
@@ -61,10 +71,26 @@ export const reset_mcq = () => {
     type: "reset_mcq",
   };
 };
+export const reset_single_mcq = () => {
+  return {
+    type: "reset_single_mcq",
+  };
+};
 
 export const add_theory = (data) => {
   return {
     type: "add_theory",
+    question: data.question,
+    answer: data.answer,
+    marks: data.marks,
+    topics: data.topics,
+    images: data.images,
+  };
+};
+
+export const add_single_theory = (data) => {
+  return {
+    type: "add_single_theory",
     question: data.question,
     answer: data.answer,
     marks: data.marks,
@@ -95,5 +121,10 @@ export const remove_theory = (data) => {
 export const reset_theory = (data) => {
   return {
     type: "reset_theory",
+  };
+};
+export const reset_single_theory = (data) => {
+  return {
+    type: "reset_single_theory",
   };
 };
