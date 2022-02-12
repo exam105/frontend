@@ -43,7 +43,6 @@ export const add_single_mcq = (data) => {
     marks: data.marks,
     options: data.options,
     topics: data.topics,
-    images: data.images,
   };
 };
 
@@ -95,7 +94,6 @@ export const add_single_theory = (data) => {
     answer: data.answer,
     marks: data.marks,
     topics: data.topics,
-    images: data.images,
   };
 };
 

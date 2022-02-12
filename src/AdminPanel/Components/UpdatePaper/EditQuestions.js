@@ -9,7 +9,10 @@ import {
   S3_SECRET_ACCESS_KEY,
 } from "../../../config";
 // Components
-import { ModelNotification } from "../LazyImports/LocalComponents";
+import {
+  ModelNotification,
+  ConfirmDialog,
+} from "../LazyImports/LocalComponents";
 // Material UI
 import {
   Dialog,
@@ -325,6 +328,36 @@ function EditQuestion(props) {
     setDialogStatus(false);
     setConfirmDialog(false);
   };
+  const backupPlan = () => {
+    try {
+      if (is_theory) {
+        navigator.clipboard.writeText(
+          `Question: 
+        ${question ? question : ""}, 
+        
+        Answer: 
+        ${answer ? answer : ""}`
+        );
+      } else {
+        navigator.clipboard.writeText(
+          `Question: 
+        ${question ? question : ""}, 
+        
+        Options: 
+        ${
+          options && options.length > 0
+            ? options.map((item) => ` ${item.option}`)
+            : ""
+        }`
+        );
+      }
+      alert(
+        `Some problem has occured. The question and ${
+          is_theory ? "answer" : "options"
+        } are copied to the clipboard. Please paste (Ctrl + v) on a notepad to save your work. Sorry for the inconvenience caused.`
+      );
+    } catch {}
+  };
   ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   // Update Question
   const update_questions_after_image_upload = (imageLocations, mark) => {
@@ -365,7 +398,10 @@ function EditQuestion(props) {
             onClose(false);
             setProgressBarStatus(false);
           })
-          .catch((err) => console.log(err));
+          .catch((err) => {
+            console.log(err);
+            backupPlan();
+          });
       } else {
         onClose(false);
       }
@@ -418,6 +454,7 @@ function EditQuestion(props) {
                     );
                     setDialogStatus(false);
                     setProgressBarStatus(true);
+                    backupPlan();
                     console.log(err);
                   });
               } else {
@@ -483,6 +520,7 @@ function EditQuestion(props) {
                       );
                       setDialogStatus(false);
                       setProgressBarStatus(true);
+                      backupPlan();
                       console.log(err);
                     });
                 } else {

@@ -11,17 +11,6 @@ const mcq = (state = [], action) => {
           images: action.images,
         },
       ];
-    case "add_single_mcq":
-      return [
-        ...state,
-        {
-          question: action.question,
-          marks: action.marks,
-          options: action.options,
-          topics: action.topics,
-          images: action.images,
-        },
-      ];
     case "remove_mcq":
       return state.filter((item, index) => action.index !== index);
     case "update_mcq":
@@ -35,8 +24,6 @@ const mcq = (state = [], action) => {
       items[action.index] = item;
       return items;
     case "reset_mcq":
-      return [];
-    case "reset_single_mcq":
       return [];
     default:
       return state;

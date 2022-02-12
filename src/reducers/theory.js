@@ -11,17 +11,6 @@ const theory = (state = [], action) => {
           images: action.images,
         },
       ];
-    case "add_single_theory":
-      return [
-        ...state,
-        {
-          question: action.question,
-          answer: action.answer,
-          marks: action.marks,
-          topics: action.topics,
-          images: action.images,
-        },
-      ];
     case "update_theory":
       let items = [...state];
       let item = { ...items[action.index] };
@@ -35,8 +24,6 @@ const theory = (state = [], action) => {
     case "remove_theory":
       return state.filter((item, index) => action.index !== index);
     case "reset_theory":
-      return [];
-    case "reset_single_theory":
       return [];
     default:
       return state;

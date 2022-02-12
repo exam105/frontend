@@ -63,14 +63,47 @@ const useStyles = makeStyles((theme) => ({
 function AddQuestion(props) {
   const classes2 = useStyles2();
   const { is_theory, open, subject } = props;
+  const mcqReducer = useSelector(
+    (state) => state?.singleMcqReducer[state.singleMcqReducer.length - 1]
+  );
+  const theoryReducer = useSelector(
+    (state) => state?.singleTheoryReducer[state.singleTheoryReducer.length - 1]
+  );
 
-  //   Add Question
   // React State hooks
-  const [question, setQuestion] = useState("");
-  const [answer, setAnswer] = useState("");
+  const [question, setQuestion] = useState(
+    is_theory
+      ? theoryReducer && theoryReducer.question
+        ? theoryReducer.question
+        : ""
+      : mcqReducer && mcqReducer.question
+      ? mcqReducer.question
+      : ""
+  );
+  const [answer, setAnswer] = useState(
+    is_theory
+      ? theoryReducer && theoryReducer.answer
+        ? theoryReducer.answer
+        : ""
+      : ""
+  );
   const [topic, setTopic] = useState("");
-  const [options, setOptions] = useState([]);
-  const [topics, setTopics] = useState([]);
+  const [options, setOptions] = useState(
+    !is_theory
+      ? mcqReducer && mcqReducer.options
+        ? mcqReducer.options
+        : []
+      : []
+  );
+  const [topics, setTopics] = useState(
+    is_theory
+      ? theoryReducer && theoryReducer.topics
+        ? theoryReducer.topics
+        : []
+      : mcqReducer && mcqReducer.topics
+      ? mcqReducer.topics
+      : []
+  );
   const [markdownFontSize, setMarkdownFontSize] = React.useState("14px");
   const [images, setImages] = React.useState([]);
   const [config, setConfig] = React.useState();
@@ -120,6 +153,7 @@ function AddQuestion(props) {
     return () => {
       clearInterval(timer);
     };
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -208,7 +242,12 @@ function AddQuestion(props) {
   };
 
   // on mcq added
-  const add_questions_after_image_upload = (imageLocations, mark) => {
+  const add_questions_after_image_upload = (
+    imageLocations,
+    mark,
+    theoryState,
+    mcqState
+  ) => {
     if (props.id.length === 1) {
       const mcqData = {
         question: question,
@@ -235,6 +274,7 @@ function AddQuestion(props) {
           props.getAllQuestions();
           setTopics([]);
           setTopic("");
+          is_theory ? props.reset_theory_state() : props.reset_mcq_state();
           setProgressBarStatus(false);
           setOptions([]);
           setQuestion("");
@@ -244,14 +284,22 @@ function AddQuestion(props) {
           $(".marks").val("");
         })
         .catch((err) => {
-          if (is_theory) {
-            props.add_theory_state(theoryData);
+          if (theoryState !== undefined) {
+            props.add_theory_state(theoryState);
           } else {
-            props.add_mcq_state(mcqData);
+            props.add_mcq_state(mcqState);
           }
           setProgressBarStatus(false);
-          alert("This question was not saved, please try again.");
+          setTopics([]);
+          setTopic("");
+          setOptions([]);
+          setQuestion("");
+          setAnswer("");
+          setImages([]);
           console.log(err);
+          props.getAllQuestions();
+          props.handleClose();
+          $(".marks").val("");
         });
     } else {
       props.handleClose();
@@ -263,6 +311,12 @@ function AddQuestion(props) {
       if (is_theory) {
         // Validation
         const mark = $(".marks").val();
+        const theoryState = {
+          question: question,
+          answer: answer,
+          marks: mark,
+          topics: topics,
+        };
         if (question === "" || mark === "" || answer === "") {
           if (question === "") {
             setDialogDesc("Question field is required!");
@@ -279,27 +333,52 @@ function AddQuestion(props) {
 
           if (images.length !== 0) {
             images.map((image, i) => {
-              console.log("this be image:", { image, subject });
               ReactS3Client.uploadFile(image, image.name)
                 .then((res) => {
                   const imageURL = { imageurl: res.location };
                   imageLocations.push(imageURL);
                   if (imageLocations.length === images.length) {
-                    add_questions_after_image_upload(imageLocations, mark);
+                    add_questions_after_image_upload(
+                      imageLocations,
+                      mark,
+                      theoryState,
+                      undefined
+                    );
                   }
                 })
                 .catch((err) => {
+                  props.add_theory_state(theoryState);
+                  setProgressBarStatus(false);
+                  setTopics([]);
+                  setTopic("");
+                  setQuestion("");
+                  setAnswer("");
+                  setImages([]);
                   console.log(err);
+                  props.getAllQuestions();
+                  props.handleClose();
+                  $(".marks").val("");
                 });
               return null;
             });
           } else {
-            add_questions_after_image_upload(imageLocations, mark);
+            add_questions_after_image_upload(
+              imageLocations,
+              mark,
+              theoryState,
+              undefined
+            );
           }
         }
       } else {
         // Validation
         const mark = $(".marks").val();
+        const mcqState = {
+          question: question,
+          marks: mark,
+          options: options,
+          topics: topics,
+        };
         if (question === "" || mark === "" || options.length === 0) {
           if (question === "") {
             setDialogDesc("Question Field Are Required!");
@@ -329,16 +408,36 @@ function AddQuestion(props) {
                     const imageURL = { imageurl: res.location };
                     imageLocations.push(imageURL);
                     if (imageLocations.length === images.length) {
-                      add_questions_after_image_upload(imageLocations, mark);
+                      add_questions_after_image_upload(
+                        imageLocations,
+                        mark,
+                        undefined,
+                        mcqState
+                      );
                     }
                   })
                   .catch((err) => {
+                    props.add_mcq_state(mcqState);
+                    setProgressBarStatus(false);
+                    setTopics([]);
+                    setTopic("");
+                    setOptions([]);
+                    setQuestion("");
+                    setImages([]);
                     console.log(err);
+                    props.getAllQuestions();
+                    props.handleClose();
+                    $(".marks").val("");
                   });
                 return null;
               });
             } else {
-              add_questions_after_image_upload(imageLocations, mark);
+              add_questions_after_image_upload(
+                imageLocations,
+                mark,
+                undefined,
+                mcqState
+              );
             }
           } else {
             setDialogDesc("Chose The correct Option");
@@ -627,6 +726,15 @@ function AddQuestion(props) {
                         max="100"
                         min="1"
                         id="topic"
+                        defaultValue={
+                          is_theory
+                            ? theoryReducer && theoryReducer.marks
+                              ? theoryReducer.marks
+                              : ""
+                            : mcqReducer && mcqReducer.marks
+                            ? mcqReducer.marks
+                            : ""
+                        }
                       />
                       <br />
                     </div>
@@ -691,31 +799,32 @@ function AddQuestion(props) {
                       type="file"
                     />
                     <div className="row">
-                      {images.map((item, i) => {
-                        var url = URL.createObjectURL(item);
-                        return (
-                          <div
-                            key={i}
-                            className="position-relative d-flex align-items-center w-50"
-                          >
-                            <img
-                              alt="Error"
-                              style={{ height: "80px", width: "100%" }}
-                              className="img-fluid p-2"
-                              src={url}
-                            />
-                            <DeleteIcon
-                              onClick={() => deleteImage(i)}
-                              className="bg-dark text-white rounded cursor-pointer"
-                              style={{
-                                position: "absolute",
-                                top: "0",
-                                right: "0",
-                              }}
-                            />
-                          </div>
-                        );
-                      })}
+                      {images &&
+                        images?.map((item, i) => {
+                          var url = URL.createObjectURL(item);
+                          return (
+                            <div
+                              key={i}
+                              className="position-relative d-flex align-items-center w-50"
+                            >
+                              <img
+                                alt="Error"
+                                style={{ height: "80px", width: "100%" }}
+                                className="img-fluid p-2"
+                                src={url}
+                              />
+                              <DeleteIcon
+                                onClick={() => deleteImage(i)}
+                                className="bg-dark text-white rounded cursor-pointer"
+                                style={{
+                                  position: "absolute",
+                                  top: "0",
+                                  right: "0",
+                                }}
+                              />
+                            </div>
+                          );
+                        })}
                     </div>
                   </form>
                 </div>
