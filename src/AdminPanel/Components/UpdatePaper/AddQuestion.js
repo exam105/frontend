@@ -214,6 +214,14 @@ function AddQuestion(props) {
     items[e] = item;
     setOptions(items);
   };
+  // on option value change
+  const onOptionValueChange = (index, e) => {
+    let items = [...options];
+    let item = { ...items[index] };
+    item.option = e.target.value;
+    items[index] = item;
+    setOptions(items);
+  };
   // Add Topics
   const submitTopic = (e) => {
     e.preventDefault();
@@ -652,7 +660,7 @@ function AddQuestion(props) {
                         {options.map((item, i) => {
                           return (
                             <div key={i} className={`mcqDisplay mcq${i}`}>
-                              <p
+                              {/* <p
                                 style={{
                                   width: "80%",
                                   fontSize: "15px",
@@ -661,7 +669,24 @@ function AddQuestion(props) {
                                 className="option_text py-auto mb-2"
                               >
                                 {item.option}
-                              </p>
+                              </p> */}
+                              <input
+                                style={{
+                                  width: "80%",
+                                  fontSize: "15px",
+                                  wordWrap: "break-word",
+                                  border: "none",
+                                  background: "transparent",
+                                  alignSelf: "center",
+                                }}
+                                className="option_text py-auto mb-2"
+                                type="text"
+                                id={i}
+                                name="option"
+                                placeholder="Please fill it or delete this option field."
+                                value={item.option}
+                                onChange={(e) => onOptionValueChange(i, e)}
+                              />
                               <div className="mcqDisplay__button">
                                 <svg
                                   onClick={() => onselect(i)}
