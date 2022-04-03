@@ -75,7 +75,7 @@ function AdminIndex(props) {
             id="standard-basic"
             label="User Email"
             className="AdminUserField w-100"
-            type="text"
+            type="email"
             required
           />
         </div>
