@@ -2,12 +2,6 @@ import React, { useState } from "react";
 import axios from "axios";
 import $ from "jquery";
 import S3 from "react-aws-s3";
-import {
-  BUCKET_NAME,
-  S3_ACCESS_KEY,
-  S3_REGION,
-  S3_SECRET_ACCESS_KEY,
-} from "../../../config";
 // Components
 import {
   ModelNotification,
@@ -119,14 +113,6 @@ function EditQuestion(props) {
   };
 
   React.useEffect(() => {
-    // GET S3 CREDENTIALS
-    // setConfig({
-    //   bucketName: BUCKET_NAME,
-    //   region: S3_REGION,
-    //   dirName: metadata.subject,
-    //   accessKeyId: S3_ACCESS_KEY,
-    //   secretAccessKey: S3_SECRET_ACCESS_KEY,
-    // });
     axios({
       method: "GET",
       url: "/dashboard/de/question/s3credentials",
@@ -173,14 +159,6 @@ function EditQuestion(props) {
         !config.secretAccessKey ||
         config === null
       ) {
-        // GET S3 CREDENTIALS
-        setConfig({
-          bucketName: BUCKET_NAME,
-          region: S3_REGION,
-          dirName: metadata.subject,
-          accessKeyId: S3_ACCESS_KEY,
-          secretAccessKey: S3_SECRET_ACCESS_KEY,
-        });
         // axios({
         //   method: "GET",
         //   url: "/dashboard/de/question/s3credentials",

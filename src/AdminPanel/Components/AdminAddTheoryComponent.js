@@ -3,12 +3,6 @@ import { useHistory } from "react-router-dom";
 import S3 from "react-aws-s3";
 import axios from "axios";
 import $ from "jquery";
-import {
-  BUCKET_NAME,
-  S3_ACCESS_KEY,
-  S3_REGION,
-  S3_SECRET_ACCESS_KEY,
-} from "../../config";
 // Markdown Libraries
 import { MathpixLoader, MathpixMarkdown } from "./LazyImports/Markdown";
 // Redux
@@ -85,14 +79,7 @@ function AdminAddTheoryComponent(props) {
       );
       history.push("/admin/panel/papers");
     }
-    // GET S3 CREDENTIALS
-    setConfig({
-      bucketName: BUCKET_NAME,
-      dirName: boardReducer[0].subject,
-      region: S3_REGION,
-      accessKeyId: S3_ACCESS_KEY,
-      secretAccessKey: S3_SECRET_ACCESS_KEY,
-    });
+
     // axios({
     //   method: "GET",
     //   url: "/dashboard/de/question/s3credentials",

@@ -2,12 +2,7 @@ import React, { useState } from "react";
 import S3 from "react-aws-s3";
 import $ from "jquery";
 import axios from "axios";
-import {
-  BUCKET_NAME,
-  S3_ACCESS_KEY,
-  S3_REGION,
-  S3_SECRET_ACCESS_KEY,
-} from "../../../config";
+
 // Redux
 import { connect, useSelector } from "react-redux";
 import {
@@ -118,14 +113,6 @@ function AddQuestion(props) {
 
   // UseEffect Hook
   React.useEffect(() => {
-    // GET S3 CREDENTIALS
-    // setConfig({
-    //   bucketName: BUCKET_NAME,
-    //   dirName: subject,
-    //   region: S3_REGION,
-    //   accessKeyId: S3_ACCESS_KEY,
-    //   secretAccessKey: S3_SECRET_ACCESS_KEY,
-    // });
     axios({
       method: "GET",
       url: "/dashboard/de/question/s3credentials",
