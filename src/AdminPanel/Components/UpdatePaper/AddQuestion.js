@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import S3 from "react-aws-s3";
+// import S3 from "react-aws-s3";
 import $ from "jquery";
 import axios from "axios";
 
@@ -101,7 +101,7 @@ function AddQuestion(props) {
   );
   const [markdownFontSize, setMarkdownFontSize] = React.useState("14px");
   const [images, setImages] = React.useState([]);
-  const [config, setConfig] = React.useState();
+  // const [config, setConfig] = React.useState();
   const [ProgressBarStatus, setProgressBarStatus] = useState(false);
   const [progress, setProgress] = useState(10);
   // Dialog Hooks

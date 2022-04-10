@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import S3 from "react-aws-s3";
+// import S3 from "react-aws-s3";
 import { useHistory } from "react-router-dom";
 import $ from "jquery";
 // Markdown Libraries
@@ -54,7 +54,7 @@ function AdminAddmcqsComponent(props) {
   const [markdownFontSize, setMarkdownFontSize] = React.useState("14px");
   const [deleteImagesNames, setDeleteImagesNames] = React.useState([]);
   const [images, setImages] = React.useState([]);
-  const [config, setConfig] = React.useState();
+  // const [config, setConfig] = React.useState();
   // Dialog Hooks
   const [DialogStatus, setDialogStatus] = React.useState(false);
   const [DialogDesc, setDialogDesc] = React.useState("Are you Sure?");
@@ -110,7 +110,7 @@ function AdminAddmcqsComponent(props) {
     }, 800);
     return () => {
       clearInterval(timer);
-      setConfig({});
+      // setConfig({});
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);

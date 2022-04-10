@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import axios from "axios";
 import $ from "jquery";
-import S3 from "react-aws-s3";
+// import S3 from "react-aws-s3";
 // Components
 import {
   ModelNotification,
-  ConfirmDialog,
+  // ConfirmDialog,
 } from "../LazyImports/LocalComponents";
 // Material UI
 import {
@@ -75,7 +75,7 @@ function EditQuestion(props) {
   const [markdownFontSize, setMarkdownFontSize] = React.useState("14px");
   const [images, setImages] = React.useState([]);
   const [deleteImagesNames, setDeleteImagesNames] = React.useState([]);
-  const [config, setConfig] = React.useState([]);
+  // const [config, setConfig] = React.useState([]);
   // Dialog Hooks
   const [DialogStatus, setDialogStatus] = React.useState(false);
   const [DialogDesc, setDialogDesc] = React.useState("Are you Sure?");
@@ -152,38 +152,38 @@ function EditQuestion(props) {
   // Get Questions From API
   React.useEffect(() => {
     if (window.EditQuestionId !== undefined) {
-      if (
-        !config.bucketName ||
-        !config.dirName ||
-        !config.accessKeyId ||
-        !config.secretAccessKey ||
-        config === null
-      ) {
-        // axios({
-        //   method: "GET",
-        //   url: "/dashboard/de/question/s3credentials",
-        // })
-        //   .then((res) => {
-        //     if (!res.data.message) {
-        //       if (!metadata.subject) {
-        //         onClose(false);
-        //         props.getAllQuestions();
-        //       } else {
-        //         setConfig({
-        //           bucketName: "exam105",
-        //           region: res.data.region,
-        //           dirName: metadata.subject,
-        //           accessKeyId: res.data.accesskey,
-        //           secretAccessKey: res.data.secretkey,
-        //         });
-        //       }
-        //     }
-        //   })
-        //   .catch((err) => {
-        //     RefreshData();
-        //     console.log(err);
-        //   });
-      }
+      // if (
+      //   !config.bucketName ||
+      //   !config.dirName ||
+      //   !config.accessKeyId ||
+      //   !config.secretAccessKey ||
+      //   config === null
+      // ) {
+      // axios({
+      //   method: "GET",
+      //   url: "/dashboard/de/question/s3credentials",
+      // })
+      //   .then((res) => {
+      //     if (!res.data.message) {
+      //       if (!metadata.subject) {
+      //         onClose(false);
+      //         props.getAllQuestions();
+      //       } else {
+      //         setConfig({
+      //           bucketName: "exam105",
+      //           region: res.data.region,
+      //           dirName: metadata.subject,
+      //           accessKeyId: res.data.accesskey,
+      //           secretAccessKey: res.data.secretkey,
+      //         });
+      //       }
+      //     }
+      //   })
+      //   .catch((err) => {
+      //     RefreshData();
+      //     console.log(err);
+      //   });
+      // }
       setProgressBarStatus(true);
       axios({
         method: "GET",
