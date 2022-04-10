@@ -113,29 +113,29 @@ function EditQuestion(props) {
   };
 
   React.useEffect(() => {
-    axios({
-      method: "GET",
-      url: "/dashboard/de/question/s3credentials",
-    })
-      .then((res) => {
-        if (!res.data.message) {
-          if (!metadata.subject) {
-            onClose(false);
-            props.getAllQuestions();
-          } else {
-            setConfig({
-              bucketName: "exam105",
-              region: res.data.region,
-              dirName: metadata.subject,
-              accessKeyId: res.data.accesskey,
-              secretAccessKey: res.data.secretkey,
-            });
-          }
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    // axios({
+    //   method: "GET",
+    //   url: "/dashboard/de/question/s3credentials",
+    // })
+    //   .then((res) => {
+    //     if (!res.data.message) {
+    //       if (!metadata.subject) {
+    //         onClose(false);
+    //         props.getAllQuestions();
+    //       } else {
+    //         setConfig({
+    //           bucketName: "exam105",
+    //           region: res.data.region,
+    //           dirName: metadata.subject,
+    //           accessKeyId: res.data.accesskey,
+    //           secretAccessKey: res.data.secretkey,
+    //         });
+    //       }
+    //     }
+    //   })
+    //   .catch((err) => {
+    //     console.log(err);
+    //   });
 
     const timer = setInterval(() => {
       setProgress((prevProgress) =>
@@ -413,18 +413,37 @@ function EditQuestion(props) {
           setDialogStatus(true);
         } else {
           setProgressBarStatus(true);
-          const ReactS3Client = new S3(config);
+          // const ReactS3Client = new S3(config);
           for (let i = 0; i < deleteImagesNames.length; i++) {
-            ReactS3Client.deleteFile(deleteImagesNames[i]);
+            // ReactS3Client.deleteFile(deleteImagesNames[i]);
+            axios({
+              method: "DELETE",
+              url: `/exam/question/deleteimage/${metadata.subject}/${deleteImagesNames[i]}`,
+            })
+              .then((res) => {
+                console.log(res);
+              })
+              .catch((err) => {
+                console.log(err);
+              });
           }
 
           let imageLocations = [];
           if (images.length !== 0) {
-            images.map((image, i) => {
+            images.map((image) => {
               if (!image.imageurl) {
-                ReactS3Client.uploadFile(image, image.name)
+                // ReactS3Client.uploadFile(image, image.name)
+                const file = image;
+                const body = new FormData();
+                body.append("file", file);
+                body.append("subject", metadata.subject);
+                axios({
+                  method: "PUT",
+                  url: `/exam/question/uploadimage`,
+                  data: body,
+                })
                   .then((res) => {
-                    const imageURL = { imageurl: res.location };
+                    const imageURL = { imageurl: res.data };
                     imageLocations.push(imageURL);
                     if (imageLocations.length === images.length) {
                       if (imageLocations.length === images.length) {
@@ -479,18 +498,37 @@ function EditQuestion(props) {
           }
           if (status === 1) {
             setProgressBarStatus(true);
-            const ReactS3Client = new S3(config);
+            // const ReactS3Client = new S3(config);
             for (let i = 0; i < deleteImagesNames.length; i++) {
-              ReactS3Client.deleteFile(deleteImagesNames[i]);
+              // ReactS3Client.deleteFile(deleteImagesNames[i]);
+              axios({
+                method: "DELETE",
+                url: `/exam/question/deleteimage/${metadata.subject}/${deleteImagesNames[i]}`,
+              })
+                .then((res) => {
+                  console.log(res);
+                })
+                .catch((err) => {
+                  console.log(err);
+                });
             }
 
             let imageLocations = [];
             if (images.length !== 0) {
               images.map((image, i) => {
                 if (!image.imageurl) {
-                  ReactS3Client.uploadFile(image, image.name)
+                  // ReactS3Client.uploadFile(image, image.name)
+                  const file = image;
+                  const body = new FormData();
+                  body.append("file", file);
+                  body.append("subject", metadata.subject);
+                  axios({
+                    method: "PUT",
+                    url: `/exam/question/uploadimage`,
+                    data: body,
+                  })
                     .then((res) => {
-                      const imageURL = { imageurl: res.location };
+                      const imageURL = { imageurl: res.data };
                       imageLocations.push(imageURL);
                       if (imageLocations.length === images.length) {
                         if (imageLocations.length === images.length) {

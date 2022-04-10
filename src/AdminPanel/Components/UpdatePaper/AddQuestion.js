@@ -113,24 +113,24 @@ function AddQuestion(props) {
 
   // UseEffect Hook
   React.useEffect(() => {
-    axios({
-      method: "GET",
-      url: "/dashboard/de/question/s3credentials",
-    })
-      .then((res) => {
-        if (!res.data.message) {
-          setConfig({
-            bucketName: "exam105",
-            dirName: subject,
-            region: res.data.region,
-            accessKeyId: res.data.accesskey,
-            secretAccessKey: res.data.secretkey,
-          });
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    // axios({
+    //   method: "GET",
+    //   url: "/dashboard/de/question/s3credentials",
+    // })
+    //   .then((res) => {
+    //     if (!res.data.message) {
+    //       setConfig({
+    //         bucketName: "exam105",
+    //         dirName: subject,
+    //         region: res.data.region,
+    //         accessKeyId: res.data.accesskey,
+    //         secretAccessKey: res.data.secretkey,
+    //       });
+    //     }
+    //   })
+    //   .catch((err) => {
+    //     console.log(err);
+    //   });
 
     const timer = setInterval(() => {
       setProgress((prevProgress) =>
@@ -323,14 +323,23 @@ function AddQuestion(props) {
           setDialogStatus(true);
         } else {
           setProgressBarStatus(true);
-          const ReactS3Client = new S3(config);
+
+          // const ReactS3Client = new S3(config);
           let imageLocations = [];
 
           if (images.length !== 0) {
-            images.map((image, i) => {
-              ReactS3Client.uploadFile(image, image.name)
+            images.map((image) => {
+              const file = image;
+              const body = new FormData();
+              body.append("file", file);
+              body.append("subject", subject);
+              axios({
+                method: "PUT",
+                url: `/exam/question/uploadimage`,
+                data: body,
+              })
                 .then((res) => {
-                  const imageURL = { imageurl: res.location };
+                  const imageURL = { imageurl: res.data };
                   imageLocations.push(imageURL);
                   if (imageLocations.length === images.length) {
                     add_questions_after_image_upload(
@@ -346,6 +355,7 @@ function AddQuestion(props) {
                   setProgressBarStatus(false);
                   setTopics([]);
                   setTopic("");
+                  setOptions([]);
                   setQuestion("");
                   setAnswer("");
                   setImages([]);
@@ -354,6 +364,8 @@ function AddQuestion(props) {
                   props.handleClose();
                   $(".marks").val("");
                 });
+              // ReactS3Client.uploadFile(image, image.name)
+
               return null;
             });
           } else {
@@ -394,13 +406,20 @@ function AddQuestion(props) {
           }
           if (status === 1) {
             setProgressBarStatus(true);
-            const ReactS3Client = new S3(config);
+            // const ReactS3Client = new S3(config);
             var imageLocations = [];
             if (images.length !== 0) {
-              images.map((image, i) => {
-                ReactS3Client.uploadFile(image, image.name)
+              images.map((image) => {
+                const body = new FormData();
+                body.append("file", image);
+                body.append("subject", subject);
+                axios({
+                  method: "PUT",
+                  url: `/exam/question/uploadimage`,
+                  data: body,
+                })
                   .then((res) => {
-                    const imageURL = { imageurl: res.location };
+                    const imageURL = { imageurl: res.data };
                     imageLocations.push(imageURL);
                     if (imageLocations.length === images.length) {
                       add_questions_after_image_upload(
@@ -424,6 +443,8 @@ function AddQuestion(props) {
                     props.handleClose();
                     $(".marks").val("");
                   });
+                // ReactS3Client.uploadFile(image, image.name)
+
                 return null;
               });
             } else {

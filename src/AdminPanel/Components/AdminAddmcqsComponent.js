@@ -257,13 +257,21 @@ function AdminAddmcqsComponent(props) {
       }
       if (status === 1) {
         setProgressBarStatus(true);
-        const ReactS3Client = new S3(config);
+        // const ReactS3Client = new S3(config);
         var imageLocations = [];
         if (images.length !== 0) {
           images.map((image, i) => {
-            ReactS3Client.uploadFile(image, image.name)
+            // ReactS3Client.uploadFile(image, image.name)
+            const body = new FormData();
+            body.append("file", image);
+            body.append("subject", boardReducer[0].subject);
+            axios({
+              method: "PUT",
+              url: `/exam/question/uploadimage`,
+              data: body,
+            })
               .then((res) => {
-                const imageURL = { imageurl: res.location };
+                const imageURL = { imageurl: res.data };
                 imageLocations.push(imageURL);
                 if (imageLocations.length === images.length) {
                   add_questions_after_image_upload(imageLocations, mark);
@@ -334,17 +342,35 @@ function AdminAddmcqsComponent(props) {
       }
       if (status === 1) {
         setProgressBarStatus(true);
-        const ReactS3Client = new S3(config);
+        // const ReactS3Client = new S3(config);
         for (let i = 0; i < deleteImagesNames.length; i++) {
-          ReactS3Client.deleteFile(deleteImagesNames[i]);
+          // ReactS3Client.deleteFile(deleteImagesNames[i]);
+          axios({
+            method: "DELETE",
+            url: `/exam/question/deleteimage/${boardReducer[0].subject}/${deleteImagesNames[i]}`,
+          })
+            .then((res) => {
+              console.log(res);
+            })
+            .catch((err) => {
+              console.log(err);
+            });
         }
         var imageLocations = [];
         if (images.length !== 0) {
           images.map((image, i) => {
             if (!image.imageurl) {
-              ReactS3Client.uploadFile(image, image.name)
+              // ReactS3Client.uploadFile(image, image.name)
+              const body = new FormData();
+              body.append("file", image);
+              body.append("subject", boardReducer[0].subject);
+              axios({
+                method: "PUT",
+                url: `/exam/question/uploadimage`,
+                data: body,
+              })
                 .then((res) => {
-                  const imageURL = { imageurl: res.location };
+                  const imageURL = { imageurl: res.data };
                   imageLocations.push(imageURL);
                   if (imageLocations.length === images.length) {
                     if (imageLocations.length === images.length) {
