@@ -81,24 +81,24 @@ function AdminAddmcqsComponent(props) {
     }
     // GET S3 CREDENTIALS
     // dirName: boardReducer[0].subject,
-    // axios({
-    //   method: "GET",
-    //   url: "/dashboard/de/question/s3credentials",
-    // })
-    //   .then((res) => {
-    //     if (!res.data.message) {
-    //       setConfig({
-    //         bucketName: "exam105",
-    //         dirName: boardReducer[0].subject,
-    //         region: res.data.region,
-    //         accessKeyId: res.data.accesskey,
-    //         secretAccessKey: res.data.secretkey,
-    //       });
-    //     }
-    //   })
-    //   .catch((err) => {
-    //     console.log(err);
-    //   });
+    axios({
+      method: "GET",
+      url: "/dashboard/de/question/s3credentials",
+    })
+      .then((res) => {
+        if (!res.data.message) {
+          setConfig({
+            bucketName: "exam105",
+            dirName: boardReducer[0].subject,
+            region: res.data.region,
+            accessKeyId: res.data.accesskey,
+            secretAccessKey: res.data.secretkey,
+          });
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
 
     if (boardReducer.length === 0) {
       history.push("/admin/panel/add/papers/");

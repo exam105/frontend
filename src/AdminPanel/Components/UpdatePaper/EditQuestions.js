@@ -555,7 +555,7 @@ function EditQuestion(props) {
     for (let i = 0; i < images.length; i++) {
       var lastSegment = "";
       if (images[i].imageurl) {
-        var parts = images[i].imageurl.split("/");
+        var parts = images[i].imageurl?.split("/");
         lastSegment = parts.pop() || parts.pop();
         oldImageNames.push(lastSegment);
       } else {
