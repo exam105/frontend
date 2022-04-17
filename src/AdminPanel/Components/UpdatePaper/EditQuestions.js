@@ -159,30 +159,30 @@ function EditQuestion(props) {
         !config.secretAccessKey ||
         config === null
       ) {
-        // axios({
-        //   method: "GET",
-        //   url: "/dashboard/de/question/s3credentials",
-        // })
-        //   .then((res) => {
-        //     if (!res.data.message) {
-        //       if (!metadata.subject) {
-        //         onClose(false);
-        //         props.getAllQuestions();
-        //       } else {
-        //         setConfig({
-        //           bucketName: "exam105",
-        //           region: res.data.region,
-        //           dirName: metadata.subject,
-        //           accessKeyId: res.data.accesskey,
-        //           secretAccessKey: res.data.secretkey,
-        //         });
-        //       }
-        //     }
-        //   })
-        //   .catch((err) => {
-        //     RefreshData();
-        //     console.log(err);
-        //   });
+        axios({
+          method: "GET",
+          url: "/dashboard/de/question/s3credentials",
+        })
+          .then((res) => {
+            if (!res.data.message) {
+              if (!metadata.subject) {
+                onClose(false);
+                props.getAllQuestions();
+              } else {
+                setConfig({
+                  bucketName: "exam105",
+                  region: res.data.region,
+                  dirName: metadata.subject,
+                  accessKeyId: res.data.accesskey,
+                  secretAccessKey: res.data.secretkey,
+                });
+              }
+            }
+          })
+          .catch((err) => {
+            RefreshData();
+            console.log(err);
+          });
       }
       setProgressBarStatus(true);
       axios({
