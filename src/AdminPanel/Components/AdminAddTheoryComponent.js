@@ -166,7 +166,7 @@ function AdminAddTheoryComponent(props) {
           body.append("file", image);
           body.append("subject", boardReducer[0].subject);
           axios({
-            method: "PUT",
+            method: "POST",
             url: `/exam/question/uploadimage`,
             data: body,
           })
@@ -266,7 +266,7 @@ function AdminAddTheoryComponent(props) {
               body.append("file", image);
               body.append("subject", boardReducer[0].subject);
               axios({
-                method: "PUT",
+                method: "POST",
                 url: `/exam/question/uploadimage`,
                 data: body,
               })

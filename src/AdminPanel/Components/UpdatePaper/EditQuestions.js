@@ -438,7 +438,7 @@ function EditQuestion(props) {
                 body.append("file", file);
                 body.append("subject", metadata.subject);
                 axios({
-                  method: "PUT",
+                  method: "POST",
                   url: `/exam/question/uploadimage`,
                   data: body,
                 })
@@ -523,7 +523,7 @@ function EditQuestion(props) {
                   body.append("file", file);
                   body.append("subject", metadata.subject);
                   axios({
-                    method: "PUT",
+                    method: "POST",
                     url: `/exam/question/uploadimage`,
                     data: body,
                   })

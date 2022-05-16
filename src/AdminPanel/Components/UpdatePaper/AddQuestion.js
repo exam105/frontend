@@ -259,7 +259,7 @@ function AddQuestion(props) {
         images: imageLocations,
       };
       axios({
-        method: "PUT",
+        method: "POST",
         url: is_theory
           ? `/dashboard/de/question/theory/meta/${props.id}`
           : `/dashboard/de/question/meta/${props.id}`,
@@ -334,7 +334,7 @@ function AddQuestion(props) {
               body.append("file", file);
               body.append("subject", subject);
               axios({
-                method: "PUT",
+                method: "POST",
                 url: `/exam/question/uploadimage`,
                 data: body,
               })
@@ -414,7 +414,7 @@ function AddQuestion(props) {
                 body.append("file", image);
                 body.append("subject", subject);
                 axios({
-                  method: "PUT",
+                  method: "POST",
                   url: `/exam/question/uploadimage`,
                   data: body,
                 })
