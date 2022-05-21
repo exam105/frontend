@@ -122,11 +122,7 @@ function AdminAddTheoryComponent(props) {
     });
     return () => {
       clearInterval(timer);
-<<<<<<< HEAD
-      // setConfig({});
-=======
       //setConfig({});
->>>>>>> 2b54af0988d8fd95186187493eb2fae25c9cda44
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
