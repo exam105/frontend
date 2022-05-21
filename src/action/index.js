@@ -9,6 +9,7 @@ export const add_board = (data, theory) => {
     date: data.date,
     is_theory: theory ? true : false,
     reference: data.reference,
+    notes: data.notes,
   };
 };
 

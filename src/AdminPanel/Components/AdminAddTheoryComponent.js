@@ -55,7 +55,7 @@ function AdminAddTheoryComponent(props) {
   const [markdownFontSize, setMarkdownFontSize] = React.useState("14px");
   const [deleteImagesNames, setDeleteImagesNames] = React.useState([]);
   const [images, setImages] = React.useState([]);
-  const [config, setConfig] = React.useState();
+  // const [config, setConfig] = React.useState();
   // Dialog Hooks
   const [DialogStatus, setDialogStatus] = useState(false);
   const [DialogDesc, setDialogDesc] = useState("Are you Sure?");
@@ -122,7 +122,7 @@ function AdminAddTheoryComponent(props) {
     });
     return () => {
       clearInterval(timer);
-      setConfig({});
+      // setConfig({});
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
