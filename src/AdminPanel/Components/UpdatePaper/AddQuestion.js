@@ -259,7 +259,7 @@ function AddQuestion(props) {
         images: imageLocations,
       };
       axios({
-        method: "POST",
+        method: "PUT",
         url: is_theory
           ? `/dashboard/de/question/theory/meta/${props.id}`
           : `/dashboard/de/question/meta/${props.id}`,
