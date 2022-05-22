@@ -141,7 +141,7 @@ function QuestionList(props) {
               Update Questions
             </Typography>
             <Typography className={classes.paper}>
-              {system} - {board}
+              {system} - {board} - {subject}
             </Typography>
             <IconButton
               edge="start"

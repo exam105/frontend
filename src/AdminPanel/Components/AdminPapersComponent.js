@@ -57,6 +57,7 @@ const headCells = [
     disablePadding: false,
     label: "Reference",
   },
+  { id: "notes", numeric: false, disablePadding: false, label: "Notes" },
 ];
 
 function EnhancedTableHead(props) {
@@ -352,6 +353,8 @@ export default function AdminPapersComponent() {
                       <TableCell align="left">
                         {row.reference ? row.reference : ""}
                       </TableCell>
+
+                      <TableCell align="left">{row.notes}</TableCell>
                     </TableRow>
                   );
                 })}
