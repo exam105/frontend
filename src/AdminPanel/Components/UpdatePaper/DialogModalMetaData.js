@@ -60,6 +60,12 @@ function DialogModalMetaData(props) {
     { paper: "Paper 5" },
     { paper: "Paper 6" },
   ]);
+  const [notes] = useState([
+    { note: "Core" },
+    { note: "Extended" },
+    { note: "Practical" },
+    { note: "Alt to Practical" },
+  ]);
 
   const [paper, setPaper] = useState({
     system: "",
@@ -69,6 +75,7 @@ function DialogModalMetaData(props) {
     series: "",
     paper: "",
     reference: "",
+    notes: "",
   });
   // React.useEffect(() => {
   //   if (reference.value === true) {
@@ -98,6 +105,7 @@ function DialogModalMetaData(props) {
       series: props?.data?.series,
       paper: props?.data?.paper,
       reference: props?.data?.reference ? props?.data?.reference : "",
+      notes: props?.data?.notes ? props?.data?.notes : "",
     });
     setOpen(props.DialogStatus);
     if (props.data.date !== undefined) {
@@ -326,7 +334,26 @@ function DialogModalMetaData(props) {
                 required
               />
             </div>
-
+            {/* Notes Field */}
+            <div className="form-group">
+              <label htmlFor="notes">{`Select Notes (optional):`}</label>
+              <select
+                value={paper.notes}
+                name="notes"
+                onChange={change_input}
+                id="notes"
+                className="form-control form-select"
+              >
+                <option value="">None</option>
+                {notes.map((item, i) => {
+                  return (
+                    <option key={i} value={item.note}>
+                      {item.note}
+                    </option>
+                  );
+                })}
+              </select>
+            </div>
             <div className="form-group justify-content-center d-flex">
               <button type="submit" className="btn px-5 py-2 bg-info mybutton">
                 Submit

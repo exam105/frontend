@@ -58,6 +58,12 @@ function AdminAddBoardComponent(props) {
     { paper: "Paper 5" },
     { paper: "Paper 6" },
   ]);
+  const [notes] = useState([
+    { note: "Core" },
+    { note: "Extended" },
+    { note: "Practical" },
+    { note: "Alt to Practical" },
+  ]);
 
   const [paper, setPaper] = useState({
     system: "",
@@ -67,6 +73,7 @@ function AdminAddBoardComponent(props) {
     series: "",
     paper: "",
     reference: "",
+    notes: "",
   });
 
   React.useEffect(() => {
@@ -269,7 +276,7 @@ function AdminAddBoardComponent(props) {
           </div>
           {/* Reference Field */}
           <div className="form-group">
-            <label htmlFor="">Enter Reference Number :</label>
+            <label htmlFor="reference">Enter Reference Number :</label>
             {/* add an input field to save input in paper.reference */}
             <input
               type="text"
@@ -280,6 +287,26 @@ function AdminAddBoardComponent(props) {
               placeholder="Reference Number"
               required
             />
+          </div>
+          {/* Notes Field */}
+          <div className="form-group">
+            <label htmlFor="notes">{`Select Notes (optional):`}</label>
+            <select
+              value={paper.notes}
+              name="notes"
+              onChange={change_input}
+              id="notes"
+              className="form-control form-select"
+            >
+              <option value="">None</option>
+              {notes.map((item, i) => {
+                return (
+                  <option key={i} value={item.note}>
+                    {item.note}
+                  </option>
+                );
+              })}
+            </select>
           </div>
           <div className="form-group justify-content-center d-flex">
             <button type="submit" className="btn px-5 py-2 bg-info mybutton">

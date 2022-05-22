@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-// import S3 from "react-aws-s3";
+import S3 from "react-aws-s3";
 import $ from "jquery";
 import axios from "axios";
 
@@ -101,7 +101,7 @@ function AddQuestion(props) {
   );
   const [markdownFontSize, setMarkdownFontSize] = React.useState("14px");
   const [images, setImages] = React.useState([]);
-  // const [config, setConfig] = React.useState();
+  const [config, setConfig] = React.useState();
   const [ProgressBarStatus, setProgressBarStatus] = useState(false);
   const [progress, setProgress] = useState(10);
   // Dialog Hooks
@@ -113,24 +113,24 @@ function AddQuestion(props) {
 
   // UseEffect Hook
   React.useEffect(() => {
-    // axios({
-    //   method: "GET",
-    //   url: "/dashboard/de/question/s3credentials",
-    // })
-    //   .then((res) => {
-    //     if (!res.data.message) {
-    //       setConfig({
-    //         bucketName: "exam105",
-    //         dirName: subject,
-    //         region: res.data.region,
-    //         accessKeyId: res.data.accesskey,
-    //         secretAccessKey: res.data.secretkey,
-    //       });
-    //     }
-    //   })
-    //   .catch((err) => {
-    //     console.log(err);
-    //   });
+    axios({
+      method: "GET",
+      url: "/dashboard/de/question/s3credentials",
+    })
+      .then((res) => {
+        if (!res.data.message) {
+          setConfig({
+            bucketName: "exam105",
+            dirName: subject,
+            region: res.data.region,
+            accessKeyId: res.data.accesskey,
+            secretAccessKey: res.data.secretkey,
+          });
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
 
     const timer = setInterval(() => {
       setProgress((prevProgress) =>
@@ -324,22 +324,24 @@ function AddQuestion(props) {
         } else {
           setProgressBarStatus(true);
 
-          // const ReactS3Client = new S3(config);
+          const ReactS3Client = new S3(config);
           let imageLocations = [];
 
           if (images.length !== 0) {
             images.map((image) => {
-              const file = image;
-              const body = new FormData();
-              body.append("file", file);
-              body.append("subject", subject);
-              axios({
-                method: "POST",
-                url: `/exam/question/uploadimage`,
-                data: body,
-              })
+              // const file = image;
+              // const body = new FormData();
+              // body.append("file", file);
+              // body.append("subject", subject);
+              // axios({
+              //   method: "POST",
+              //   url: `/exam/question/uploadimage`,
+              //   data: body,
+              // })
+              ReactS3Client.uploadFile(image, image.name)
                 .then((res) => {
-                  const imageURL = { imageurl: res.data };
+                  const imageURL = { imageurl: res.location };
+                  // const imageURL = { imageurl: res.data };
                   imageLocations.push(imageURL);
                   if (imageLocations.length === images.length) {
                     add_questions_after_image_upload(
@@ -406,18 +408,19 @@ function AddQuestion(props) {
           }
           if (status === 1) {
             setProgressBarStatus(true);
-            // const ReactS3Client = new S3(config);
+            const ReactS3Client = new S3(config);
             var imageLocations = [];
             if (images.length !== 0) {
               images.map((image) => {
-                const body = new FormData();
-                body.append("file", image);
-                body.append("subject", subject);
-                axios({
-                  method: "POST",
-                  url: `/exam/question/uploadimage`,
-                  data: body,
-                })
+                ReactS3Client.uploadFile(image, image.name)
+                  // const body = new FormData();
+                  // body.append("file", image);
+                  // body.append("subject", subject);
+                  // axios({
+                  //   method: "POST",
+                  //   url: `/exam/question/uploadimage`,
+                  //   data: body,
+                  // })
                   .then((res) => {
                     const imageURL = { imageurl: res.data };
                     imageLocations.push(imageURL);
@@ -443,7 +446,6 @@ function AddQuestion(props) {
                     props.handleClose();
                     $(".marks").val("");
                   });
-                // ReactS3Client.uploadFile(image, image.name)
 
                 return null;
               });

@@ -55,7 +55,7 @@ function AdminAddTheoryComponent(props) {
   const [markdownFontSize, setMarkdownFontSize] = React.useState("14px");
   const [deleteImagesNames, setDeleteImagesNames] = React.useState([]);
   const [images, setImages] = React.useState([]);
-  // const [config, setConfig] = React.useState();
+  const [config, setConfig] = React.useState();
   // Dialog Hooks
   const [DialogStatus, setDialogStatus] = useState(false);
   const [DialogDesc, setDialogDesc] = useState("Are you Sure?");
@@ -80,24 +80,24 @@ function AdminAddTheoryComponent(props) {
       history.push("/admin/panel/papers");
     }
 
-    // axios({
-    //   method: "GET",
-    //   url: "/dashboard/de/question/s3credentials",
-    // })
-    //   .then((res) => {
-    //     if (!res.data.message) {
-    //       setConfig({
-    //         bucketName: "exam105",
-    //         dirName: boardReducer[0].subject,
-    //         region: res.data.region,
-    //         accessKeyId: res.data.accesskey,
-    //         secretAccessKey: res.data.secretkey,
-    //       });
-    //     }
-    //   })
-    //   .catch((err) => {
-    //     console.log(err);
-    //   });
+    axios({
+      method: "GET",
+      url: "/dashboard/de/question/s3credentials",
+    })
+      .then((res) => {
+        if (!res.data.message) {
+          setConfig({
+            bucketName: "exam105",
+            dirName: boardReducer[0].subject,
+            region: res.data.region,
+            accessKeyId: res.data.accesskey,
+            secretAccessKey: res.data.secretkey,
+          });
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
 
     if (boardReducer.length === 0) {
       history.push("/admin/panel/add/papers/");
@@ -122,7 +122,7 @@ function AdminAddTheoryComponent(props) {
     });
     return () => {
       clearInterval(timer);
-      // setConfig({});
+      setConfig({});
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -157,21 +157,22 @@ function AdminAddTheoryComponent(props) {
       setDialogStatus(true);
     } else {
       setProgressBarStatus(true);
-      // const ReactS3Client = new S3(config);
+      const ReactS3Client = new S3(config);
       let imageLocations = [];
       if (images.length !== 0) {
         images.map((image, i) => {
-          // ReactS3Client.uploadFile(image, image.name)
-          const body = new FormData();
-          body.append("file", image);
-          body.append("subject", boardReducer[0].subject);
-          axios({
-            method: "POST",
-            url: `/exam/question/uploadimage`,
-            data: body,
-          })
+          ReactS3Client.uploadFile(image, image.name)
+            // const body = new FormData();
+            // body.append("file", image);
+            // body.append("subject", boardReducer[0].subject);
+            // axios({
+            //   method: "POST",
+            //   url: `/exam/question/uploadimage`,
+            //   data: body,
+            // })
             .then((res) => {
-              const imageURL = { imageurl: res.data };
+              // const imageURL = { imageurl: res.data };
+              const imageURL = { imageurl: res.location };
               imageLocations.push(imageURL);
               if (imageLocations.length === images.length) {
                 add_theory_question_after_image_upload(imageLocations, mark);
@@ -243,19 +244,19 @@ function AdminAddTheoryComponent(props) {
         setDialogStatus(true);
       } else {
         setProgressBarStatus(true);
-        // const ReactS3Client = new S3(config);
+        const ReactS3Client = new S3(config);
         for (let i = 0; i < deleteImagesNames.length; i++) {
-          // ReactS3Client.deleteFile(deleteImagesNames[i]);
-          axios({
-            method: "DELETE",
-            url: `/exam/question/deleteimage/${boardReducer[0].subject}/${deleteImagesNames[i]}`,
-          })
-            .then((res) => {
-              console.log(res);
-            })
-            .catch((err) => {
-              console.log(err);
-            });
+          ReactS3Client.deleteFile(deleteImagesNames[i]);
+          // axios({
+          //   method: "DELETE",
+          //   url: `/exam/question/deleteimage/${boardReducer[0].subject}/${deleteImagesNames[i]}`,
+          // })
+          //   .then((res) => {
+          //     console.log(res);
+          //   })
+          //   .catch((err) => {
+          //     console.log(err);
+          //   });
         }
         let imageLocations = [];
         if (images.length !== 0) {
