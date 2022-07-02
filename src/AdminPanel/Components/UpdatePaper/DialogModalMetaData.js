@@ -39,6 +39,7 @@ function DialogModalMetaData(props) {
     { subject: "Chemistry" },
     { subject: "Economics" },
     { subject: "Design and Technology" },
+    { subject: "Computer Science" },
   ]);
 
   const [series] = useState([
