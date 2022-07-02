@@ -85,6 +85,7 @@ export const add_theory = (data) => {
     marks: data.marks,
     topics: data.topics,
     images: data.images,
+    order_number: data.order_number,
   };
 };
 
@@ -107,6 +108,7 @@ export const update_theory = (data) => {
     topics: data.topics,
     images: data.images,
     index: data.index,
+    order_number: data.order_number,
   };
 };
 

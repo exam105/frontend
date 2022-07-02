@@ -1,6 +1,18 @@
 const theory = (state = [], action) => {
   switch (action.type) {
     case "add_theory":
+      if (action.order_number) {
+        if (action.order_number > 0 && action.order_number <= state.length) {
+          state.splice(action.order_number - 1, 0, {
+            question: action.question,
+            answer: action.answer,
+            marks: action.marks,
+            topics: action.topics,
+            images: action.images,
+          });
+          return state;
+        }
+      }
       return [
         ...state,
         {
@@ -20,6 +32,16 @@ const theory = (state = [], action) => {
       item.topics = action.topics;
       item.images = action.images;
       items[action.index] = item;
+      if (action.order_number) {
+        if (action.order_number > 0 && action.order_number <= state.length) {
+          items.splice(
+            action.order_number - 1,
+            0,
+            items.splice(action.index, 1)[0]
+          );
+          return items;
+        }
+      }
       return items;
     case "remove_theory":
       return state.filter((item, index) => action.index !== index);
