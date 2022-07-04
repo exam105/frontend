@@ -35,6 +35,7 @@ export const add_mcq = (data) => {
     options: data.options,
     topics: data.topics,
     images: data.images,
+    order_number: data.order_number,
   };
 };
 export const add_single_mcq = (data) => {
@@ -56,6 +57,7 @@ export const update_mcq = (data) => {
     topics: data.topics,
     options: data.options,
     images: data.images,
+    order_number: data.order_number,
   };
 };
 
