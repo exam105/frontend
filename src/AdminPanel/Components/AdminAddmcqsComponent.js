@@ -54,6 +54,7 @@ function AdminAddmcqsComponent(props) {
   const [markdownFontSize, setMarkdownFontSize] = React.useState("14px");
   const [deleteImagesNames, setDeleteImagesNames] = React.useState([]);
   const [images, setImages] = React.useState([]);
+  const [orderNumber, setOrderNumber] = React.useState("");
   const [config, setConfig] = React.useState();
   // Dialog Hooks
   const [DialogStatus, setDialogStatus] = React.useState(false);
@@ -199,6 +200,7 @@ function AdminAddmcqsComponent(props) {
       options: options,
       topics: topics,
       images: imageLocations,
+      order_number: orderNumber,
     };
     props.changeState(data);
     setOptions([]);
@@ -208,6 +210,7 @@ function AdminAddmcqsComponent(props) {
     setProgressBarStatus(false);
     var filesInput = $(".upload_images_input_for_mcqs");
     filesInput.replaceWith(filesInput.val(""));
+    setOrderNumber("");
   };
 
   const update_questions_after_image_upload = (imageLocations, mark) => {
@@ -218,6 +221,7 @@ function AdminAddmcqsComponent(props) {
       topics: topics,
       index: window.value,
       images: imageLocations,
+      order_number: orderNumber,
     };
     props.updateState(data);
     setQuestion("");
@@ -227,6 +231,7 @@ function AdminAddmcqsComponent(props) {
     setProgressBarStatus(false);
     mcqButtonChangeBorder(-1);
     setImages([]);
+    setOrderNumber("");
     window.value = undefined;
     $(".next_mcq_button").css("display", "inline");
     $(".update_mcq_button").css("display", "none");
@@ -723,6 +728,24 @@ function AdminAddmcqsComponent(props) {
                 );
               })}
             </form>
+            <div className="d-flex">
+              <input
+                type="number"
+                name="order_number"
+                id="order_number"
+                placeholder="Order number"
+                style={{ width: "200px" }}
+                className="form-control ml-3"
+                value={orderNumber}
+                onChange={(e) => setOrderNumber(e.target.value)}
+              />{" "}
+              <span className="ml-3 mt-1">(Optional Field)</span>{" "}
+            </div>
+            <label htmlFor="order_number" className="ml-3 pr-3">
+              Please enter the question number if you would like to change the
+              order, to adjust the arrangement of question numbers as shown in
+              the left pane.
+            </label>
             <div className="container-fluid">
               <div className="row">
                 <div className="col-12 mx-auto mt-4">
