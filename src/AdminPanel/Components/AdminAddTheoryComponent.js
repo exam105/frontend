@@ -629,24 +629,7 @@ function AdminAddTheoryComponent(props) {
                 </MathpixLoader>
               </div>
             </div>
-            <div className="d-flex">
-              <input
-                type="number"
-                name="order_number"
-                id="order_number"
-                placeholder="Order number"
-                style={{ width: "200px" }}
-                className="form-control ml-3"
-                value={orderNumber}
-                onChange={(e) => setOrderNumber(e.target.value)}
-              />{" "}
-              <span className="ml-3 mt-1">(Optional Field)</span>{" "}
-            </div>
-            <label htmlFor="order_number" className="ml-3 pr-3">
-              Please enter the question number if you would like to change the
-              order, to adjust the arrangement of question numbers as shown in
-              the left pane.
-            </label>
+
             <div className="container-fluid">
               <div className="row">
                 <div className="col-12 mx-auto mt-4">
@@ -825,6 +808,29 @@ function AdminAddTheoryComponent(props) {
                 })}
               </div>
             </form>
+            <div
+              className="bg-white py-4 px-3 mt-4"
+              style={{ borderRadius: "20px", boxShadow: "0px 0px 2px black" }}
+            >
+              <div className="d-flex row">
+                <input
+                  type="number"
+                  name="order_number"
+                  id="order_number"
+                  placeholder="Order number"
+                  style={{ width: "200px" }}
+                  className="form-control ml-3"
+                  value={orderNumber}
+                  onChange={(e) => setOrderNumber(e.target.value)}
+                />{" "}
+                <span className="ml-3 mt-1">(Optional Field)</span>{" "}
+              </div>
+              <label htmlFor="order_number" className="ml-3 pr-3">
+                Please enter the question number if you would like to change the
+                order, to adjust the arrangement of question numbers as shown in
+                the left pane.
+              </label>
+            </div>
           </div>
         </div>
       </div>
