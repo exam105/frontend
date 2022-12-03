@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
-// import S3 from "react-aws-s3";
 import axios from "axios";
 import $ from "jquery";
 // Markdown Libraries
@@ -56,7 +55,6 @@ function AdminAddTheoryComponent(props) {
   const [deleteImagesNames, setDeleteImagesNames] = React.useState([]);
   const [images, setImages] = React.useState([]);
   const [orderNumber, setOrderNumber] = React.useState("");
-  // const [config, setConfig] = React.useState();
   // Dialog Hooks
   const [DialogStatus, setDialogStatus] = useState(false);
   const [DialogDesc, setDialogDesc] = useState("Are you Sure?");
@@ -81,25 +79,6 @@ function AdminAddTheoryComponent(props) {
       history.push("/admin/panel/papers");
     }
 
-    // axios({
-    //   method: "GET",
-    //   url: "/dashboard/de/question/s3credentials",
-    // })
-    //   .then((res) => {
-    //     if (!res.data.message) {
-    //       setConfig({
-    //         bucketName: "exam105",
-    //         dirName: boardReducer[0].subject,
-    //         region: res.data.region,
-    //         accessKeyId: res.data.accesskey,
-    //         secretAccessKey: res.data.secretkey,
-    //       });
-    //     }
-    //   })
-    //   .catch((err) => {
-    //     console.log(err);
-    //   });
-
     if (boardReducer.length === 0) {
       history.push("/admin/panel/add/papers/");
     }
@@ -123,7 +102,6 @@ function AdminAddTheoryComponent(props) {
     });
     return () => {
       clearInterval(timer);
-      //setConfig({});
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -158,11 +136,9 @@ function AdminAddTheoryComponent(props) {
       setDialogStatus(true);
     } else {
       setProgressBarStatus(true);
-      // const ReactS3Client = new S3(config);
       let imageLocations = [];
       if (images.length !== 0) {
         images.map((image, i) => {
-          // ReactS3Client.uploadFile(image, image.name)
           const body = new FormData();
           body.append("file", image);
           body.append("subject", boardReducer[0].subject);
@@ -246,9 +222,7 @@ function AdminAddTheoryComponent(props) {
         setDialogStatus(true);
       } else {
         setProgressBarStatus(true);
-        // const ReactS3Client = new S3(config);
         for (let i = 0; i < deleteImagesNames.length; i++) {
-          // ReactS3Client.deleteFile(deleteImagesNames[i]);
           axios({
             method: "DELETE",
             url: `/exam/question/deleteimage/${boardReducer[0].subject}/${deleteImagesNames[i]}`,
@@ -264,7 +238,6 @@ function AdminAddTheoryComponent(props) {
         if (images.length !== 0) {
           images.map((image, i) => {
             if (!image.imageurl) {
-              // ReactS3Client.uploadFile(image, image.name)
               const body = new FormData();
               body.append("file", image);
               body.append("subject", boardReducer[0].subject);

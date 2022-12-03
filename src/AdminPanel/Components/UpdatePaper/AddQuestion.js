@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-// import S3 from "react-aws-s3";
 import $ from "jquery";
 import axios from "axios";
 
@@ -101,7 +100,6 @@ function AddQuestion(props) {
   );
   const [markdownFontSize, setMarkdownFontSize] = React.useState("14px");
   const [images, setImages] = React.useState([]);
-  // const [config, setConfig] = React.useState();
   const [ProgressBarStatus, setProgressBarStatus] = useState(false);
   const [progress, setProgress] = useState(10);
   // Dialog Hooks
@@ -113,25 +111,6 @@ function AddQuestion(props) {
 
   // UseEffect Hook
   React.useEffect(() => {
-    // axios({
-    //   method: "GET",
-    //   url: "/dashboard/de/question/s3credentials",
-    // })
-    //   .then((res) => {
-    //     if (!res.data.message) {
-    //       setConfig({
-    //         bucketName: "exam105",
-    //         dirName: subject,
-    //         region: res.data.region,
-    //         accessKeyId: res.data.accesskey,
-    //         secretAccessKey: res.data.secretkey,
-    //       });
-    //     }
-    //   })
-    //   .catch((err) => {
-    //     console.log(err);
-    //   });
-
     const timer = setInterval(() => {
       setProgress((prevProgress) =>
         prevProgress >= 90 ? 10 : prevProgress + 7
@@ -323,8 +302,6 @@ function AddQuestion(props) {
           setDialogStatus(true);
         } else {
           setProgressBarStatus(true);
-
-          // const ReactS3Client = new S3(config);
           let imageLocations = [];
 
           if (images.length !== 0) {
@@ -364,7 +341,6 @@ function AddQuestion(props) {
                   props.handleClose();
                   $(".marks").val("");
                 });
-              // ReactS3Client.uploadFile(image, image.name)
 
               return null;
             });
@@ -406,7 +382,6 @@ function AddQuestion(props) {
           }
           if (status === 1) {
             setProgressBarStatus(true);
-            // const ReactS3Client = new S3(config);
             var imageLocations = [];
             if (images.length !== 0) {
               images.map((image) => {
@@ -443,7 +418,6 @@ function AddQuestion(props) {
                     props.handleClose();
                     $(".marks").val("");
                   });
-                // ReactS3Client.uploadFile(image, image.name)
 
                 return null;
               });
